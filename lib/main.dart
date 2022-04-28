@@ -110,72 +110,87 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Container _buildLoginButton() {
-    return Container(
-      width: 380,
-      height: 70,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: const Color.fromARGB(230, 255, 215, 0),
-      ),
-      child: const Center(
-        child: Text(
-          "Login",
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container _buildRegisterButton() {
-    return Container(
-      width: 380,
-      height: 70,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(
-          width: 1,
+  Widget _buildLoginButton() {
+    return GestureDetector(
+      onTap: () {
+        print("Login button");
+      },
+      child: Container(
+        width: 380,
+        height: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
           color: const Color.fromARGB(230, 255, 215, 0),
         ),
-      ),
-      child: const Center(
-        child: Text(
-          "Create an Account",
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
+        child: const Center(
+          child: Text(
+            "Login",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
       ),
     );
   }
 
-  Row _buildSkipButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
-          "Don't want login?",
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey,
+  Widget _buildRegisterButton() {
+    return GestureDetector(
+      onTap: () {
+        print("Register button");
+      },
+      child: Container(
+        width: 380,
+        height: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            width: 1,
+            color: const Color.fromARGB(230, 255, 215, 0),
           ),
         ),
-        SizedBox(
-          width: 4,
-        ),
-        Text(
-          "Skip",
-          style: TextStyle(
-            fontSize: 18,
-            color: Color.fromARGB(230, 255, 215, 0),
-            fontWeight: FontWeight.bold,
+        child: const Center(
+          child: Text(
+            "Create an Account",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+            ),
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildSkipButton() {
+    return GestureDetector(
+      onTap: () {
+        print("Skip button");
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text(
+            "Don't want login?",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey,
+            ),
+          ),
+          SizedBox(
+            width: 4,
+          ),
+          Text(
+            "Skip",
+            style: TextStyle(
+              fontSize: 18,
+              color: Color.fromARGB(230, 255, 215, 0),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
