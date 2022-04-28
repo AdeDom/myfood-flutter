@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildTopSection() {
     return Expanded(
-      flex: 7,
+      flex: 6,
       child: Stack(
         children: [
           Container(
@@ -94,15 +94,15 @@ class MyApp extends StatelessWidget {
         children: [
           _buildLoginButton(),
           const SizedBox(
-            height: 24,
+            height: 16,
           ),
           _buildRegisterButton(),
           const SizedBox(
-            height: 24,
+            height: 16,
           ),
           _buildSkipButton(),
           const SizedBox(
-            height: 24,
+            height: 16,
           ),
           _buildLanguageThButton(),
         ],
@@ -116,8 +116,8 @@ class MyApp extends StatelessWidget {
         print("Login button");
       },
       child: Container(
-        width: 380,
-        height: 70,
+        width: 360,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           color: const Color.fromARGB(230, 255, 215, 0),
@@ -141,8 +141,8 @@ class MyApp extends StatelessWidget {
         print("Register button");
       },
       child: Container(
-        width: 380,
-        height: 70,
+        width: 360,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
