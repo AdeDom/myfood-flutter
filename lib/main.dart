@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildTopSection(),
             _buildCenterSection(),
@@ -94,8 +93,17 @@ class MyApp extends StatelessWidget {
       child: Column(
         children: [
           _buildLoginButton(),
+          const SizedBox(
+            height: 24,
+          ),
           _buildRegisterButton(),
+          const SizedBox(
+            height: 24,
+          ),
           _buildSkipButton(),
+          const SizedBox(
+            height: 24,
+          ),
         ],
       ),
     );
