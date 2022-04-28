@@ -155,11 +155,15 @@ class MyApp extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
+        SizedBox(
+          width: 4,
+        ),
         Text(
           "Skip",
           style: TextStyle(
             fontSize: 18,
             color: Color.fromARGB(230, 255, 215, 0),
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
