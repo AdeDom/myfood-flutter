@@ -91,12 +91,11 @@ class MyApp extends StatelessWidget {
   Widget _buildBottomSection() {
     return Expanded(
       flex: 5,
-      child: Container(
-        child: Column(
-          children: [
-            _buildLoginButton(),
-          ],
-        ),
+      child: Column(
+        children: [
+          _buildLoginButton(),
+          _buildRegisterButton(),
+        ],
       ),
     );
   }
@@ -112,6 +111,29 @@ class MyApp extends StatelessWidget {
       child: const Center(
         child: Text(
           "Login",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container _buildRegisterButton() {
+    return Container(
+      width: 380,
+      height: 70,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        border: Border.all(
+          width: 1,
+          color: const Color.fromARGB(230, 255, 215, 0),
+        ),
+      ),
+      child: const Center(
+        child: Text(
+          "Create an Account",
           style: TextStyle(
             fontSize: 18,
             color: Colors.black,
