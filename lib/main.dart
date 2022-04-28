@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,39 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: Text("Hello world"),
+      home: Scaffold(
+        body: Column(
+          children: [
+            _buildTopSection(),
+            _buildCenterSection(),
+            _buildBottomSection(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTopSection() {
+    return Expanded(
+      flex: 7,
+      child: Container(
+        color: Colors.green,
+      ),
+    );
+  }
+
+  Widget _buildCenterSection() {
+    return Expanded(
+      flex: 3,
+      child: Container(),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Expanded(
+      flex: 5,
+      child: Container(
+        color: Colors.orange,
       ),
     );
   }
