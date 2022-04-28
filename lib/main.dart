@@ -95,6 +95,7 @@ class MyApp extends StatelessWidget {
         children: [
           _buildLoginButton(),
           _buildRegisterButton(),
+          _buildSkipButton(),
         ],
       ),
     );
@@ -140,6 +141,28 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Row _buildSkipButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Text(
+          "Don't want login?",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.grey,
+          ),
+        ),
+        Text(
+          "Skip",
+          style: TextStyle(
+            fontSize: 18,
+            color: Color.fromARGB(230, 255, 215, 0),
+          ),
+        ),
+      ],
     );
   }
 }
