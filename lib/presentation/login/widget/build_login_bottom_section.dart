@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/register/register.dart';
 
 class BuildLoginBottomSection extends StatelessWidget {
   const BuildLoginBottomSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return _buildLoginBottomSection(context);
+  }
+
+  Widget _buildLoginBottomSection(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("sign up button");
+        _navigatorToRegisterPage(context);
       },
       child: Column(
         children: [
@@ -35,6 +40,14 @@ class BuildLoginBottomSection extends StatelessWidget {
           const SizedBox(height: 32),
         ],
       ),
+    );
+  }
+
+  void _navigatorToRegisterPage(BuildContext context) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Register()),
     );
   }
 }
