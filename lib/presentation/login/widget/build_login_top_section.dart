@@ -15,6 +15,14 @@ class BuildLoginTopSection extends StatelessWidget {
           height: 16,
         ),
         _buildLoginSubTitle(),
+        const SizedBox(
+          height: 32,
+        ),
+        _buildEmailTextFormField(),
+        const SizedBox(
+          height: 32,
+        ),
+        _buildPasswordTextFormField(),
       ],
     );
   }
@@ -35,6 +43,48 @@ class BuildLoginTopSection extends StatelessWidget {
       style: TextStyle(
         fontSize: 16,
         color: Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildEmailTextFormField() {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(50),
+          )),
+      width: 360,
+      child: TextFormField(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          labelText: "Your Email",
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordTextFormField() {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(50),
+          )),
+      width: 360,
+      child: TextFormField(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          labelText: "Password",
+        ),
       ),
     );
   }
