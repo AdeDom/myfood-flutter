@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/login/login.dart';
 
 class BuildLoginButton extends StatelessWidget {
   const BuildLoginButton({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class BuildLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Login button");
+        navigatorToLoginPage(context);
       },
       child: Container(
         width: 360,
@@ -26,6 +27,13 @@ class BuildLoginButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void navigatorToLoginPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
     );
   }
 }
