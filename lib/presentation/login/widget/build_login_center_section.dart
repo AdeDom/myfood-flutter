@@ -5,9 +5,8 @@ class BuildLoginCenterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow,
-      height: 250,
+    return Expanded(
+      child: Container(),
     );
   }
 }
