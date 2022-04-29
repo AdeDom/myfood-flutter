@@ -9,6 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Bottom view move on top key board
       body: Column(
         children: const [
           BuildLoginTopSection(),
