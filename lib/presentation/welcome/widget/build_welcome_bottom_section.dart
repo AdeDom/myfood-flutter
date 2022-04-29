@@ -14,17 +14,11 @@ class BuildWelcomeBottomSection extends StatelessWidget {
       child: Column(
         children: const [
           BuildLoginButton(),
-          SizedBox(
-            height: 16,
-          ),
+          SizedBox(height: 16),
           BuildRegisterButton(),
-          SizedBox(
-            height: 16,
-          ),
+          SizedBox(height: 16),
           BuildSkipButton(),
-          SizedBox(
-            height: 16,
-          ),
+          SizedBox(height: 16),
           BuildLanguageButton(),
         ],
       ),

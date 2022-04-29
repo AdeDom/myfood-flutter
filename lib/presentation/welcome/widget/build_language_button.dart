@@ -67,9 +67,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
             children: [
               Column(
                 children: const [
-                  SizedBox(
-                    height: 4,
-                  ),
+                  SizedBox(height: 4),
                   Text(
                     "TH",
                     style: TextStyle(
@@ -80,14 +78,10 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                   ),
                 ],
               ),
-              const SizedBox(
-                width: 14,
-              ),
+              const SizedBox(width: 14),
               Column(
                 children: const [
-                  SizedBox(
-                    height: 4,
-                  ),
+                  SizedBox(height: 4),
                   Text(
                     "EN",
                     style: TextStyle(
@@ -127,9 +121,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                   ),
                   Row(
                     children: [
-                      const SizedBox(
-                        width: 40,
-                      ),
+                      const SizedBox(width: 40),
                       Container(
                         width: 40,
                         height: 30,
@@ -149,9 +141,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
             children: [
               Column(
                 children: const [
-                  SizedBox(
-                    height: 4,
-                  ),
+                  SizedBox(height: 4),
                   Text(
                     "TH",
                     style: TextStyle(
@@ -161,14 +151,10 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                   ),
                 ],
               ),
-              const SizedBox(
-                width: 14,
-              ),
+              const SizedBox(width: 14),
               Column(
                 children: const [
-                  SizedBox(
-                    height: 4,
-                  ),
+                  SizedBox(height: 4),
                   Text(
                     "EN",
                     style: TextStyle(

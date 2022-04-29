@@ -19,9 +19,7 @@ class BuildSkipButton extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          SizedBox(
-            width: 4,
-          ),
+          SizedBox(width: 4),
           Text(
             "Skip",
             style: TextStyle(

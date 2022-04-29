@@ -11,45 +11,25 @@ class Register extends StatelessWidget {
         children: <Widget>[
           Column(
             children: [
-              const SizedBox(
-                height: 64,
-              ),
+              const SizedBox(height: 64),
               _buildRegisterTitle(),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               _buildRegisterSubTitle(),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Name"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Email"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Mobile No"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Address"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Password"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildWidgetTextFormField(labelText: "Confirm Password"),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildRegisterButton(),
-              const SizedBox(
-                height: 32,
-              ),
+              const SizedBox(height: 32),
               _buildAlreadyHaveAccount(),
             ],
           ),
@@ -136,9 +116,7 @@ class Register extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(
-                width: 4,
-              ),
+              SizedBox(width: 4),
               Text(
                 "Login",
                 style: TextStyle(
@@ -149,9 +127,7 @@ class Register extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 32,
-          ),
+          const SizedBox(height: 32),
         ],
       ),
     );

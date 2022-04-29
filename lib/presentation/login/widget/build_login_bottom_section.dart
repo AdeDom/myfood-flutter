@@ -21,9 +21,7 @@ class BuildLoginBottomSection extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(
-                width: 4,
-              ),
+              SizedBox(width: 4),
               Text(
                 "Sign Up",
                 style: TextStyle(
@@ -34,9 +32,7 @@ class BuildLoginBottomSection extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 32,
-          ),
+          const SizedBox(height: 32),
         ],
       ),
     );

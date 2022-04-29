@@ -7,29 +7,17 @@ class BuildLoginTopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 64,
-        ),
+        const SizedBox(height: 64),
         _buildLoginTitle(),
-        const SizedBox(
-          height: 16,
-        ),
+        const SizedBox(height: 16),
         _buildLoginSubTitle(),
-        const SizedBox(
-          height: 32,
-        ),
+        const SizedBox(height: 32),
         _buildEmailTextFormField(),
-        const SizedBox(
-          height: 32,
-        ),
+        const SizedBox(height: 32),
         _buildPasswordTextFormField(),
-        const SizedBox(
-          height: 32,
-        ),
+        const SizedBox(height: 32),
         _buildLoginButton(),
-        const SizedBox(
-          height: 32,
-        ),
+        const SizedBox(height: 32),
         _buildForgetPasswordButton(),
       ],
     );
