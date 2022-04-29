@@ -26,7 +26,7 @@ class BuildSkipButton extends StatelessWidget {
             "Skip",
             style: TextStyle(
               fontSize: 18,
-              color: Color.fromARGB(230, 255, 215, 0),
+              color: Color(0xFFFFD700),
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -16,7 +16,7 @@ class BuildRegisterButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
             width: 1,
-            color: const Color.fromARGB(230, 255, 215, 0),
+            color: const Color(0xFFFFD700),
           ),
         ),
         child: const Center(

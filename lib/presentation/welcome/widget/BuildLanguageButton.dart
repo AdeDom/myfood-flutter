@@ -46,7 +46,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(
                         width: 1,
-                        color: const Color.fromARGB(230, 255, 215, 0),
+                        color: const Color(0xFFFFD700),
                       ),
                     ),
                   ),
@@ -55,7 +55,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                     height: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: const Color.fromARGB(230, 255, 215, 0),
+                      color: const Color(0xFFFFD700),
                     ),
                   ),
                 ],
@@ -121,7 +121,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(
                         width: 1,
-                        color: const Color.fromARGB(230, 255, 215, 0),
+                        color: const Color(0xFFFFD700),
                       ),
                     ),
                   ),
@@ -135,7 +135,7 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
                         height: 30,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: const Color.fromARGB(230, 255, 215, 0),
+                          color: const Color(0xFFFFD700),
                         ),
                       ),
                     ],

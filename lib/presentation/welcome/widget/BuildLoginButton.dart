@@ -15,7 +15,7 @@ class BuildLoginButton extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: const Color.fromARGB(230, 255, 215, 0),
+          color: const Color(0xFFFFD700),
         ),
         child: const Center(
           child: Text(
