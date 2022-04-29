@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/login/widget/build_login_button.dart';
 
 class BuildLoginTopSection extends StatelessWidget {
   const BuildLoginTopSection({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class BuildLoginTopSection extends StatelessWidget {
         const SizedBox(height: 32),
         _buildPasswordTextFormField(),
         const SizedBox(height: 32),
-        _buildLoginButton(),
+        const BuildLoginButton(),
         const SizedBox(height: 32),
         _buildForgetPasswordButton(),
       ],
@@ -80,26 +81,6 @@ class BuildLoginTopSection extends StatelessWidget {
             ),
           ),
           labelText: "Password",
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoginButton() {
-    return Container(
-      width: 360,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: const Color(0xFFFFD700),
-      ),
-      child: const Center(
-        child: Text(
-          "Login",
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-          ),
         ),
       ),
     );
