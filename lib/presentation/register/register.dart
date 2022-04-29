@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/register/widget/build_already_have_account.dart';
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class Register extends StatelessWidget {
               const SizedBox(height: 32),
               _buildRegisterButton(),
               const SizedBox(height: 32),
-              _buildAlreadyHaveAccount(),
+              const BuildAlreadyHaveAccount(),
             ],
           ),
         ],
@@ -95,40 +96,6 @@ class Register extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildAlreadyHaveAccount() {
-    return GestureDetector(
-      onTap: () {
-        print("Already have account");
-      },
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                "Already have an Account?",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(width: 4),
-              Text(
-                "Login",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFFFFD700),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 32),
-        ],
       ),
     );
   }
