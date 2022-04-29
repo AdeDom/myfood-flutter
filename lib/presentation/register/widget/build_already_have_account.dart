@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/login/login.dart';
 
 class BuildAlreadyHaveAccount extends StatelessWidget {
   const BuildAlreadyHaveAccount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return _buildAlreadyHaveAccount(context);
+  }
+
+  Widget _buildAlreadyHaveAccount(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Already have zz");
+        _navigatorToLoginPage(context);
       },
       child: Column(
         children: [
@@ -35,6 +40,14 @@ class BuildAlreadyHaveAccount extends StatelessWidget {
           const SizedBox(height: 32),
         ],
       ),
+    );
+  }
+
+  void _navigatorToLoginPage(BuildContext context) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
     );
   }
 }
