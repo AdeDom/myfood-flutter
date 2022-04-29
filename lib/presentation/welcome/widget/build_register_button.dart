@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/register/register.dart';
 
 class BuildRegisterButton extends StatelessWidget {
   const BuildRegisterButton({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class BuildRegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Register button");
+        _navigatorToRegisterPage(context);
       },
       child: Container(
         width: 360,
@@ -29,6 +30,13 @@ class BuildRegisterButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _navigatorToRegisterPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Register()),
     );
   }
 }
