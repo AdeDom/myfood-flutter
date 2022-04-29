@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/food/food.dart';
 
 class BuildSkipButton extends StatelessWidget {
   const BuildSkipButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return _buildSkipButton(context);
+  }
+
+  Widget _buildSkipButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Skip button");
+        _navigatorToFoodPage(context);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,6 +35,14 @@ class BuildSkipButton extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void _navigatorToFoodPage(BuildContext context) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Food()),
     );
   }
 }
