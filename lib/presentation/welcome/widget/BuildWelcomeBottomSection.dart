@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/welcome/widget/BuildLanguageThButton.dart';
+import 'package:myfood/presentation/welcome/widget/BuildLanguageButton.dart';
 import 'package:myfood/presentation/welcome/widget/BuildLoginButton.dart';
 import 'package:myfood/presentation/welcome/widget/BuildRegisterButton.dart';
 import 'package:myfood/presentation/welcome/widget/BuildSkipButton.dart';
@@ -25,7 +25,7 @@ class BuildWelcomeBottomSection extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          BuildLanguageThButton(),
+          BuildLanguageButton(),
         ],
       ),
     );
