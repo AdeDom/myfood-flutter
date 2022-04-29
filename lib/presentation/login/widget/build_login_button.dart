@@ -35,10 +35,9 @@ class BuildLoginButton extends StatelessWidget {
   }
 
   void _navigatorToFoodPage(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const Food()),
+      (Route<dynamic> route) => false,
     );
   }
 }
