@@ -23,6 +23,14 @@ class BuildLoginTopSection extends StatelessWidget {
           height: 32,
         ),
         _buildPasswordTextFormField(),
+        const SizedBox(
+          height: 32,
+        ),
+        _buildLoginButton(),
+        const SizedBox(
+          height: 32,
+        ),
+        _buildForgetPasswordButton(),
       ],
     );
   }
@@ -85,6 +93,36 @@ class BuildLoginTopSection extends StatelessWidget {
           ),
           labelText: "Password",
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return Container(
+      width: 360,
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: const Color(0xFFFFD700),
+      ),
+      child: const Center(
+        child: Text(
+          "Login",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildForgetPasswordButton() {
+    return const Text(
+      "Forget your password?",
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.grey,
       ),
     );
   }
