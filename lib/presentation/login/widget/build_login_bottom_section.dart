@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/register/register.dart';
 
 class BuildLoginBottomSection extends StatelessWidget {
   const BuildLoginBottomSection({Key? key}) : super(key: key);
@@ -44,10 +43,6 @@ class BuildLoginBottomSection extends StatelessWidget {
   }
 
   void _navigatorToRegisterPage(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Register()),
-    );
+    Navigator.pushReplacementNamed(context, "/register");
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/register/register.dart';
 
 class BuildRegisterButton extends StatelessWidget {
   const BuildRegisterButton({Key? key}) : super(key: key);
@@ -34,9 +33,6 @@ class BuildRegisterButton extends StatelessWidget {
   }
 
   void _navigatorToRegisterPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Register()),
-    );
+    Navigator.pushNamed(context, "/register");
   }
 }

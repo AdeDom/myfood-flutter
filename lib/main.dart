@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/food/food.dart';
+import 'package:myfood/presentation/login/login.dart';
+import 'package:myfood/presentation/register/register.dart';
 import 'package:myfood/presentation/welcome/welcome.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final _route = <String, WidgetBuilder>{
+    "/welcome": (BuildContext context) => const Welcome(),
+    "/login": (BuildContext context) => const Login(),
+    "/register": (BuildContext context) => const Register(),
+    "/food": (BuildContext context) => const Food(),
+  };
+
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: _route,
       title: 'My Food',
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/login/login.dart';
 
 class BuildLoginButton extends StatelessWidget {
   const BuildLoginButton({Key? key}) : super(key: key);
@@ -31,9 +30,6 @@ class BuildLoginButton extends StatelessWidget {
   }
 
   void _navigatorToLoginPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Login()),
-    );
+    Navigator.pushNamed(context, "/login");
   }
 }

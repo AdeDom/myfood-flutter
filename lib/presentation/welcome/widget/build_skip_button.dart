@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/food/food.dart';
 
 class BuildSkipButton extends StatelessWidget {
   const BuildSkipButton({Key? key}) : super(key: key);
@@ -39,10 +38,6 @@ class BuildSkipButton extends StatelessWidget {
   }
 
   void _navigatorToFoodPage(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Food()),
-    );
+    Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
   }
 }

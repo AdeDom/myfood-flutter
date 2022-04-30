@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/login/login.dart';
 
 class BuildAlreadyHaveAccount extends StatelessWidget {
   const BuildAlreadyHaveAccount({Key? key}) : super(key: key);
@@ -44,10 +43,6 @@ class BuildAlreadyHaveAccount extends StatelessWidget {
   }
 
   void _navigatorToLoginPage(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Login()),
-    );
+    Navigator.pushReplacementNamed(context, "/login");
   }
 }
