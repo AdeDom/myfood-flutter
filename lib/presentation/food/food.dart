@@ -14,7 +14,9 @@ class Food extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FoodDetail(1)),
+                  MaterialPageRoute(
+                    builder: (context) => const FoodDetail(foodId: 1),
+                  ),
                 );
               },
               child: const Text("Food detail 1"),
@@ -23,7 +25,9 @@ class Food extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FoodDetail(2)),
+                  MaterialPageRoute(
+                    builder: (context) => const FoodDetail(foodId: 2),
+                  ),
                 );
               },
               child: const Text("Food detail 2"),
