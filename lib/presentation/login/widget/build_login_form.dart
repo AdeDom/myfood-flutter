@@ -43,8 +43,9 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       width: 360,
       child: TextFormField(
         controller: emailController,
-        cursorColor: const Color(0xFFFFD700),
+        cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Your Email"),
+        keyboardType: TextInputType.emailAddress,
         validator: _loginUseCase.validateEmail,
       ),
     );
@@ -55,8 +56,9 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       width: 360,
       child: TextFormField(
         controller: passwordController,
-        cursorColor: const Color(0xFFFFD700),
+        cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Password"),
+        obscureText: true,
         validator: _loginUseCase.validatePassword,
       ),
     );
@@ -67,20 +69,13 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       fillColor: Colors.grey.shade200,
       filled: true,
       labelStyle: const TextStyle(
-        color: Color(0xFFFFD700),
+        color: Colors.grey,
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
-          color: Color(0xFFFFD700),
-          width: 1.0,
-        ),
         borderRadius: BorderRadius.circular(50),
       ),
-      hoverColor: Colors.yellow.shade50,
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(50),
-        ),
+      border:  OutlineInputBorder(
+        borderRadius: BorderRadius.circular(50),
       ),
       labelText: labelText,
     );
