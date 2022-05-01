@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
 import 'package:myfood/domain/usecase/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {
@@ -9,7 +11,11 @@ class BuildLoginForm extends StatefulWidget {
 }
 
 class _BuildLoginFormState extends State<BuildLoginForm> {
-  final LoginUseCase _loginUseCase = LoginUseCase();
+  final LoginUseCase _loginUseCase = LoginUseCase(
+    authRepository: AuthRepositoryImpl(
+      authRemoteDataSource: AuthRemoteDataSourceImpl(),
+    ),
+  );
 
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
@@ -83,7 +89,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
 
   Widget _buildLoginButton(BuildContext context) {
     return GestureDetector(
-      onTap: onLoginClick,
+      onTap: callLogin,
       child: Container(
         width: 360,
         height: 60,
@@ -108,11 +114,38 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
   }
 
-  void onLoginClick() {
+  void callLogin() {
     if (_formKey.currentState?.validate() == true) {
       String email = emailController.text;
       String password = passwordController.text;
-      _loginUseCase(email: email, password: password);
+      _loginUseCase(email: email, password: password).then(
+        (result) => {
+          if (!result) {_showAlertDialog()}
+        },
+      );
     }
+  }
+
+  void _showAlertDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: const Text(
+            "Email or password is incorrect, please try again.",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
