@@ -20,6 +20,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _isLoginButtonStatus = true;
 
   @override
   void dispose() {
@@ -38,7 +39,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
           const SizedBox(height: 32),
           _buildPasswordTextFormField(),
           const SizedBox(height: 32),
-          _buildLoginButton(context),
+          _buildLoginButton(),
         ],
       ),
     );
@@ -87,15 +88,15 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     );
   }
 
-  Widget _buildLoginButton(BuildContext context) {
+  Widget _buildLoginButton() {
     return GestureDetector(
-      onTap: _requestLogin,
+      onTap: _isLoginButtonStatus ? _requestLogin : null,
       child: Container(
         width: 360,
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: const Color(0xFFFFD700),
+          color: _isLoginButtonStatus ? const Color(0xFFFFD700) : Colors.grey,
         ),
         child: const Center(
           child: Text(
@@ -117,6 +118,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   void _requestLogin() {
     if (_formKey.currentState?.validate() == true) {
       _showLoadingDialog();
+      _setLoginButton(false);
       String email = emailController.text;
       String password = passwordController.text;
       _loginUseCase(email: email, password: password).then(_responseLogin);
@@ -125,6 +127,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
 
   void _responseLogin(bool result) {
     Navigator.pop(context);
+    _setLoginButton(true);
     if (!result) {
       _showAlertDialog();
     }
@@ -171,5 +174,11 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
         );
       },
     );
+  }
+
+  void _setLoginButton(bool isLoginButtonStatus) {
+    setState(() {
+      _isLoginButtonStatus = isLoginButtonStatus;
+    });
   }
 }
