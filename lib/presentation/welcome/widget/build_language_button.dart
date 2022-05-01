@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/data/repositories/shared_preference/shared_preference_repository.dart';
 import 'package:myfood/data/source/shared_preference/shared_preference.dart';
 
 class BuildLanguageButton extends StatefulWidget {
@@ -10,7 +11,10 @@ class BuildLanguageButton extends StatefulWidget {
 
 class _BuildLanguageButtonState extends State<BuildLanguageButton> {
   bool _isLanguageEn = false;
-  final SharedPreference sharedPreference = SharedPreferenceImpl();
+  final SharedPreferenceRepository sharedPreferenceRepository =
+      SharedPreferenceRepositoryImpl(
+    sharedPreference: SharedPreferenceImpl(),
+  );
 
   @override
   void initState() {
@@ -19,14 +23,16 @@ class _BuildLanguageButtonState extends State<BuildLanguageButton> {
   }
 
   Future<void> initLanguageButton() async {
-    bool isLanguageEn = await sharedPreference.getIsLanguageEn();
+    bool isLanguageEn = await sharedPreferenceRepository.getIsLanguageEn();
     setState(() {
       _isLanguageEn = isLanguageEn;
     });
   }
 
   void setLanguage() {
-    sharedPreference.setIsLanguageEn(!_isLanguageEn).then((result) {
+    sharedPreferenceRepository
+        .setIsLanguageEn(isLanguageEn: !_isLanguageEn)
+        .then((result) {
       setState(() {
         _isLanguageEn = !_isLanguageEn;
       });
