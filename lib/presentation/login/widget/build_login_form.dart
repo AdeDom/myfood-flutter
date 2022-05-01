@@ -18,14 +18,15 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   );
 
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
   bool _isLoginButtonStatus = true;
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -49,10 +50,13 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     return SizedBox(
       width: 360,
       child: TextFormField(
-        controller: emailController,
+        controller: _emailController,
         cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Your Email"),
         keyboardType: TextInputType.emailAddress,
+        onFieldSubmitted: (value) {
+          FocusScope?.of(context).requestFocus(_passwordFocusNode);
+        },
         validator: _loginUseCase.validateEmail,
       ),
     );
@@ -62,7 +66,8 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     return SizedBox(
       width: 360,
       child: TextFormField(
-        controller: passwordController,
+        controller: _passwordController,
+        focusNode: _passwordFocusNode,
         cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Password"),
         obscureText: true,
@@ -119,8 +124,8 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     if (_formKey.currentState?.validate() == true) {
       _showLoadingDialog();
       _setLoginButton(false);
-      String email = emailController.text;
-      String password = passwordController.text;
+      String email = _emailController.text;
+      String password = _passwordController.text;
       _loginUseCase(email: email, password: password).then(_responseLogin);
     }
   }

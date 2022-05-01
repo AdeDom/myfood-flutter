@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
       routes: _route,
       title: 'My Food',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: const Color(0xFFFFD700),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const Welcome(),
