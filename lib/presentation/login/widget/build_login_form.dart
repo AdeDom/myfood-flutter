@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/domain/usecase/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {
   const BuildLoginForm({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class BuildLoginForm extends StatefulWidget {
 }
 
 class _BuildLoginFormState extends State<BuildLoginForm> {
+  final LoginUseCase _loginUseCase = LoginUseCase();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -105,6 +108,6 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   void onLoginButton() {
     String email = emailController.text;
     String password = passwordController.text;
-    print("email : $email, password : $password");
+    _loginUseCase(email: email, password: password);
   }
 }
