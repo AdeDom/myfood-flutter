@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/login/widget/build_login_button.dart';
+import 'package:myfood/presentation/login/widget/build_login_form.dart';
 
 class BuildLoginTopSection extends StatelessWidget {
   const BuildLoginTopSection({Key? key}) : super(key: key);
@@ -13,11 +13,7 @@ class BuildLoginTopSection extends StatelessWidget {
         const SizedBox(height: 16),
         _buildLoginSubTitle(),
         const SizedBox(height: 32),
-        _buildEmailTextFormField(),
-        const SizedBox(height: 32),
-        _buildPasswordTextFormField(),
-        const SizedBox(height: 32),
-        const BuildLoginButton(),
+        const BuildLoginForm(),
         const SizedBox(height: 32),
         _buildForgetPasswordButton(),
       ],
@@ -40,48 +36,6 @@ class BuildLoginTopSection extends StatelessWidget {
       style: TextStyle(
         fontSize: 16,
         color: Colors.grey,
-      ),
-    );
-  }
-
-  Widget _buildEmailTextFormField() {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          )),
-      width: 360,
-      child: TextFormField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          labelText: "Your Email",
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPasswordTextFormField() {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          )),
-      width: 360,
-      child: TextFormField(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          labelText: "Password",
-        ),
       ),
     );
   }
