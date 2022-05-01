@@ -1,4 +1,4 @@
-import 'package:myfood/data/models/login_request.dart';
+import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 
 class LoginUseCase {

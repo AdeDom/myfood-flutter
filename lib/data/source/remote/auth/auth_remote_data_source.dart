@@ -1,15 +1,16 @@
-import 'package:myfood/data/models/login_request.dart';
+import 'package:myfood/data/models/login/login_request.dart';
 
 abstract class AuthRemoteDataSource {
-  bool callLogin({required LoginRequest loginRequest});
+  Future<bool> callLogin({required LoginRequest loginRequest});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
-  bool callLogin({required LoginRequest loginRequest}) {
-    if (loginRequest.username == "abc" && loginRequest.password == "456") {
-      return true;
-    }
-    return false;
+  Future<bool> callLogin({required LoginRequest loginRequest}) {
+    return Future.delayed(
+      const Duration(seconds: 2),
+      // () => throw const HttpException("Http exception..."),
+      () => false,
+    );
   }
 }
