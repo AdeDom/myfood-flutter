@@ -11,6 +11,7 @@ class BuildLoginForm extends StatefulWidget {
 class _BuildLoginFormState extends State<BuildLoginForm> {
   final LoginUseCase _loginUseCase = LoginUseCase();
 
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -23,14 +24,17 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildEmailTextFormField(),
-        const SizedBox(height: 32),
-        _buildPasswordTextFormField(),
-        const SizedBox(height: 32),
-        _buildLoginButton(context),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          _buildEmailTextFormField(),
+          const SizedBox(height: 32),
+          _buildPasswordTextFormField(),
+          const SizedBox(height: 32),
+          _buildLoginButton(context),
+        ],
+      ),
     );
   }
 
@@ -52,6 +56,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
           ),
           labelText: "Your Email",
         ),
+        validator: _loginUseCase.validateEmail,
       ),
     );
   }
@@ -74,13 +79,14 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
           ),
           labelText: "Password",
         ),
+        validator: _loginUseCase.validatePassword,
       ),
     );
   }
 
   Widget _buildLoginButton(BuildContext context) {
     return GestureDetector(
-      onTap: onLoginButton,
+      onTap: onLoginClick,
       child: Container(
         width: 360,
         height: 60,
@@ -105,9 +111,11 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
   }
 
-  void onLoginButton() {
-    String email = emailController.text;
-    String password = passwordController.text;
-    _loginUseCase(email: email, password: password);
+  void onLoginClick() {
+    if (_formKey.currentState?.validate() == true) {
+      String email = emailController.text;
+      String password = passwordController.text;
+      _loginUseCase(email: email, password: password);
+    }
   }
 }
