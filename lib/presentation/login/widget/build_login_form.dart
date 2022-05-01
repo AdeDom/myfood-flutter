@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
-class BuildLoginForm extends StatelessWidget {
+class BuildLoginForm extends StatefulWidget {
   const BuildLoginForm({Key? key}) : super(key: key);
+
+  @override
+  State<BuildLoginForm> createState() => _BuildLoginFormState();
+}
+
+class _BuildLoginFormState extends State<BuildLoginForm> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +40,7 @@ class BuildLoginForm extends StatelessWidget {
           )),
       width: 360,
       child: TextFormField(
+        controller: emailController,
         decoration: const InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
@@ -46,6 +62,7 @@ class BuildLoginForm extends StatelessWidget {
           )),
       width: 360,
       child: TextFormField(
+        controller: passwordController,
         decoration: const InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
@@ -60,9 +77,7 @@ class BuildLoginForm extends StatelessWidget {
 
   Widget _buildLoginButton(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        _navigatorToFoodPage(context);
-      },
+      onTap: onLoginButton,
       child: Container(
         width: 360,
         height: 60,
@@ -85,5 +100,11 @@ class BuildLoginForm extends StatelessWidget {
 
   void _navigatorToFoodPage(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
+  }
+
+  void onLoginButton() {
+    String email = emailController.text;
+    String password = passwordController.text;
+    print("email : $email, password : $password");
   }
 }
