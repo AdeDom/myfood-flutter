@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/presentation/food/widget/build_category_list_section.dart';
 
 class Food extends StatelessWidget {
   const Food({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class Food extends StatelessWidget {
             children: [
               _buildTitleSection(),
               _buildSearchSection(),
-              _buildCategoryListSection(),
+              const BuildCategoryListSection(),
               _buildFoodListSection(),
             ],
           )
@@ -35,12 +36,6 @@ class Food extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryListSection() {
-    return Container(
-      height: 300,
-      color: Colors.green,
-    );
-  }
 
   Widget _buildFoodListSection() {
     return Container(
