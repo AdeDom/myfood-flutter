@@ -39,48 +39,50 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   }
 
   Widget _buildEmailTextFormField() {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          )),
+    return SizedBox(
       width: 360,
       child: TextFormField(
         controller: emailController,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          labelText: "Your Email",
-        ),
+        cursorColor: const Color(0xFFFFD700),
+        decoration: _buildInputDecoration(labelText: "Your Email"),
         validator: _loginUseCase.validateEmail,
       ),
     );
   }
 
   Widget _buildPasswordTextFormField() {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          )),
+    return SizedBox(
       width: 360,
       child: TextFormField(
         controller: passwordController,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          labelText: "Password",
-        ),
+        cursorColor: const Color(0xFFFFD700),
+        decoration: _buildInputDecoration(labelText: "Password"),
         validator: _loginUseCase.validatePassword,
       ),
+    );
+  }
+
+  InputDecoration _buildInputDecoration({required String labelText}) {
+    return InputDecoration(
+      fillColor: Colors.grey.shade200,
+      filled: true,
+      labelStyle: const TextStyle(
+        color: Color(0xFFFFD700),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Color(0xFFFFD700),
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      hoverColor: Colors.yellow.shade50,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(50),
+        ),
+      ),
+      labelText: labelText,
     );
   }
 
