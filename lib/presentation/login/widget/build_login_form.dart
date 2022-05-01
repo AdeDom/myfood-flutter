@@ -89,7 +89,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
 
   Widget _buildLoginButton(BuildContext context) {
     return GestureDetector(
-      onTap: callLogin,
+      onTap: _requestLogin,
       child: Container(
         width: 360,
         height: 60,
@@ -114,16 +114,40 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
   }
 
-  void callLogin() {
+  void _requestLogin() {
     if (_formKey.currentState?.validate() == true) {
+      _showLoadingDialog();
       String email = emailController.text;
       String password = passwordController.text;
-      _loginUseCase(email: email, password: password).then(
-        (result) => {
-          if (!result) {_showAlertDialog()}
-        },
-      );
+      _loginUseCase(email: email, password: password).then(_responseLogin);
     }
+  }
+
+  void _responseLogin(bool result) {
+    Navigator.pop(context);
+    if (!result) {
+      _showAlertDialog();
+    }
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text("Loading"),
+          content: SizedBox(
+            width: 50,
+            height: 200,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+              backgroundColor: Color(0xFFFFD700),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _showAlertDialog() {
