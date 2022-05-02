@@ -116,7 +116,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     );
   }
 
-  void _navigatorToFoodPage(BuildContext context) {
+  void _navigatorToFoodPage() {
     Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
   }
 
@@ -133,7 +133,9 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   void _responseLogin(bool result) {
     Navigator.pop(context);
     _setLoginButton(true);
-    if (!result) {
+    if (result) {
+      _navigatorToFoodPage();
+    } else {
       _showAlertDialog();
     }
   }
