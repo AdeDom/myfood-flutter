@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:myfood/data/models/login/login_request.dart';
+import 'package:myfood/data/models/login/login_response.dart';
 import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
 
 abstract class AuthRepository {
@@ -12,6 +15,14 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<bool> callLogin({required LoginRequest loginRequest}) async {
-    return await authRemoteDataSource.callLogin(loginRequest: loginRequest);
+    try {
+      LoginResponse loginResponse =
+          await authRemoteDataSource.callLogin(loginRequest: loginRequest);
+      return true;
+    } on HttpException catch (error) {
+      return false;
+    } catch (error) {
+      return false;
+    }
   }
 }
