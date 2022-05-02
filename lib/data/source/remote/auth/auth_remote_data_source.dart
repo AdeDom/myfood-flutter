@@ -1,34 +1,25 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:http/http.dart' as http;
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
+import 'package:myfood/data/source/remote/data_source_provider.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginResponse> callLogin({required LoginRequest loginRequest});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  AuthRemoteDataSourceImpl({required this.dataSourceProvider});
+
+  DataSourceProvider dataSourceProvider;
+
   @override
   Future<LoginResponse> callLogin({required LoginRequest loginRequest}) async {
-    final data = {
-      "username": loginRequest.username,
-      "password": loginRequest.password,
-    };
-    var body = json.encode(data);
-
-    final response = await http.post(
-      Uri.parse("https://myfood-server.herokuapp.com/api/auth/login"),
-      headers: {"Content-Type": "application/json"},
-      body: body,
+    final jsonResponse = await dataSourceProvider.post(
+      "api/auth/login",
+      body: {
+        "username": loginRequest.username,
+        "password": loginRequest.password,
+      },
     );
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      LoginResponse loginResponse = LoginResponse.fromJson(jsonResponse);
-      return loginResponse;
-    } else {
-      throw const HttpException("Api error.");
-    }
+    return LoginResponse.fromJson(jsonResponse);
   }
 }
