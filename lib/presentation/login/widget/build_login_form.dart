@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/source/remote/data_source_provider.dart';
 import 'package:myfood/domain/usecase/login/login_use_case.dart';
@@ -133,13 +135,13 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     }
   }
 
-  void _responseLogin(bool result) {
+  void _responseLogin(Resource resource) {
     Navigator.pop(context);
     _setLoginButton(true);
-    if (result) {
+    if (resource.isSuccess) {
       _navigatorToFoodPage();
     } else {
-      _showAlertDialog();
+      _showErrorDialog(error: resource.error);
     }
   }
 
@@ -163,16 +165,14 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     );
   }
 
-  void _showAlertDialog() {
+  void _showErrorDialog({required BaseError? error}) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
           title: const Text("Error"),
-          content: const Text(
-            "Email or password is incorrect, please try again.",
-          ),
+          content: Text(error?.message ?? "-"),
           actions: [
             TextButton(
               onPressed: () {
