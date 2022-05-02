@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:myfood/data/models/token/token.dart';
+
 LoginResponse loginResponseFromJson(String str) =>
     LoginResponse.fromJson(json.decode(str));
 
@@ -17,13 +19,13 @@ class LoginResponse {
   String? status;
 
   // Error? error;
-  Result? result;
+  Token? result;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         version: json["version"],
         status: json["status"],
         // error: Error.fromJson(json["error"]),
-        result: Result.fromJson(json["result"]),
+        result: Token.fromJson(json["result"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,25 +53,5 @@ class Error {
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
-      };
-}
-
-class Result {
-  Result({
-    this.accessToken,
-    this.refreshToken,
-  });
-
-  String? accessToken;
-  String? refreshToken;
-
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
-        accessToken: json["accessToken"],
-        refreshToken: json["refreshToken"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "accessToken": accessToken,
-        "refreshToken": refreshToken,
       };
 }
