@@ -11,12 +11,24 @@ class DataSourceProvider {
   static const String _errorValue = "error";
 
   Future<Map<String, dynamic>> post(
-    String path, {
+    String path,
+    DataSourceType dataSourceType, {
     Map<String, dynamic>? body,
   }) async {
+    Map<String, String> headers;
+    if (dataSourceType == DataSourceType.authorization) {
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": "",
+      };
+    } else {
+      headers = {
+        "Content-Type": "application/json",
+      };
+    }
     final response = await http.post(
       Uri.parse("$_baseUrl$path"),
-      headers: {"Content-Type": "application/json"},
+      headers: headers,
       body: json.encode(body),
     );
 
@@ -38,6 +50,11 @@ class DataSourceProvider {
       throw ApiServiceManagerException(errorString);
     }
   }
+}
+
+enum DataSourceType {
+  unAuthorization,
+  authorization,
 }
 
 class ApiServiceManagerException extends HttpException {

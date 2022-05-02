@@ -15,6 +15,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<LoginResponse> callLogin({required LoginRequest loginRequest}) async {
     final jsonResponse = await dataSourceProvider.post(
       "api/auth/login",
+      DataSourceType.unAuthorization,
       body: {
         "username": loginRequest.username,
         "password": loginRequest.password,
