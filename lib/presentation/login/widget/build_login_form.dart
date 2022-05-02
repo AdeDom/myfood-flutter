@@ -4,6 +4,7 @@ import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/source/remote/data_source_provider.dart';
+import 'package:myfood/data/source/shared_preference/shared_preference.dart';
 import 'package:myfood/domain/usecase/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {
@@ -17,8 +18,11 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   final LoginUseCase _loginUseCase = LoginUseCase(
     authRepository: AuthRepositoryImpl(
       authRemoteDataSource: AuthRemoteDataSourceImpl(
-        dataSourceProvider: DataSourceProvider(),
+        dataSourceProvider: DataSourceProvider(
+          sharedPreference: SharedPreferenceImpl(),
+        ),
       ),
+      sharedPreference: SharedPreferenceImpl(),
     ),
   );
 

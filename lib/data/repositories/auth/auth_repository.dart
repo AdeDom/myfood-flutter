@@ -7,21 +7,30 @@ import 'package:myfood/data/models/login/login_response.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/source/remote/data_source_provider.dart';
+import 'package:myfood/data/source/shared_preference/shared_preference.dart';
 
 abstract class AuthRepository {
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest});
 }
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRemoteDataSource authRemoteDataSource;
+  AuthRepositoryImpl({
+    required this.authRemoteDataSource,
+    required this.sharedPreference,
+  });
 
-  AuthRepositoryImpl({required this.authRemoteDataSource});
+  AuthRemoteDataSource authRemoteDataSource;
+  SharedPreference sharedPreference;
 
   @override
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest}) async {
     try {
       LoginResponse loginResponse =
           await authRemoteDataSource.callLogin(loginRequest: loginRequest);
+      String accessToken = loginResponse.result?.accessToken ?? "";
+      String refreshToken = loginResponse.result?.refreshToken ?? "";
+      sharedPreference.setAccessToken(accessToken: accessToken);
+      sharedPreference.setRefreshToken(refreshToken: refreshToken);
       return Resource(
         isSuccess: true,
         data: true,

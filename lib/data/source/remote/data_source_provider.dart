@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:myfood/data/models/base/base_error.dart';
+import 'package:myfood/data/source/shared_preference/shared_preference.dart';
 
 class DataSourceProvider {
   static const String _baseUrl = "https://myfood-server.herokuapp.com/";
@@ -10,16 +11,21 @@ class DataSourceProvider {
   static const String _successValue = "success";
   static const String _errorValue = "error";
 
+  DataSourceProvider({required this.sharedPreference});
+
+  SharedPreference sharedPreference = SharedPreferenceImpl();
+
   Future<Map<String, dynamic>> post(
     String path,
     DataSourceType dataSourceType, {
     Map<String, dynamic>? body,
   }) async {
+    var accessToken = await sharedPreference.getAccessToken();
     Map<String, String> headers;
     if (dataSourceType == DataSourceType.authorization) {
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "",
+        "Authorization": accessToken ?? "",
       };
     } else {
       headers = {
