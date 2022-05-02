@@ -13,7 +13,7 @@ class DataSourceProvider {
 
   DataSourceProvider({required this.sharedPreference});
 
-  SharedPreference sharedPreference = SharedPreferenceImpl();
+  SharedPreference sharedPreference;
 
   Future<Map<String, dynamic>> post(
     String path,
