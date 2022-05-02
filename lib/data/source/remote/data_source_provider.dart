@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:myfood/data/models/base/base_error.dart';
 
 class DataSourceProvider {
   static const String _baseUrl = "https://myfood-server.herokuapp.com/";
@@ -25,12 +26,16 @@ class DataSourceProvider {
         return jsonResponse;
       } else {
         final error = jsonResponse[_errorValue];
-        throw ApiServiceManagerException(error.toString());
+        BaseError baseError = BaseError.fromJson(error);
+        String errorString = json.encode(baseError);
+        throw ApiServiceManagerException(errorString);
       }
     } else {
       final jsonResponse = json.decode(response.body);
       final error = jsonResponse[_errorValue];
-      throw ApiServiceManagerException(error.toString());
+      BaseError baseError = BaseError.fromJson(error);
+      String errorString = json.encode(baseError);
+      throw ApiServiceManagerException(errorString);
     }
   }
 }

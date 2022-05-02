@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:myfood/data/models/base/base_error.dart';
@@ -26,7 +27,8 @@ class AuthRepositoryImpl implements AuthRepository {
         data: true,
       );
     } on ApiServiceManagerException catch (error) {
-      BaseError baseError = BaseError(message: "Hello, error.");
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
       return Resource(error: baseError);
     } on HttpException catch (error) {
       BaseError baseError = BaseError(message: error.message);
