@@ -25,12 +25,12 @@ class DataSourceProvider {
         return jsonResponse;
       } else {
         final error = jsonResponse[_errorValue];
-        throw ApiServiceManagerException(error);
+        throw ApiServiceManagerException(error.toString());
       }
     } else {
       final jsonResponse = json.decode(response.body);
       final error = jsonResponse[_errorValue];
-      throw ApiServiceManagerException(error);
+      throw ApiServiceManagerException(error.toString());
     }
   }
 }
