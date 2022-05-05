@@ -18,7 +18,7 @@ class DataSourceProvider {
   Future<Map<String, dynamic>> post(
     String path,
     DataSourceType dataSourceType, {
-    Map<String, dynamic>? body,
+    Object? body,
   }) async {
     var accessToken = await sharedPreference.getAccessToken();
     Map<String, String> headers;

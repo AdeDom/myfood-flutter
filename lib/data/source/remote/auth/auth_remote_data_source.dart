@@ -16,10 +16,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final jsonResponse = await dataSourceProvider.post(
       "api/auth/login",
       DataSourceType.unAuthorization,
-      body: {
-        "username": loginRequest.username,
-        "password": loginRequest.password,
-      },
+      body: loginRequest,
     );
     return LoginResponse.fromJson(jsonResponse);
   }
