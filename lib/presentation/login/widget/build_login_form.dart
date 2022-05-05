@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/providers/remote/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/remote/data_source_provider.dart';
+import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
+import 'package:myfood/data/providers/network/data_source_provider.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/data/repositories/resource.dart';
-import 'package:myfood/domain/usecase/login/login_use_case.dart';
+import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {
   const BuildLoginForm({Key? key}) : super(key: key);

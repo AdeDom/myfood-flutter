@@ -4,14 +4,11 @@ import 'dart:io';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
-import 'package:myfood/data/providers/remote/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/remote/data_source_provider.dart';
+import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
+import 'package:myfood/data/providers/network/data_source_provider.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/resource.dart';
-
-abstract class AuthRepository {
-  Future<Resource<bool>> callLogin({required LoginRequest loginRequest});
-}
+import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
