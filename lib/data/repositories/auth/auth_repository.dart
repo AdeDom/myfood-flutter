@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
+import 'package:myfood/data/providers/remote/auth/auth_remote_data_source.dart';
+import 'package:myfood/data/providers/remote/data_source_provider.dart';
+import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/resource.dart';
-import 'package:myfood/data/source/remote/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/source/remote/data_source_provider.dart';
-import 'package:myfood/data/source/shared_preference/shared_preference.dart';
 
 abstract class AuthRepository {
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest});

@@ -1,6 +1,6 @@
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
-import 'package:myfood/data/source/remote/data_source_provider.dart';
+import 'package:myfood/data/providers/remote/data_source_provider.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginResponse> callLogin({required LoginRequest loginRequest});

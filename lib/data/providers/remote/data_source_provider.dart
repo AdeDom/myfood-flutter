@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/source/shared_preference/shared_preference.dart';
+import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 
 class DataSourceProvider {
   static const String _baseUrl = "https://myfood-server.herokuapp.com/";
