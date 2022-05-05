@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/providers/remote/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/remote/data_source_provider.dart';
@@ -26,22 +28,12 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     ),
   );
 
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _passwordFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormBuilderState>();
   bool _isLoginButtonStatus = true;
 
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Form(
+    return FormBuilder(
       key: _formKey,
       child: Column(
         children: [
@@ -58,15 +50,13 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   Widget _buildEmailTextFormField() {
     return SizedBox(
       width: 360,
-      child: TextFormField(
-        controller: _emailController,
+      child: FormBuilderTextField(
         cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Your Email"),
         keyboardType: TextInputType.emailAddress,
-        onFieldSubmitted: (value) {
-          FocusScope?.of(context).requestFocus(_passwordFocusNode);
-        },
+        textInputAction: TextInputAction.next,
         validator: _loginUseCase.validateEmail,
+        name: AppConstant.emailKey,
       ),
     );
   }
@@ -74,13 +64,12 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   Widget _buildPasswordTextFormField() {
     return SizedBox(
       width: 360,
-      child: TextFormField(
-        controller: _passwordController,
-        focusNode: _passwordFocusNode,
+      child: FormBuilderTextField(
         cursorColor: Colors.grey,
         decoration: _buildInputDecoration(labelText: "Password"),
         obscureText: true,
         validator: _loginUseCase.validatePassword,
+        name: AppConstant.passwordKey,
       ),
     );
   }
@@ -130,12 +119,14 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   }
 
   void _requestLogin() {
+    _formKey.currentState?.save();
     if (_formKey.currentState?.validate() == true) {
       _showLoadingDialog();
       _setLoginButton(false);
-      String email = _emailController.text;
-      String password = _passwordController.text;
-      _loginUseCase(email: email, password: password).then(_responseLogin);
+      final _formData = _formKey.currentState?.value ?? <String, dynamic>{};
+      final _email = _formData[(AppConstant.emailKey)];
+      final _password = _formData[(AppConstant.passwordKey)];
+      _loginUseCase(email: _email, password: _password).then(_responseLogin);
     }
   }
 
