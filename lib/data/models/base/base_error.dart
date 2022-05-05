@@ -1,19 +1,21 @@
 class BaseError {
+  String? message;
+  String? code;
+
   BaseError({
-    this.code,
     this.message,
+    this.code,
   });
 
-  String? code;
-  String? message;
+  BaseError.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    code = json['code'];
+  }
 
-  factory BaseError.fromJson(Map<String, dynamic> json) => BaseError(
-        code: json["code"],
-        message: json["message"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "code": code,
-        "message": message,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['code'] = code;
+    return data;
+  }
 }

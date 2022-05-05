@@ -25,8 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest}) async {
     try {
-      LoginResponse loginResponse =
-          await authRemoteDataSource.callLogin(loginRequest: loginRequest);
+      LoginResponse loginResponse = await authRemoteDataSource.callLogin(
+        loginRequest: loginRequest,
+      );
       String accessToken = loginResponse.result?.accessToken ?? "";
       String refreshToken = loginResponse.result?.refreshToken ?? "";
       sharedPreference.setAccessToken(accessToken: accessToken);
