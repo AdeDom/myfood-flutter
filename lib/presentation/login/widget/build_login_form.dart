@@ -4,6 +4,7 @@ import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/data_source_provider.dart';
+import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/data/repositories/resource.dart';
@@ -20,6 +21,11 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   final LoginUseCase _loginUseCase = LoginUseCase(
     authRepository: AuthRepositoryImpl(
       authRemoteDataSource: AuthRemoteDataSourceImpl(
+        dataSourceProvider: DataSourceProvider(
+          sharedPreference: SharedPreferenceImpl(),
+        ),
+      ),
+      profileRemoteDataSource: ProfileRemoteDataSourceImpl(
         dataSourceProvider: DataSourceProvider(
           sharedPreference: SharedPreferenceImpl(),
         ),

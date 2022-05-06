@@ -13,7 +13,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future<UserProfileResponse> callUserProfile() async {
     final jsonResponse = await dataSourceProvider.get(
-      "api/auth/login",
+      "api/profile/user",
       DataSourceType.authorization,
     );
     return UserProfileResponse.fromJson(jsonResponse);

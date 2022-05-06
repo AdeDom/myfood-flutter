@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
+import 'package:myfood/data/models/user_profile/user_profile_response.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/data_source_provider.dart';
+import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
@@ -13,10 +15,12 @@ import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
     required this.authRemoteDataSource,
+    required this.profileRemoteDataSource,
     required this.sharedPreference,
   });
 
   AuthRemoteDataSource authRemoteDataSource;
+  ProfileRemoteDataSource profileRemoteDataSource;
   SharedPreference sharedPreference;
 
   @override
@@ -29,6 +33,8 @@ class AuthRepositoryImpl implements AuthRepository {
       String refreshToken = loginResponse.result?.refreshToken ?? "";
       sharedPreference.setAccessToken(accessToken: accessToken);
       sharedPreference.setRefreshToken(refreshToken: refreshToken);
+      UserProfileResponse userProfileResponse =
+          await profileRemoteDataSource.callUserProfile();
       return Resource(
         isSuccess: true,
         data: true,
