@@ -15,6 +15,46 @@ class DataSourceProvider {
 
   SharedPreference sharedPreference;
 
+  Future<Map<String, dynamic>> get(
+    String path,
+    DataSourceType dataSourceType,
+  ) async {
+    var accessToken = await sharedPreference.getAccessToken();
+    Map<String, String> headers;
+    if (dataSourceType == DataSourceType.authorization) {
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": accessToken ?? "",
+      };
+    } else {
+      headers = {
+        "Content-Type": "application/json",
+      };
+    }
+    final response = await http.get(
+      Uri.parse("$_baseUrl$path"),
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      if (jsonResponse[_statusKey] == _successValue) {
+        return jsonResponse;
+      } else {
+        final error = jsonResponse[_errorValue];
+        BaseError baseError = BaseError.fromJson(error);
+        String errorString = json.encode(baseError);
+        throw ApiServiceManagerException(errorString);
+      }
+    } else {
+      final jsonResponse = json.decode(response.body);
+      final error = jsonResponse[_errorValue];
+      BaseError baseError = BaseError.fromJson(error);
+      String errorString = json.encode(baseError);
+      throw ApiServiceManagerException(errorString);
+    }
+  }
+
   Future<Map<String, dynamic>> post(
     String path,
     DataSourceType dataSourceType, {
