@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 
@@ -19,28 +20,12 @@ class DataSourceProvider {
     String path,
     DataSourceType dataSourceType,
   ) async {
-    final response = await http.get(
+    final response = http.get(
       Uri.parse("$_baseUrl$path"),
-      headers: await getHeaders(dataSourceType),
+      headers: await _getHeaders(dataSourceType),
     );
 
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      if (jsonResponse[_statusKey] == _successValue) {
-        return jsonResponse;
-      } else {
-        final error = jsonResponse[_errorValue];
-        BaseError baseError = BaseError.fromJson(error);
-        String errorString = json.encode(baseError);
-        throw ApiServiceManagerException(errorString);
-      }
-    } else {
-      final jsonResponse = json.decode(response.body);
-      final error = jsonResponse[_errorValue];
-      BaseError baseError = BaseError.fromJson(error);
-      String errorString = json.encode(baseError);
-      throw ApiServiceManagerException(errorString);
-    }
+    return await _getResponse(response);
   }
 
   Future<Map<String, dynamic>> httpPost(
@@ -48,32 +33,16 @@ class DataSourceProvider {
     DataSourceType dataSourceType, {
     Object? body,
   }) async {
-    final response = await http.post(
+    final response = http.post(
       Uri.parse("$_baseUrl$path"),
-      headers: await getHeaders(dataSourceType),
+      headers: await _getHeaders(dataSourceType),
       body: json.encode(body),
     );
 
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      if (jsonResponse[_statusKey] == _successValue) {
-        return jsonResponse;
-      } else {
-        final error = jsonResponse[_errorValue];
-        BaseError baseError = BaseError.fromJson(error);
-        String errorString = json.encode(baseError);
-        throw ApiServiceManagerException(errorString);
-      }
-    } else {
-      final jsonResponse = json.decode(response.body);
-      final error = jsonResponse[_errorValue];
-      BaseError baseError = BaseError.fromJson(error);
-      String errorString = json.encode(baseError);
-      throw ApiServiceManagerException(errorString);
-    }
+    return await _getResponse(response);
   }
 
-  Future<Map<String, String>> getHeaders(DataSourceType dataSourceType) async {
+  Future<Map<String, String>> _getHeaders(DataSourceType dataSourceType) async {
     Map<String, String> headers;
     if (dataSourceType == DataSourceType.authorization) {
       var accessToken = await sharedPreference.getAccessToken();
@@ -87,6 +56,27 @@ class DataSourceProvider {
       };
     }
     return headers;
+  }
+
+  Future<Map<String, dynamic>> _getResponse(Future<Response> response) async {
+    final _response = await response;
+    if (_response.statusCode == 200) {
+      final jsonResponse = json.decode(_response.body);
+      if (jsonResponse[_statusKey] == _successValue) {
+        return jsonResponse;
+      } else {
+        final error = jsonResponse[_errorValue];
+        BaseError baseError = BaseError.fromJson(error);
+        String errorString = json.encode(baseError);
+        throw ApiServiceManagerException(errorString);
+      }
+    } else {
+      final jsonResponse = json.decode(_response.body);
+      final error = jsonResponse[_errorValue];
+      BaseError baseError = BaseError.fromJson(error);
+      String errorString = json.encode(baseError);
+      throw ApiServiceManagerException(errorString);
+    }
   }
 }
 
