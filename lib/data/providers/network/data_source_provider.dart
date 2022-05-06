@@ -19,9 +19,9 @@ class DataSourceProvider {
     String path,
     DataSourceType dataSourceType,
   ) async {
-    var accessToken = await sharedPreference.getAccessToken();
     Map<String, String> headers;
     if (dataSourceType == DataSourceType.authorization) {
+      var accessToken = await sharedPreference.getAccessToken();
       headers = {
         "Content-Type": "application/json",
         "Authorization": accessToken ?? "",
@@ -60,9 +60,9 @@ class DataSourceProvider {
     DataSourceType dataSourceType, {
     Object? body,
   }) async {
-    var accessToken = await sharedPreference.getAccessToken();
     Map<String, String> headers;
     if (dataSourceType == DataSourceType.authorization) {
+      var accessToken = await sharedPreference.getAccessToken();
       headers = {
         "Content-Type": "application/json",
         "Authorization": accessToken ?? "",
