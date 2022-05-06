@@ -19,21 +19,9 @@ class DataSourceProvider {
     String path,
     DataSourceType dataSourceType,
   ) async {
-    Map<String, String> headers;
-    if (dataSourceType == DataSourceType.authorization) {
-      var accessToken = await sharedPreference.getAccessToken();
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": accessToken ?? "",
-      };
-    } else {
-      headers = {
-        "Content-Type": "application/json",
-      };
-    }
     final response = await http.get(
       Uri.parse("$_baseUrl$path"),
-      headers: headers,
+      headers: await getHeaders(dataSourceType),
     );
 
     if (response.statusCode == 200) {
@@ -60,21 +48,9 @@ class DataSourceProvider {
     DataSourceType dataSourceType, {
     Object? body,
   }) async {
-    Map<String, String> headers;
-    if (dataSourceType == DataSourceType.authorization) {
-      var accessToken = await sharedPreference.getAccessToken();
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": accessToken ?? "",
-      };
-    } else {
-      headers = {
-        "Content-Type": "application/json",
-      };
-    }
     final response = await http.post(
       Uri.parse("$_baseUrl$path"),
-      headers: headers,
+      headers: await getHeaders(dataSourceType),
       body: json.encode(body),
     );
 
@@ -95,6 +71,22 @@ class DataSourceProvider {
       String errorString = json.encode(baseError);
       throw ApiServiceManagerException(errorString);
     }
+  }
+
+  Future<Map<String, String>> getHeaders(DataSourceType dataSourceType) async {
+    Map<String, String> headers;
+    if (dataSourceType == DataSourceType.authorization) {
+      var accessToken = await sharedPreference.getAccessToken();
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": accessToken ?? "",
+      };
+    } else {
+      headers = {
+        "Content-Type": "application/json",
+      };
+    }
+    return headers;
   }
 }
 
