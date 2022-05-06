@@ -13,7 +13,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<LoginResponse> callLogin({required LoginRequest loginRequest}) async {
-    final jsonResponse = await dataSourceProvider.post(
+    final jsonResponse = await dataSourceProvider.httpPost(
       "api/auth/login",
       DataSourceType.unAuthorization,
       body: loginRequest,

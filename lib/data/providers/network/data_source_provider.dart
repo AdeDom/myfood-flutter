@@ -15,7 +15,7 @@ class DataSourceProvider {
 
   SharedPreference sharedPreference;
 
-  Future<Map<String, dynamic>> get(
+  Future<Map<String, dynamic>> httpGet(
     String path,
     DataSourceType dataSourceType,
   ) async {
@@ -55,7 +55,7 @@ class DataSourceProvider {
     }
   }
 
-  Future<Map<String, dynamic>> post(
+  Future<Map<String, dynamic>> httpPost(
     String path,
     DataSourceType dataSourceType, {
     Object? body,
