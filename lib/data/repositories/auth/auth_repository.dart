@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
@@ -42,9 +41,6 @@ class AuthRepositoryImpl implements AuthRepository {
     } on ApiServiceManagerException catch (error) {
       Map<String, dynamic> jsonError = json.decode(error.message);
       BaseError baseError = BaseError.fromJson(jsonError);
-      return Resource(error: baseError);
-    } on HttpException catch (error) {
-      BaseError baseError = BaseError(message: error.message);
       return Resource(error: baseError);
     } catch (error) {
       BaseError baseError = BaseError(message: error.toString());
