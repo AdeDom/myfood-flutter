@@ -14,17 +14,17 @@ import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
+  final UserLocalDataSource userLocalDataSource;
+  final AuthRemoteDataSource authRemoteDataSource;
+  final ProfileRemoteDataSource profileRemoteDataSource;
+  final SharedPreference sharedPreference;
+
   AuthRepositoryImpl({
     required this.userLocalDataSource,
     required this.authRemoteDataSource,
     required this.profileRemoteDataSource,
     required this.sharedPreference,
   });
-
-  UserLocalDataSource userLocalDataSource;
-  AuthRemoteDataSource authRemoteDataSource;
-  ProfileRemoteDataSource profileRemoteDataSource;
-  SharedPreference sharedPreference;
 
   @override
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest}) async {

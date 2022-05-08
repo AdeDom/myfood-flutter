@@ -6,9 +6,9 @@ abstract class ProfileRemoteDataSource {
 }
 
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
-  ProfileRemoteDataSourceImpl({required this.dataSourceProvider});
+  final DataSourceProvider dataSourceProvider;
 
-  DataSourceProvider dataSourceProvider;
+  ProfileRemoteDataSourceImpl({required this.dataSourceProvider});
 
   @override
   Future<UserProfileResponse> callUserProfile() async {

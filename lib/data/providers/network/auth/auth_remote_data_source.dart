@@ -7,9 +7,9 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  AuthRemoteDataSourceImpl({required this.dataSourceProvider});
+  final DataSourceProvider dataSourceProvider;
 
-  DataSourceProvider dataSourceProvider;
+  AuthRemoteDataSourceImpl({required this.dataSourceProvider});
 
   @override
   Future<LoginResponse> callLogin({required LoginRequest loginRequest}) async {
