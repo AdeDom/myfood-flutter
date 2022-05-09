@@ -1,11 +1,11 @@
 import 'package:myfood/app/config/database_constant.dart';
-import 'package:myfood/data/models/user_profile/user_profile.dart';
+import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/providers/database/myfood_provider.dart';
 
 abstract class UserLocalDataSource {
-  Future<UserProfile?> getUser();
+  Future<UserEntity?> getUser();
 
-  Future saveUser(UserProfile user);
+  Future saveUser(UserEntity user);
 
   Future deleteUserAll();
 }
@@ -16,13 +16,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   UserLocalDataSourceImpl({required this.myFoodProvider});
 
   @override
-  Future<UserProfile?> getUser() async {
+  Future<UserEntity?> getUser() async {
     List<Map<String, Object?>>? maps = await myFoodProvider.database?.query(
       DatabaseConstant.tableUser,
     );
-    List<UserProfile>? userProfileList = maps
+    List<UserEntity>? userProfileList = maps
         ?.map(
-          (e) => UserProfile.fromJson(e),
+          (e) => UserEntity.fromJson(e),
         )
         .toList();
     if (userProfileList?.isNotEmpty == true) {
@@ -33,7 +33,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future saveUser(UserProfile user) async {
+  Future saveUser(UserEntity user) async {
     return await myFoodProvider.database?.insert(
       DatabaseConstant.tableUser,
       user.toJson(),

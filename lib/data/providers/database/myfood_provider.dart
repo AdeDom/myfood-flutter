@@ -16,6 +16,10 @@ class MyFoodProviderImpl implements MyFoodProvider {
   @override
   Database? database;
 
+  MyFoodProviderImpl() {
+    initDb();
+  }
+
   @override
   Future initDb() async {
     try {

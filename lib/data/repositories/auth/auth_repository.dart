@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
+import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/models/user_profile/user_profile_response.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
@@ -42,7 +43,19 @@ class AuthRepositoryImpl implements AuthRepository {
       UserProfile? userProfile = userProfileResponse.result;
       if (userProfile != null) {
         await userLocalDataSource.deleteUserAll();
-        await userLocalDataSource.saveUser(userProfile);
+        UserEntity userEntity = UserEntity(
+          userId: userProfile.userId,
+          username: userProfile.username,
+          name: userProfile.name,
+          email: userProfile.email,
+          mobileNo: userProfile.mobileNo,
+          address: userProfile.address,
+          image: userProfile.image,
+          status: userProfile.status,
+          created: userProfile.created,
+          updated: userProfile.updated,
+        );
+        await userLocalDataSource.saveUser(userEntity);
       }
 
       return Resource(

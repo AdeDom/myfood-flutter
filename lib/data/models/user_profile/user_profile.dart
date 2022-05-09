@@ -8,6 +8,7 @@ class UserProfile {
   String? image;
   String? status;
   String? created;
+  String? updated;
 
   UserProfile({
     this.userId,
@@ -19,6 +20,7 @@ class UserProfile {
     this.image,
     this.status,
     this.created,
+    this.updated,
   });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class UserProfile {
     image = json['image'];
     status = json['status'];
     created = json['created'];
+    updated = json['updated'];
   }
 
   Map<String, dynamic> toJson() {
@@ -44,6 +47,7 @@ class UserProfile {
     data['image'] = image;
     data['status'] = status;
     data['created'] = created;
+    data['updated'] = updated;
     return data;
   }
 }
