@@ -5,7 +5,6 @@ import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/providers/database/myfood_provider.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/network/data_source_provider.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/data/providers/shared_preference/shared_preference.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
@@ -25,15 +24,9 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       userLocalDataSource: UserLocalDataSourceImpl(
         myFoodProvider: MyFoodProviderImpl(),
       ),
-      authRemoteDataSource: AuthRemoteDataSourceImpl(
-        dataSourceProvider: DataSourceProvider(
-          sharedPreference: SharedPreferenceImpl(),
-        ),
-      ),
+      authRemoteDataSource: AuthRemoteDataSourceImpl(),
       profileRemoteDataSource: ProfileRemoteDataSourceImpl(
-        dataSourceProvider: DataSourceProvider(
-          sharedPreference: SharedPreferenceImpl(),
-        ),
+        sharedPreference: SharedPreferenceImpl(),
       ),
       sharedPreference: SharedPreferenceImpl(),
     ),

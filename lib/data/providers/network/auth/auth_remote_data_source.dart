@@ -1,23 +1,27 @@
+import 'package:dio/dio.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/login/login_response.dart';
-import 'package:myfood/data/providers/network/data_source_provider.dart';
+import 'package:myfood/data/providers/network/api_service_manager.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginResponse> callLogin({required LoginRequest loginRequest});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final DataSourceProvider dataSourceProvider;
-
-  AuthRemoteDataSourceImpl({required this.dataSourceProvider});
-
   @override
   Future<LoginResponse> callLogin({required LoginRequest loginRequest}) async {
-    final jsonResponse = await dataSourceProvider.httpPost(
+    final _dio = Dio();
+    _dio.interceptors.add(ApiServiceManagerInterceptors());
+    final response = await _dio.post(
       "api/auth/login",
-      DataSourceType.unAuthorization,
-      body: loginRequest,
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+      data: loginRequest,
     );
-    return LoginResponse.fromJson(jsonResponse);
+
+    return LoginResponse.fromJson(response.data);
   }
 }
