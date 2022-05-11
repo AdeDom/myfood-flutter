@@ -1,6 +1,20 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:dio/native_imp.dart';
+
+class MyFoodDio extends DioForNative {
+  MyFoodDio([BaseOptions? options]) : super(options) {
+    interceptors.add(ApiServiceManagerInterceptors());
+  }
+
+  MyFoodDio addAuth(String? accessToken) {
+    options.headers = {
+      "Authorization": accessToken ?? "",
+    };
+    return this;
+  }
+}
 
 class ApiServiceManagerInterceptors extends Interceptor {
   static const String _baseUrl = "https://myfood-server.herokuapp.com/";
@@ -14,6 +28,15 @@ class ApiServiceManagerInterceptors extends Interceptor {
 
     options.baseUrl = _baseUrl;
     options.connectTimeout = 60000;
+    switch (options.method) {
+      case "POST":
+        if (options.data != null) {
+          options.headers = {
+            Headers.contentTypeHeader: Headers.jsonContentType,
+          };
+        }
+        break;
+    }
   }
 
   @override

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/token/token.dart';
@@ -9,19 +8,16 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final MyFoodDio myFoodDio;
+
+  AuthRemoteDataSourceImpl({required this.myFoodDio});
+
   @override
   Future<BaseResponse<Token>> callLogin({
     required LoginRequest loginRequest,
   }) async {
-    final _dio = Dio();
-    _dio.interceptors.add(ApiServiceManagerInterceptors());
-    final response = await _dio.post(
+    final response = await myFoodDio.post(
       "api/auth/login",
-      options: Options(
-        headers: {
-          "Content-Type": "application/json",
-        },
-      ),
       data: loginRequest,
     );
 
