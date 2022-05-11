@@ -1,28 +1,31 @@
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/models/user_profile/user_profile.dart';
 
-class UserProfileResponse {
+class BaseResponse<T> {
   String? version;
   String? status;
   BaseError? error;
-  UserProfile? result;
+  T? result;
 
-  UserProfileResponse({
+  BaseResponse({
     this.version,
     this.status,
     this.error,
     this.result,
   });
 
-  UserProfileResponse.fromJson(Map<String, dynamic> json) {
+  BaseResponse.fromJson(
+    Map<String, dynamic> json,
+    T Function(dynamic json) fromJsonT,
+  ) {
     version = json['version'];
     status = json['status'];
     error = json['error'] != null ? BaseError.fromJson(json['error']) : null;
-    result =
-        json['result'] != null ? UserProfile.fromJson(json['result']) : null;
+    result = json['result'] != null ? fromJsonT(json['result']) : null;
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson(
+    dynamic Function(T value) toJsonT,
+  ) {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['version'] = version;
     data['status'] = status;
@@ -30,7 +33,7 @@ class UserProfileResponse {
       data['error'] = error!.toJson();
     }
     if (result != null) {
-      data['result'] = result!.toJson();
+      data['result'] = toJsonT(result!);
     }
     return data;
   }

@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/models/login/login_response.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/models/user_profile/user_profile.dart';
-import 'package:myfood/data/models/user_profile/user_profile_response.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
@@ -30,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Resource<bool>> callLogin({required LoginRequest loginRequest}) async {
     try {
-      LoginResponse loginResponse = await authRemoteDataSource.callLogin(
+      final loginResponse = await authRemoteDataSource.callLogin(
         loginRequest: loginRequest,
       );
       String accessToken = loginResponse.result?.accessToken ?? "";
@@ -38,7 +36,7 @@ class AuthRepositoryImpl implements AuthRepository {
       sharedPreference.setAccessToken(accessToken: accessToken);
       sharedPreference.setRefreshToken(refreshToken: refreshToken);
 
-      UserProfileResponse userProfileResponse =
+      final userProfileResponse =
           await profileRemoteDataSource.callUserProfile();
       UserProfile? userProfile = userProfileResponse.result;
       if (userProfile != null) {
