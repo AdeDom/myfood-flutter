@@ -26,11 +26,14 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
         myFoodProvider: MyFoodProviderImpl(),
       ),
       authRemoteDataSource: AuthRemoteDataSourceImpl(
-        myFoodDio: MyFoodDio(),
+        myFoodDio: MyFoodDio(
+          store: StoreImpl(),
+        ),
       ),
       profileRemoteDataSource: ProfileRemoteDataSourceImpl(
-        myFoodDio: MyFoodDio(),
-        store: StoreImpl(),
+        myFoodDio: MyFoodDio(
+          store: StoreImpl(),
+        ),
       ),
       store: StoreImpl(),
     ),

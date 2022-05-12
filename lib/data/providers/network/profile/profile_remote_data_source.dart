@@ -1,7 +1,6 @@
 import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/providers/store/store.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<BaseResponse<UserProfile>> callUserProfile();
@@ -9,17 +8,14 @@ abstract class ProfileRemoteDataSource {
 
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   final MyFoodDio myFoodDio;
-  final Store store;
 
   ProfileRemoteDataSourceImpl({
     required this.myFoodDio,
-    required this.store,
   });
 
   @override
   Future<BaseResponse<UserProfile>> callUserProfile() async {
-    var accessToken = store.getAccessToken();
-    final response = await myFoodDio.addAuth(accessToken).get(
+    final response = await myFoodDio.addAuth().get(
           "api/profile/user",
         );
 

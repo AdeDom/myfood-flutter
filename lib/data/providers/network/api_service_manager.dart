@@ -2,15 +2,21 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
+import 'package:myfood/data/providers/store/store.dart';
 
 class MyFoodDio extends DioForNative {
-  MyFoodDio([BaseOptions? options]) : super(options) {
+  final Store store;
+
+  MyFoodDio({
+    BaseOptions? options,
+    required this.store,
+  }) : super(options) {
     interceptors.add(ApiServiceManagerInterceptors());
   }
 
-  MyFoodDio addAuth(String? accessToken) {
+  MyFoodDio addAuth() {
     options.headers = {
-      "Authorization": accessToken ?? "",
+      "Authorization": store.getAccessToken(),
     };
     return this;
   }
