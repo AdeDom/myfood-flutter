@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:myfood/data/providers/store/store.dart';
 import 'package:myfood/presentation/food/food.dart';
 import 'package:myfood/presentation/login/login.dart';
 import 'package:myfood/presentation/register/register.dart';
 import 'package:myfood/presentation/welcome/welcome.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init(StoreImpl.storeFile);
   runApp(MyApp());
 }
 
