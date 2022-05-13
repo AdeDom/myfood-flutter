@@ -1,15 +1,38 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
 
+part 'user_entity.g.dart';
+
+@HiveType(typeId: 0)
 class UserEntity {
+  @HiveField(0)
   String? userId;
+
+  @HiveField(1)
   String? username;
+
+  @HiveField(2)
   String? name;
+
+  @HiveField(3)
   String? email;
+
+  @HiveField(4)
   String? mobileNo;
+
+  @HiveField(5)
   String? address;
+
+  @HiveField(6)
   String? image;
+
+  @HiveField(7)
   String? status;
+
+  @HiveField(8)
   String? created;
+
+  @HiveField(9)
   String? updated;
 
   UserEntity({

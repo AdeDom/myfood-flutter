@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/providers/database/myfood_provider.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
@@ -22,9 +21,7 @@ class BuildLoginForm extends StatefulWidget {
 class _BuildLoginFormState extends State<BuildLoginForm> {
   final LoginUseCase _loginUseCase = LoginUseCase(
     authRepository: AuthRepositoryImpl(
-      userLocalDataSource: UserLocalDataSourceImpl(
-        myFoodProvider: MyFoodProviderImpl(),
-      ),
+      userLocalDataSource: UserLocalDataSourceImpl(),
       authRemoteDataSource: AuthRemoteDataSourceImpl(
         myFoodDio: MyFoodDio(
           store: StoreImpl(),

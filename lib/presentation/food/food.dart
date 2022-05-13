@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myfood/data/models/user/user_entity.dart';
+import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/presentation/food/widget/build_category_list_section.dart';
 
 class Food extends StatelessWidget {
@@ -30,9 +32,17 @@ class Food extends StatelessWidget {
   }
 
   Widget _buildSearchSection() {
+    UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
+    UserEntity? userEntity = userLocalDataSource.getUser();
     return Container(
       height: 300,
       color: Colors.yellow,
+      child: Column(
+        children: [
+          Text("userId : ${userEntity?.userId}"),
+          Text("name : ${userEntity?.name}"),
+        ],
+      ),
     );
   }
 

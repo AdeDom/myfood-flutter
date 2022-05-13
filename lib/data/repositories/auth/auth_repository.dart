@@ -40,7 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
           await profileRemoteDataSource.callUserProfile();
       UserProfile? userProfile = userProfileResponse.result;
       if (userProfile != null) {
-        await userLocalDataSource.deleteUserAll();
+        userLocalDataSource.deleteUserAll();
         UserEntity userEntity = UserEntity(
           userId: userProfile.userId,
           username: userProfile.username,
@@ -53,7 +53,7 @@ class AuthRepositoryImpl implements AuthRepository {
           created: userProfile.created,
           updated: userProfile.updated,
         );
-        await userLocalDataSource.saveUser(userEntity);
+        userLocalDataSource.saveUser(userEntity);
       }
 
       return Resource(
