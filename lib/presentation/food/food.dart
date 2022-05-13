@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/presentation/food/widget/build_category_list_section.dart';
@@ -33,19 +35,24 @@ class Food extends StatelessWidget {
 
   Widget _buildSearchSection() {
     UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
-    UserEntity? userEntity = userLocalDataSource.getUser();
-    return Container(
-      height: 300,
-      color: Colors.yellow,
-      child: Column(
-        children: [
-          Text("userId : ${userEntity?.userId}"),
-          Text("name : ${userEntity?.name}"),
-        ],
-      ),
+    return ValueListenableBuilder(
+      valueListenable: userLocalDataSource.getUserListenable(),
+      builder: (context, box, _) {
+        final userBox = box as Box<dynamic>;
+        UserEntity? userEntity = userBox.get(DatabaseConstant.tableUser);
+        return Container(
+          height: 300,
+          color: Colors.yellow,
+          child: Column(
+            children: [
+              Text("userId : ${userEntity?.userId}"),
+              Text("name : ${userEntity?.name}"),
+            ],
+          ),
+        );
+      },
     );
   }
-
 
   Widget _buildFoodListSection() {
     return Container(
