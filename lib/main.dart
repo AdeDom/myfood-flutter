@@ -13,7 +13,7 @@ void main() async {
   await GetStorage.init(StoreImpl.storeFile);
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
-  Hive.openBox(DatabaseConstant.tableUser);
+  await Hive.openBox(DatabaseConstant.tableUser);
   runApp(MyApp());
 }
 
