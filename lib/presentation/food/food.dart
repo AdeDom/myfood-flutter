@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
-import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/presentation/food/widget/build_category_list_section.dart';
 
 class Food extends StatelessWidget {
@@ -34,9 +33,8 @@ class Food extends StatelessWidget {
   }
 
   Widget _buildSearchSection() {
-    UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
     return ValueListenableBuilder(
-      valueListenable: userLocalDataSource.getUserListenable(),
+      valueListenable: Hive.box(DatabaseConstant.tableUser).listenable(),
       builder: (context, box, _) {
         final userBox = box as Box<dynamic>;
         UserEntity? userEntity = userBox.get(DatabaseConstant.tableUser);
