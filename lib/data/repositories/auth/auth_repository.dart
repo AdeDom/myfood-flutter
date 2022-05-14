@@ -43,9 +43,8 @@ class AuthRepositoryImpl implements AuthRepository {
         await userLocalDataSource.deleteUserAll();
         UserEntity userEntity = UserEntity(
           userId: userProfile.userId,
-          username: userProfile.username,
-          name: userProfile.name,
           email: userProfile.email,
+          name: userProfile.name,
           mobileNo: userProfile.mobileNo,
           address: userProfile.address,
           image: userProfile.image,

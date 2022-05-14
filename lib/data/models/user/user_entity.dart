@@ -9,37 +9,33 @@ class UserEntity {
   String? userId;
 
   @HiveField(1)
-  String? username;
-
-  @HiveField(2)
   String? name;
 
-  @HiveField(3)
+  @HiveField(2)
   String? email;
 
-  @HiveField(4)
+  @HiveField(3)
   String? mobileNo;
 
-  @HiveField(5)
+  @HiveField(4)
   String? address;
 
-  @HiveField(6)
+  @HiveField(5)
   String? image;
 
-  @HiveField(7)
+  @HiveField(6)
   String? status;
 
-  @HiveField(8)
+  @HiveField(7)
   String? created;
 
-  @HiveField(9)
+  @HiveField(8)
   String? updated;
 
   UserEntity({
     this.userId,
-    this.username,
-    this.name,
     this.email,
+    this.name,
     this.mobileNo,
     this.address,
     this.image,
@@ -50,9 +46,8 @@ class UserEntity {
 
   UserEntity.fromJson(Map<String, dynamic> json) {
     userId = json[DatabaseConstant.columnUserId];
-    username = json[DatabaseConstant.columnUsername];
-    name = json[DatabaseConstant.columnName];
     email = json[DatabaseConstant.columnEmail];
+    name = json[DatabaseConstant.columnName];
     mobileNo = json[DatabaseConstant.columnMobileNo];
     address = json[DatabaseConstant.columnAddress];
     image = json[DatabaseConstant.columnImage];
@@ -64,9 +59,8 @@ class UserEntity {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data[DatabaseConstant.columnUserId] = userId;
-    data[DatabaseConstant.columnUsername] = username;
-    data[DatabaseConstant.columnName] = name;
     data[DatabaseConstant.columnEmail] = email;
+    data[DatabaseConstant.columnName] = name;
     data[DatabaseConstant.columnMobileNo] = mobileNo;
     data[DatabaseConstant.columnAddress] = address;
     data[DatabaseConstant.columnImage] = image;

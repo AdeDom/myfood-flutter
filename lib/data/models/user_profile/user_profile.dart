@@ -1,8 +1,7 @@
 class UserProfile {
   String? userId;
-  String? username;
-  String? name;
   String? email;
+  String? name;
   String? mobileNo;
   String? address;
   String? image;
@@ -12,9 +11,8 @@ class UserProfile {
 
   UserProfile({
     this.userId,
-    this.username,
-    this.name,
     this.email,
+    this.name,
     this.mobileNo,
     this.address,
     this.image,
@@ -25,9 +23,8 @@ class UserProfile {
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
-    username = json['username'];
-    name = json['name'];
     email = json['email'];
+    name = json['name'];
     mobileNo = json['mobileNo'];
     address = json['address'];
     image = json['image'];
@@ -39,9 +36,8 @@ class UserProfile {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['userId'] = userId;
-    data['username'] = username;
-    data['name'] = name;
     data['email'] = email;
+    data['name'] = name;
     data['mobileNo'] = mobileNo;
     data['address'] = address;
     data['image'] = image;

@@ -8,7 +8,7 @@ class LoginUseCase {
 
   call({required String email, required String password}) {
     LoginRequest loginRequest = LoginRequest(
-      username: email,
+      email: email,
       password: password,
     );
     return authRepository.callLogin(loginRequest: loginRequest);

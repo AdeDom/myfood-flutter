@@ -2,7 +2,6 @@ class DatabaseConstant {
   static const String databaseName = "myFood";
   static const String tableUser = "user";
   static const String columnUserId = "userId";
-  static const String columnUsername = "username";
   static const String columnName = "name";
   static const String columnEmail = "email";
   static const String columnMobileNo = "mobileNo";

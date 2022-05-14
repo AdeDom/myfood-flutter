@@ -18,41 +18,38 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
     };
     return UserEntity(
       userId: fields[0] as String?,
-      username: fields[1] as String?,
-      name: fields[2] as String?,
-      email: fields[3] as String?,
-      mobileNo: fields[4] as String?,
-      address: fields[5] as String?,
-      image: fields[6] as String?,
-      status: fields[7] as String?,
-      created: fields[8] as String?,
-      updated: fields[9] as String?,
+      email: fields[2] as String?,
+      name: fields[1] as String?,
+      mobileNo: fields[3] as String?,
+      address: fields[4] as String?,
+      image: fields[5] as String?,
+      status: fields[6] as String?,
+      created: fields[7] as String?,
+      updated: fields[8] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
-      ..write(obj.username)
-      ..writeByte(2)
       ..write(obj.name)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.email)
-      ..writeByte(4)
+      ..writeByte(3)
       ..write(obj.mobileNo)
-      ..writeByte(5)
+      ..writeByte(4)
       ..write(obj.address)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.image)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.status)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.created)
-      ..writeByte(9)
+      ..writeByte(8)
       ..write(obj.updated);
   }
 
