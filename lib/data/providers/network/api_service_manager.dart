@@ -15,9 +15,11 @@ class MyFoodDio extends DioForNative {
   }
 
   MyFoodDio addAuth() {
-    options.headers = {
-      "Authorization": store.getAccessToken(),
-    };
+    if (store.getAccessToken().isNotEmpty) {
+      options.headers = {
+        "Authorization": store.getAccessToken(),
+      };
+    }
     return this;
   }
 }

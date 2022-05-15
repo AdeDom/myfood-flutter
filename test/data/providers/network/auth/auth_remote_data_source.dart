@@ -4,13 +4,15 @@ import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/store/store.dart';
 
+import '../../../provider/store/store.dart';
+
 void main() {
   late Store store;
   late MyFoodDio myFoodDio;
   late AuthRemoteDataSource dataSource;
 
   setUp(() {
-    store = StoreImpl();
+    store = FakeStoreImpl();
     myFoodDio = MyFoodDio(store: store);
     dataSource = AuthRemoteDataSourceImpl(myFoodDio: myFoodDio);
   });
