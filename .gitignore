@@ -49,3 +49,4 @@ ios/Flutter/Release.xcconfig
 ios/Podfile
 pubspec.lock
 windows/flutter/generated_plugins.cmake
+/macos/
