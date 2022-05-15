@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
@@ -54,7 +52,6 @@ void main() {
         """
             .trim();
         expect(error.message, messageError);
-        exit(0);
       }
     });
   });

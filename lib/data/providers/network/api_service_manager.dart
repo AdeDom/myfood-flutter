@@ -54,10 +54,10 @@ class ApiServiceManagerInterceptors extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    super.onError(err, handler);
-
     final response = err.response;
     handleErrorResponse(response);
+
+    super.onError(err, handler);
   }
 
   void handleErrorResponse(Response<dynamic>? response) {
