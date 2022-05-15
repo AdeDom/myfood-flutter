@@ -17,6 +17,10 @@ void main() {
     dataSource = AuthRemoteDataSourceImpl(myFoodDio: myFoodDio);
   });
 
+  tearDown(() {
+    myFoodDio.close(force: true);
+  });
+
   group("AuthRemoteDataSource", () {
     test("callLogin_returnSuccess", () async {
       String email = "dom6";
