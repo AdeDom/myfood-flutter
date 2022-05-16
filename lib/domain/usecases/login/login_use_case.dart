@@ -34,9 +34,7 @@ class LoginUseCase {
   }
 
   String? validateEmail(String? email) {
-    if (email == null) {
-      return "The email is null";
-    } else if (email.isEmpty) {
+    if (email == null || email.isEmpty) {
       return "The email is empty";
     } else {
       return null;
@@ -44,9 +42,7 @@ class LoginUseCase {
   }
 
   String? validatePassword(String? password) {
-    if (password == null) {
-      return "The password is null";
-    } else if (password.isEmpty) {
+    if (password == null || password.isEmpty) {
       return "The password is empty";
     } else {
       return null;

@@ -67,14 +67,6 @@ void main() {
     expect(result, null);
   });
 
-  test("validateEmail_incorrect_returnMessageEmailIsNull", () {
-    String? email;
-
-    final result = useCase.validateEmail(email);
-
-    expect(result, "The email is null");
-  });
-
   test("validateEmail_incorrect_returnMessageEmailIsEmpty", () {
     String email = "";
 
@@ -91,15 +83,7 @@ void main() {
     expect(result, null);
   });
 
-  test("validatePassword_incorrect_returnMessageEmailIsNull", () {
-    String? password;
-
-    final result = useCase.validatePassword(password);
-
-    expect(result, "The password is null");
-  });
-
-  test("validatePassword_incorrect_returnMessageEmailIsEmpty", () {
+  test("validatePassword_incorrect_returnMessagePasswordIsEmpty", () {
     String password = "";
 
     final result = useCase.validatePassword(password);
