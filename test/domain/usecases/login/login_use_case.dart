@@ -33,12 +33,12 @@ void main() {
       ),
     ).thenAnswer((_) => Future.value(resourceSuccess));
 
-    final result = useCase(
+    final result = await useCase(
       email: email,
       password: password,
     );
 
-    expect(await result, resourceSuccess);
+    expect(result, resourceSuccess);
   });
 
   test("callLogin_returnError", () async {
@@ -51,12 +51,12 @@ void main() {
       ),
     ).thenAnswer((_) => Future.value(resourceError));
 
-    final result = useCase(
+    final result = await useCase(
       email: email,
       password: password,
     );
 
-    expect(await result, resourceError);
+    expect(result, resourceError);
   });
 
   test("validateEmail_correct_returnNull", () {
