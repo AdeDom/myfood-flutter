@@ -2,20 +2,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/store.dart';
+import 'package:myfood/data/providers/store/data_store.dart';
 
-import '../../store/store.dart';
+import '../../store/data_store.dart';
 import '../add_auth.dart';
 
 void main() {
-  late Store store;
+  late DataStore dataStore;
   late MyFoodDio myFoodDio;
   late AuthRemoteDataSource authRemoteDataSource;
   late ProfileRemoteDataSource dataSource;
 
   setUp(() {
-    store = FakeStoreImpl();
-    myFoodDio = MyFoodDio(store: store);
+    dataStore = FakeDataStoreImpl();
+    myFoodDio = MyFoodDio(dataStore: dataStore);
     authRemoteDataSource = AuthRemoteDataSourceImpl(myFoodDio: myFoodDio);
     dataSource = ProfileRemoteDataSourceImpl(myFoodDio: myFoodDio);
   });
@@ -25,7 +25,7 @@ void main() {
   });
 
   test("callUserProfile_returnSuccess", () async {
-    await addAuth(authRemoteDataSource, store);
+    await addAuth(authRemoteDataSource, dataStore);
 
     final userProfile = await dataSource.callUserProfile();
 

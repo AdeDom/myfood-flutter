@@ -8,7 +8,7 @@ import 'package:myfood/data/providers/database/user/user_local_data_source.dart'
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/store.dart';
+import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 
@@ -16,13 +16,13 @@ class AuthRepositoryImpl implements AuthRepository {
   final UserLocalDataSource userLocalDataSource;
   final AuthRemoteDataSource authRemoteDataSource;
   final ProfileRemoteDataSource profileRemoteDataSource;
-  final Store store;
+  final DataStore dataStore;
 
   AuthRepositoryImpl({
     required this.userLocalDataSource,
     required this.authRemoteDataSource,
     required this.profileRemoteDataSource,
-    required this.store,
+    required this.dataStore,
   });
 
   @override
@@ -33,8 +33,8 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       String accessToken = loginResponse.result?.accessToken ?? "";
       String refreshToken = loginResponse.result?.refreshToken ?? "";
-      store.setAccessToken(accessToken: accessToken);
-      store.setRefreshToken(refreshToken: refreshToken);
+      dataStore.setAccessToken(accessToken: accessToken);
+      dataStore.setRefreshToken(refreshToken: refreshToken);
 
       final userProfileResponse =
           await profileRemoteDataSource.callUserProfile();

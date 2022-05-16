@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/data/providers/store/store.dart';
+import 'package:myfood/data/providers/store/data_store.dart';
 
 class BuildLanguageButton extends StatefulWidget {
   const BuildLanguageButton({Key? key}) : super(key: key);
@@ -10,18 +10,18 @@ class BuildLanguageButton extends StatefulWidget {
 
 class _BuildLanguageButtonState extends State<BuildLanguageButton> {
   bool _isLanguageEn = false;
-  final Store store = StoreImpl();
+  final DataStore dataStore = DataStoreImpl();
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      _isLanguageEn = store.getIsLanguageEn();
+      _isLanguageEn = dataStore.getIsLanguageEn();
     });
   }
 
   void setLanguage() {
-    store.setIsLanguageEn(isLanguageEn: !_isLanguageEn);
+    dataStore.setIsLanguageEn(isLanguageEn: !_isLanguageEn);
     setState(() {
       _isLanguageEn = !_isLanguageEn;
     });

@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
-abstract class Store {
+abstract class DataStore {
   void setIsLanguageEn({required bool isLanguageEn});
 
   bool getIsLanguageEn();
@@ -14,7 +14,7 @@ abstract class Store {
   String getRefreshToken();
 }
 
-class StoreImpl implements Store {
+class DataStoreImpl implements DataStore {
   static const String storeFile = "myfood";
   static const String _isLanguageEnKey = "is_language_en";
   static const String _accessTokenKey = "access_token";

@@ -6,7 +6,7 @@ import 'package:myfood/data/providers/database/user/user_local_data_source.dart'
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/store.dart';
+import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
@@ -24,15 +24,15 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       userLocalDataSource: UserLocalDataSourceImpl(),
       authRemoteDataSource: AuthRemoteDataSourceImpl(
         myFoodDio: MyFoodDio(
-          store: StoreImpl(),
+          dataStore: DataStoreImpl(),
         ),
       ),
       profileRemoteDataSource: ProfileRemoteDataSourceImpl(
         myFoodDio: MyFoodDio(
-          store: StoreImpl(),
+          dataStore: DataStoreImpl(),
         ),
       ),
-      store: StoreImpl(),
+      dataStore: DataStoreImpl(),
     ),
   );
 

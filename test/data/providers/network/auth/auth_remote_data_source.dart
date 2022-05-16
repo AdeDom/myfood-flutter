@@ -2,18 +2,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/store/store.dart';
+import 'package:myfood/data/providers/store/data_store.dart';
 
-import '../../store/store.dart';
+import '../../store/data_store.dart';
 
 void main() {
-  late Store store;
+  late DataStore dataStore;
   late MyFoodDio myFoodDio;
   late AuthRemoteDataSource dataSource;
 
   setUp(() {
-    store = FakeStoreImpl();
-    myFoodDio = MyFoodDio(store: store);
+    dataStore = FakeDataStoreImpl();
+    myFoodDio = MyFoodDio(dataStore: dataStore);
     dataSource = AuthRemoteDataSourceImpl(myFoodDio: myFoodDio);
   });
 
