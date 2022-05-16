@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
+import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 
 class LoginUseCase {
@@ -6,15 +10,27 @@ class LoginUseCase {
 
   LoginUseCase({required this.authRepository});
 
-  call({
-    required String email,
-    required String password,
+  Future<Resource<bool>> call({
+    required String? email,
+    required String? password,
   }) {
-    LoginRequest loginRequest = LoginRequest(
-      email: email,
-      password: password,
-    );
-    return authRepository.callLogin(loginRequest: loginRequest);
+    String? validateEmailString = validateEmail(email);
+    String? validatePasswordString = validatePassword(password);
+    if (validateEmailString != null) {
+      BaseError error = BaseError(message: validateEmailString);
+      Resource<bool> resourceError = Resource(error: error);
+      return Future.value(resourceError);
+    } else if (validatePasswordString != null) {
+      BaseError error = BaseError(message: validatePasswordString);
+      Resource<bool> resourceError = Resource(error: error);
+      return Future.value(resourceError);
+    } else {
+      LoginRequest loginRequest = LoginRequest(
+        email: email,
+        password: password,
+      );
+      return authRepository.callLogin(loginRequest: loginRequest);
+    }
   }
 
   String? validateEmail(String? email) {
