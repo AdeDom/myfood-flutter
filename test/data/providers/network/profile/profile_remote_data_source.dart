@@ -4,7 +4,7 @@ import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart'
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/data/providers/store/store.dart';
 
-import '../../../provider/store/store.dart';
+import '../../store/store.dart';
 import '../add_auth.dart';
 
 void main() {
@@ -24,27 +24,25 @@ void main() {
     myFoodDio.close(force: true);
   });
 
-  group("ProfileRemoteDataSource", () {
-    test("callUserProfile_returnSuccess", () async {
-      await addAuth(authRemoteDataSource, store);
+  test("callUserProfile_returnSuccess", () async {
+    await addAuth(authRemoteDataSource, store);
 
-      final userProfile = await dataSource.callUserProfile();
+    final userProfile = await dataSource.callUserProfile();
 
-      String? result = userProfile.result?.userId;
-      expect(result, isNotNull);
-      expect(result, "7e6e4db6a09c43d1a1e3ed8156750e88");
-    });
+    String? result = userProfile.result?.userId;
+    expect(result, isNotNull);
+    expect(result, "7e6e4db6a09c43d1a1e3ed8156750e88");
+  });
 
-    test("callUserProfile_returnSuccess", () async {
-      try {
-        await dataSource.callUserProfile();
-      } on ApiServiceManagerException catch (error) {
-        String messageError = """
-        {"code":"401","message":"Unauthorized."}
-        """
-            .trim();
-        expect(error.message, messageError);
-      }
-    });
+  test("callUserProfile_returnSuccess", () async {
+    try {
+      await dataSource.callUserProfile();
+    } on ApiServiceManagerException catch (error) {
+      String messageError = """
+            {"code":"401","message":"Unauthorized."}
+            """
+          .trim();
+      expect(error.message, messageError);
+    }
   });
 }
