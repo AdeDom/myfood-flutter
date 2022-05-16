@@ -105,6 +105,7 @@ void main() {
     final result = await repository.callLogin(loginRequest: loginRequest);
 
     expect(result.isSuccess, true);
+    expect(result.error, null);
     expect(result.data, true);
     expect(dataStore.getAccessToken(), accessToken);
     expect(dataStore.getRefreshToken(), refreshToken);
@@ -144,8 +145,9 @@ void main() {
 
     final result = await repository.callLogin(loginRequest: loginRequest);
 
-    BaseError? errorResponse = result.error;
-    expect(errorResponse?.code, null);
-    expect(errorResponse?.message, messageError);
+    expect(result.isSuccess, false);
+    expect(result.error?.code, null);
+    expect(result.error?.message, messageError);
+    expect(result.data, null);
   });
 }
