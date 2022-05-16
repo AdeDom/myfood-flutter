@@ -6,7 +6,10 @@ class LoginUseCase {
 
   LoginUseCase({required this.authRepository});
 
-  call({required String email, required String password}) {
+  call({
+    required String email,
+    required String password,
+  }) {
     LoginRequest loginRequest = LoginRequest(
       email: email,
       password: password,
