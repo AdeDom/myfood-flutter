@@ -40,4 +40,70 @@ void main() {
 
     expect(await result, resourceSuccess);
   });
+
+  test("callLogin_returnError", () async {
+    String email = "dom6";
+    String password = "dom6";
+    final resourceError = Resource(data: false);
+    when(
+      () => authRepository.callLogin(
+        loginRequest: any(named: "loginRequest"),
+      ),
+    ).thenAnswer((_) => Future.value(resourceError));
+
+    final result = useCase(
+      email: email,
+      password: password,
+    );
+
+    expect(await result, resourceError);
+  });
+
+  test("validateEmail_correct_returnNull", () {
+    String email = "dom6";
+
+    final result = useCase.validateEmail(email);
+
+    expect(result, null);
+  });
+
+  test("validateEmail_incorrect_returnMessageEmailIsNull", () {
+    String? email;
+
+    final result = useCase.validateEmail(email);
+
+    expect(result, "The email is null");
+  });
+
+  test("validateEmail_incorrect_returnMessageEmailIsEmpty", () {
+    String email = "";
+
+    final result = useCase.validateEmail(email);
+
+    expect(result, "The email is empty");
+  });
+
+  test("validatePassword_correct_returnNull", () {
+    String password = "dom6";
+
+    final result = useCase.validatePassword(password);
+
+    expect(result, null);
+  });
+
+  test("validatePassword_incorrect_returnMessageEmailIsNull", () {
+    String? password;
+
+    final result = useCase.validatePassword(password);
+
+    expect(result, "The password is null");
+  });
+
+  test("validatePassword_incorrect_returnMessageEmailIsEmpty", () {
+    String password = "";
+
+    final result = useCase.validatePassword(password);
+
+    expect(result, "The password is empty");
+  });
 }

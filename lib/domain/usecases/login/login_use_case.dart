@@ -18,14 +18,20 @@ class LoginUseCase {
   }
 
   String? validateEmail(String? email) {
-    if (email?.isEmpty == true) {
+    if (email == null) {
+      return "The email is null";
+    }
+    if (email.isEmpty) {
       return "The email is empty";
     }
     return null;
   }
 
   String? validatePassword(String? password) {
-    if (password?.isEmpty == true) {
+    if (password == null) {
+      return "The password is null";
+    }
+    if (password.isEmpty) {
       return "The password is empty";
     }
     return null;
