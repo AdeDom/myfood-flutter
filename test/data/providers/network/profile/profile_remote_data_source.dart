@@ -1,22 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:myfood/data/models/base/base_error.dart';
+import 'package:myfood/data/models/base/base_response.dart';
+import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/data_store.dart';
 
-import '../../store/data_store.dart';
-import '../add_auth.dart';
+class MockMyFoodDio extends Mock implements MyFoodDio {}
 
 void main() {
-  late DataStore dataStore;
   late MyFoodDio myFoodDio;
-  late AuthRemoteDataSource authRemoteDataSource;
   late ProfileRemoteDataSource dataSource;
 
   setUp(() {
-    dataStore = FakeDataStoreImpl();
-    myFoodDio = MyFoodDio(dataStore: dataStore);
-    authRemoteDataSource = AuthRemoteDataSourceImpl(myFoodDio: myFoodDio);
+    myFoodDio = MockMyFoodDio();
     dataSource = ProfileRemoteDataSourceImpl(myFoodDio: myFoodDio);
   });
 
@@ -25,24 +23,96 @@ void main() {
   });
 
   test("callUserProfile_returnSuccess", () async {
-    await addAuth(authRemoteDataSource, dataStore);
+    String version = "1.0";
+    String status = "success";
+    BaseError? baseError;
+    String userId = "aaa";
+    String emailResponse = "bbb";
+    String name = "ccc";
+    String mobileNo = "ddd";
+    String address = "eee";
+    String image = "fff";
+    String statusResponse = "ggg";
+    String created = "hhh";
+    String updated = "iii";
+    UserProfile userProfile = UserProfile(
+      userId: userId,
+      email: emailResponse,
+      name: name,
+      mobileNo: mobileNo,
+      address: address,
+      image: image,
+      status: statusResponse,
+      created: created,
+      updated: updated,
+    );
+    final baseResponse = BaseResponse(
+      version: version,
+      status: status,
+      error: baseError,
+      result: userProfile,
+    );
+    String path = "api/profile/user";
+    RequestOptions requestOptions = RequestOptions(path: path);
+    Response response = Response(
+      requestOptions: requestOptions,
+      data: baseResponse.toJson((value) => value.toJson()),
+    );
+    final dioAddAuth = MockMyFoodDio();
+    when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
+    when(() => dioAddAuth.get(path)).thenAnswer((_) => Future.value(response));
 
-    final userProfile = await dataSource.callUserProfile();
+    final userProfileResponse = await dataSource.callUserProfile();
 
-    String? result = userProfile.result?.userId;
+    UserProfile? result = userProfileResponse.result;
+    expect(userProfileResponse.version, version);
+    expect(userProfileResponse.status, status);
+    expect(userProfileResponse.error, baseError);
     expect(result, isNotNull);
-    expect(result, "7e6e4db6a09c43d1a1e3ed8156750e88");
+    expect(result?.userId, userId);
+    expect(result?.email, emailResponse);
+    expect(result?.name, name);
+    expect(result?.mobileNo, mobileNo);
+    expect(result?.address, address);
+    expect(result?.image, image);
+    expect(result?.status, statusResponse);
+    expect(result?.created, created);
+    expect(result?.updated, updated);
   });
 
   test("callUserProfile_returnSuccess", () async {
-    try {
-      await dataSource.callUserProfile();
-    } on ApiServiceManagerException catch (error) {
-      String messageError = """
-            {"code":"401","message":"Unauthorized."}
-            """
-          .trim();
-      expect(error.message, messageError);
-    }
+    String version = "1.0";
+    String status = "success";
+    String code = "error-999";
+    String message = "Api error.";
+    BaseError? baseError = BaseError(
+      code: code,
+      message: message,
+    );
+    Object? result;
+    final baseResponse = BaseResponse(
+      version: version,
+      status: status,
+      error: baseError,
+      result: result,
+    );
+    String path = "api/profile/user";
+    RequestOptions requestOptions = RequestOptions(path: path);
+    Response response = Response(
+      requestOptions: requestOptions,
+      data: baseResponse.toJson((value) => result),
+    );
+    final dioAddAuth = MockMyFoodDio();
+    when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
+    when(() => dioAddAuth.get(path)).thenAnswer((_) => Future.value(response));
+
+    final userProfileResponse = await dataSource.callUserProfile();
+
+    expect(userProfileResponse.version, version);
+    expect(userProfileResponse.status, status);
+    expect(userProfileResponse.error, isNotNull);
+    expect(userProfileResponse.error?.code, code);
+    expect(userProfileResponse.error?.message, message);
+    expect(userProfileResponse.result, result);
   });
 }
