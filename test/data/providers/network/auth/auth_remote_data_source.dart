@@ -75,15 +75,41 @@ void main() {
       email: email,
       password: password,
     );
+    String version = "1.0";
+    String status = "success";
+    String code = "error-999";
+    String message = "Api error.";
+    BaseError? baseError = BaseError(
+      code: code,
+      message: message,
+    );
+    Object? result;
+    final baseResponse = BaseResponse(
+      version: version,
+      status: status,
+      error: baseError,
+      result: result,
+    );
+    String path = "api/auth/login";
+    RequestOptions requestOptions = RequestOptions(path: path);
+    Response response = Response(
+      requestOptions: requestOptions,
+      data: baseResponse.toJson((value) => result),
+    );
+    when(
+      () => myFoodDio.post(
+        path,
+        data: loginRequest,
+      ),
+    ).thenAnswer((_) => Future.value(response));
 
-    try {
-      await dataSource.callLogin(loginRequest: loginRequest);
-    } on ApiServiceManagerException catch (error) {
-      String messageError = """
-            {"message":"Email or password incorrect."}
-            """
-          .trim();
-      expect(error.message, messageError);
-    }
+    final login = await dataSource.callLogin(loginRequest: loginRequest);
+
+    expect(login.version, version);
+    expect(login.status, status);
+    expect(login.error, isNotNull);
+    expect(login.error?.code, code);
+    expect(login.error?.message, message);
+    expect(login.result, result);
   });
 }
