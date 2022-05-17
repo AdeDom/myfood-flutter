@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
 
-abstract class UserLocalDataSource {
+mixin UserLocalDataSource {
   Future<UserEntity?> getUser();
 
   Future<void> saveUser(UserEntity user);

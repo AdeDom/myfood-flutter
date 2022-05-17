@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
-abstract class DataStore {
+mixin DataStore {
   void setIsLanguageEn({required bool isLanguageEn});
 
   bool getIsLanguageEn();

@@ -2,7 +2,7 @@ import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 
-abstract class ProfileRemoteDataSource {
+mixin ProfileRemoteDataSource {
   Future<BaseResponse<UserProfile>> callUserProfile();
 }
 

@@ -3,7 +3,7 @@ import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/models/token/token.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 
-abstract class AuthRemoteDataSource {
+mixin AuthRemoteDataSource {
   Future<BaseResponse<Token>> callLogin({required LoginRequest loginRequest});
 }
 
