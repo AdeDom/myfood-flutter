@@ -17,12 +17,9 @@ import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 
+import '../../../mock.dart';
 import '../../providers/database/user/user_local_data_source.dart';
 import '../../providers/store/data_store.dart';
-
-class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
-
-class MockProfileRemoteDataSource extends Mock implements ProfileRemoteDataSource {}
 
 void main() {
   setUpAll(() {

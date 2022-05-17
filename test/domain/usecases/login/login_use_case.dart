@@ -5,7 +5,7 @@ import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
-class MockAuthRepository extends Mock implements AuthRepository {}
+import '../../../mock.dart';
 
 void main() {
   setUpAll(() {

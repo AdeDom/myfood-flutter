@@ -8,7 +8,7 @@ import 'package:myfood/data/models/token/token.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 
-class MockMyFoodDio extends Mock implements MyFoodDio {}
+import '../../../../mock.dart';
 
 void main() {
   late MyFoodDio myFoodDio;

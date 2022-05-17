@@ -7,7 +7,7 @@ import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 
-class MockMyFoodDio extends Mock implements MyFoodDio {}
+import '../../../../mock.dart';
 
 void main() {
   late MyFoodDio myFoodDio;
