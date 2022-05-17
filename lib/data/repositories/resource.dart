@@ -7,6 +7,14 @@ class Resource<T> {
     this.data,
   });
 
+  Resource.success({required this.data})
+      : isSuccess = true,
+        error = null;
+
+  Resource.error({required this.error})
+      : isSuccess = false,
+        data = null;
+
   bool isSuccess;
   BaseError? error;
   T? data;

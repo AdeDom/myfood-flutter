@@ -55,17 +55,14 @@ class AuthRepositoryImpl implements AuthRepository {
         await userLocalDataSource.saveUser(userEntity);
       }
 
-      return Resource(
-        isSuccess: true,
-        data: true,
-      );
+      return Resource.success(data: true);
     } on ApiServiceManagerException catch (error) {
       Map<String, dynamic> jsonError = json.decode(error.message);
       BaseError baseError = BaseError.fromJson(jsonError);
-      return Resource(error: baseError);
+      return Resource.error(error: baseError);
     } catch (error) {
       BaseError baseError = BaseError(message: error.toString());
-      return Resource(error: baseError);
+      return Resource.error(error: baseError);
     }
   }
 }
