@@ -29,7 +29,9 @@ class LoginUseCase {
         email: email,
         password: password,
       );
-      return authRepository.callLogin(loginRequest: loginRequest);
+      return authRepository.callLoginAlreadyToUserProfile(
+        loginRequest: loginRequest,
+      );
     }
   }
 

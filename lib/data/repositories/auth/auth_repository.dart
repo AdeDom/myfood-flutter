@@ -8,8 +8,7 @@ import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 
-class AuthRepositoryImpl
-    with AuthRepository, AuthUserProfileRepository, AuthLoginRepository {
+class AuthRepositoryImpl with AuthRepository {
   final AuthLoginRepository authLoginRepository;
   final AuthUserProfileRepository authUserProfileRepository;
 
@@ -19,11 +18,11 @@ class AuthRepositoryImpl
   });
 
   @override
-  Future<Resource<Object>> callLogin({
+  Future<Resource<Object>> callLoginAlreadyToUserProfile({
     required LoginRequest loginRequest,
   }) async {
     try {
-      await authLoginRepository.callAuthLogin(loginRequest: loginRequest);
+      await authLoginRepository.callLogin(loginRequest: loginRequest);
 
       await authUserProfileRepository.callUserProfile();
 
@@ -44,7 +43,7 @@ class AuthRepositoryImpl
   }
 
   @override
-  Future<void> callAuthLogin({required LoginRequest loginRequest}) {
-    return authLoginRepository.callAuthLogin(loginRequest: loginRequest);
+  Future<void> callLogin({required LoginRequest loginRequest}) {
+    return authLoginRepository.callLogin(loginRequest: loginRequest);
   }
 }

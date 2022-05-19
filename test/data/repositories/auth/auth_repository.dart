@@ -99,7 +99,9 @@ void main() {
       () => profileRemoteDataSource.callUserProfile(),
     ).thenAnswer((_) => Future.value(userProfileResponse));
 
-    final result = await repository.callLogin(loginRequest: loginRequest);
+    final result = await repository.callLoginAlreadyToUserProfile(
+      loginRequest: loginRequest,
+    );
 
     expect(result.isSuccess, true);
     expect(result.error, null);
@@ -140,7 +142,9 @@ void main() {
       ),
     );
 
-    final result = await repository.callLogin(loginRequest: loginRequest);
+    final result = await repository.callLoginAlreadyToUserProfile(
+      loginRequest: loginRequest,
+    );
 
     expect(result.isSuccess, false);
     expect(result.error?.code, null);

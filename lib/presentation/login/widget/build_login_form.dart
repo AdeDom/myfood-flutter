@@ -133,8 +133,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   }
 
   void _requestLogin() {
-    _formKey.currentState?.save();
-    if (_formKey.currentState?.validate() == true) {
+    if (_formKey.currentState?.saveAndValidate() == true) {
       _showLoadingDialog();
       _setLoginButton(false);
       final _formData = _formKey.currentState?.value ?? <String, dynamic>{};

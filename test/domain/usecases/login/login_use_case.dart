@@ -28,8 +28,10 @@ void main() {
       data: true,
     );
     when(
-      () => authRepository.callLogin(
-        loginRequest: any(named: "loginRequest"),
+      () => authRepository.callLoginAlreadyToUserProfile(
+        loginRequest: any(
+          named: "loginRequest",
+        ),
       ),
     ).thenAnswer((_) => Future.value(resourceSuccess));
 
@@ -46,8 +48,10 @@ void main() {
     String password = "dom6";
     final resourceError = Resource(data: false);
     when(
-      () => authRepository.callLogin(
-        loginRequest: any(named: "loginRequest"),
+      () => authRepository.callLoginAlreadyToUserProfile(
+        loginRequest: any(
+          named: "loginRequest",
+        ),
       ),
     ).thenAnswer((_) => Future.value(resourceError));
 
