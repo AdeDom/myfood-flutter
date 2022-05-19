@@ -4,100 +4,48 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/models/token/token.dart';
-import 'package:myfood/data/models/user/user_entity.dart';
-import 'package:myfood/data/models/user_profile/user_profile.dart';
-import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
+import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 
 import '../../../mock.dart';
-import '../../providers/database/user/user_local_data_source.dart';
-import '../../providers/store/data_store.dart';
 
 void main() {
   setUpAll(() {
     registerFallbackValue(LoginRequest());
   });
 
-  late UserLocalDataSource userLocalDataSource;
-  late AuthRemoteDataSource authRemoteDataSource;
-  late ProfileRemoteDataSource profileRemoteDataSource;
-  late DataStore dataStore;
+  late AuthLoginRepository authLoginRepository;
+  late AuthUserProfileRepository authUserProfileRepository;
   late AuthRepository repository;
 
   setUp(() {
-    userLocalDataSource = FakeUserLocalDataSource();
-    authRemoteDataSource = MockAuthRemoteDataSource();
-    profileRemoteDataSource = MockProfileRemoteDataSource();
-    dataStore = FakeDataStoreImpl();
+    authLoginRepository = MockAuthLoginRepository();
+    authUserProfileRepository = MockAuthUserProfileRepository();
     repository = AuthRepositoryImpl(
-      userLocalDataSource: userLocalDataSource,
-      authRemoteDataSource: authRemoteDataSource,
-      profileRemoteDataSource: profileRemoteDataSource,
-      dataStore: dataStore,
+      authLoginRepository: authLoginRepository,
+      authUserProfileRepository: authUserProfileRepository,
     );
   });
 
-  test("callLogin_returnSuccess", () async {
-    String accessToken = "abc123";
-    String refreshToken = "xyz456";
+  test("callLoginAlreadyToUserProfile_returnSuccess", () async {
     String email = "dom6";
     String password = "dom6";
     LoginRequest loginRequest = LoginRequest(
       email: email,
       password: password,
     );
-    String version = "1.0";
-    String status = "success";
-    Token token = Token(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    );
-    final loginResponse = BaseResponse(
-      version: version,
-      status: status,
-      result: token,
-    );
-    String userId = "aaa";
-    String emailResponse = "bbb";
-    String name = "ccc";
-    String mobileNo = "ddd";
-    String address = "eee";
-    String image = "fff";
-    String statusResponse = "ggg";
-    String created = "hhh";
-    String updated = "iii";
-    UserProfile userProfile = UserProfile(
-      userId: userId,
-      email: emailResponse,
-      name: name,
-      mobileNo: mobileNo,
-      address: address,
-      image: image,
-      status: statusResponse,
-      created: created,
-      updated: updated,
-    );
-    final userProfileResponse = BaseResponse(
-      version: version,
-      status: status,
-      result: userProfile,
-    );
     when(
-      () => authRemoteDataSource.callLogin(
+      () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
-    ).thenAnswer((_) => Future.value(loginResponse));
+    ).thenAnswer((_) => Future.value(null));
     when(
-      () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) => Future.value(userProfileResponse));
+      () => authUserProfileRepository.callUserProfile(),
+    ).thenAnswer((_) => Future.value(null));
 
     final result = await repository.callLoginAlreadyToUserProfile(
       loginRequest: loginRequest,
@@ -105,40 +53,72 @@ void main() {
 
     expect(result.isSuccess, true);
     expect(result.error, null);
-    expect(result.data, true);
-    expect(dataStore.getAccessToken(), accessToken);
-    expect(dataStore.getRefreshToken(), refreshToken);
-    UserEntity? userEntity = await userLocalDataSource.getUser();
-    expect(userEntity?.userId, userId);
-    expect(userEntity?.email, emailResponse);
-    expect(userEntity?.name, name);
-    expect(userEntity?.mobileNo, mobileNo);
-    expect(userEntity?.address, address);
-    expect(userEntity?.image, image);
-    expect(userEntity?.status, statusResponse);
-    expect(userEntity?.created, created);
-    expect(userEntity?.updated, updated);
+    expect(result.data, null);
   });
 
-  test("callLogin_returnError", () async {
+  test("callLoginAlreadyToUserProfile_callLogin_returnError", () async {
     String email = "dom6";
     String password = "dom6";
     LoginRequest loginRequest = LoginRequest(
       email: email,
       password: password,
     );
-    var messageError = "Api error.";
-    BaseError baseError = BaseError(message: messageError);
+    String code = "APP-999";
+    String message = "Api error.";
+    BaseError baseError = BaseError(
+      code: code,
+      message: message,
+    );
     String jsonError = jsonEncode(baseError.toJson());
-    String errorString = jsonError;
     when(
-      () => authRemoteDataSource.callLogin(
+      () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
     ).thenAnswer(
       (_) => throw ApiServiceManagerException(
         requestOptions: RequestOptions(path: ""),
-        error: errorString,
+        error: jsonError,
+      ),
+    );
+    when(
+      () => authUserProfileRepository.callUserProfile(),
+    ).thenAnswer((_) => Future.value(null));
+
+    final result = await repository.callLoginAlreadyToUserProfile(
+      loginRequest: loginRequest,
+    );
+
+    expect(result.isSuccess, false);
+    expect(result.error?.code, code);
+    expect(result.error?.message, message);
+    expect(result.data, null);
+  });
+
+  test("callLoginAlreadyToUserProfile_callUserProfile_returnError", () async {
+    String email = "dom6";
+    String password = "dom6";
+    LoginRequest loginRequest = LoginRequest(
+      email: email,
+      password: password,
+    );
+    String code = "APP-999";
+    String message = "Api error.";
+    BaseError baseError = BaseError(
+      code: code,
+      message: message,
+    );
+    String jsonError = jsonEncode(baseError.toJson());
+    when(
+      () => authLoginRepository.callLogin(
+        loginRequest: any(named: "loginRequest"),
+      ),
+    ).thenAnswer((_) => Future.value(null));
+    when(
+      () => authUserProfileRepository.callUserProfile(),
+    ).thenAnswer(
+      (_) => throw ApiServiceManagerException(
+        requestOptions: RequestOptions(path: ""),
+        error: jsonError,
       ),
     );
 
@@ -147,8 +127,8 @@ void main() {
     );
 
     expect(result.isSuccess, false);
-    expect(result.error?.code, null);
-    expect(result.error?.message, messageError);
+    expect(result.error?.code, code);
+    expect(result.error?.message, message);
     expect(result.data, null);
   });
 }
