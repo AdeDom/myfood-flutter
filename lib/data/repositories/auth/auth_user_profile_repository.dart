@@ -4,7 +4,7 @@ import 'package:myfood/data/providers/database/user/user_local_data_source.dart'
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 
-class AuthUserProfileRepositoryImpl implements AuthUserProfileRepository {
+class AuthUserProfileRepositoryImpl with AuthUserProfileRepository {
   final UserLocalDataSource userLocalDataSource;
   final ProfileRemoteDataSource profileRemoteDataSource;
 

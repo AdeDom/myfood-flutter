@@ -1,7 +1,7 @@
 import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 
-class FakeUserLocalDataSource implements UserLocalDataSource {
+class FakeUserLocalDataSource with UserLocalDataSource {
   UserEntity? userEntity;
 
   @override

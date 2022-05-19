@@ -6,7 +6,7 @@ mixin ProfileRemoteDataSource {
   Future<BaseResponse<UserProfile>> callUserProfile();
 }
 
-class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
+class ProfileRemoteDataSourceImpl with ProfileRemoteDataSource {
   final MyFoodDio myFoodDio;
 
   ProfileRemoteDataSourceImpl({

@@ -14,7 +14,7 @@ mixin DataStore {
   String getRefreshToken();
 }
 
-class DataStoreImpl implements DataStore {
+class DataStoreImpl with DataStore {
   static const String storeFile = "myfood";
   static const String _isLanguageEnKey = "is_language_en";
   static const String _accessTokenKey = "access_token";

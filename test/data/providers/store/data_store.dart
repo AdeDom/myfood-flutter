@@ -1,6 +1,6 @@
 import 'package:myfood/data/providers/store/data_store.dart';
 
-class FakeDataStoreImpl implements DataStore {
+class FakeDataStoreImpl with DataStore {
   bool isLanguageEn = false;
   String accessToken = "";
   String refreshToken = "";

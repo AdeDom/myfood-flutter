@@ -3,7 +3,7 @@ import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart'
 import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 
-class AuthLoginRepositoryImpl implements AuthLoginRepository {
+class AuthLoginRepositoryImpl with AuthLoginRepository {
   final DataStore dataStore;
   final AuthRemoteDataSource authRemoteDataSource;
 

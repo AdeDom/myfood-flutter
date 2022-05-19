@@ -7,7 +7,7 @@ mixin AuthRemoteDataSource {
   Future<BaseResponse<Token>> callLogin({required LoginRequest loginRequest});
 }
 
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+class AuthRemoteDataSourceImpl with AuthRemoteDataSource {
   final MyFoodDio myFoodDio;
 
   AuthRemoteDataSourceImpl({required this.myFoodDio});

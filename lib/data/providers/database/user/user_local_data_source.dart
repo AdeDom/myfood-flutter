@@ -10,7 +10,7 @@ mixin UserLocalDataSource {
   Future<void> deleteUserAll();
 }
 
-class UserLocalDataSourceImpl implements UserLocalDataSource {
+class UserLocalDataSourceImpl with UserLocalDataSource {
   final box = Hive.box(DatabaseConstant.tableUser);
 
   @override
