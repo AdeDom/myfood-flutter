@@ -8,7 +8,8 @@ import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class AuthRepositoryImpl
+    with AuthRepository, AuthUserProfileRepository, AuthLoginRepository {
   final AuthLoginRepository authLoginRepository;
   final AuthUserProfileRepository authUserProfileRepository;
 
@@ -22,7 +23,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required LoginRequest loginRequest,
   }) async {
     try {
-      await authLoginRepository.callLogin(loginRequest: loginRequest);
+      await authLoginRepository.callAuthLogin(loginRequest: loginRequest);
 
       await authUserProfileRepository.callUserProfile();
 
@@ -35,5 +36,15 @@ class AuthRepositoryImpl implements AuthRepository {
       BaseError baseError = BaseError(message: error.toString());
       return Resource.error(error: baseError);
     }
+  }
+
+  @override
+  Future<void> callUserProfile() {
+    return authUserProfileRepository.callUserProfile();
+  }
+
+  @override
+  Future<void> callAuthLogin({required LoginRequest loginRequest}) {
+    return authLoginRepository.callAuthLogin(loginRequest: loginRequest);
   }
 }

@@ -13,7 +13,7 @@ class AuthLoginRepositoryImpl implements AuthLoginRepository {
   });
 
   @override
-  Future<void> callLogin({required LoginRequest loginRequest}) async {
+  Future<void> callAuthLogin({required LoginRequest loginRequest}) async {
     final loginResponse = await authRemoteDataSource.callLogin(
       loginRequest: loginRequest,
     );
