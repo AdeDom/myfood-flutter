@@ -10,7 +10,7 @@ class LoginUseCase {
 
   LoginUseCase({required this.authRepository});
 
-  Future<Resource<bool>> call({
+  Future<Resource<Object>> call({
     required String? email,
     required String? password,
   }) {

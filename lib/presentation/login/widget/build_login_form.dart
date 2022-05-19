@@ -7,7 +7,9 @@ import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/data/providers/store/data_store.dart';
+import 'package:myfood/data/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/data/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
@@ -21,18 +23,22 @@ class BuildLoginForm extends StatefulWidget {
 class _BuildLoginFormState extends State<BuildLoginForm> {
   final LoginUseCase _loginUseCase = LoginUseCase(
     authRepository: AuthRepositoryImpl(
-      userLocalDataSource: UserLocalDataSourceImpl(),
-      authRemoteDataSource: AuthRemoteDataSourceImpl(
-        myFoodDio: MyFoodDio(
-          dataStore: DataStoreImpl(),
+      authLoginRepository: AuthLoginRepositoryImpl(
+        authRemoteDataSource: AuthRemoteDataSourceImpl(
+          myFoodDio: MyFoodDio(
+            dataStore: DataStoreImpl(),
+          ),
+        ),
+        dataStore: DataStoreImpl(),
+      ),
+      authUserProfileRepository: AuthUserProfileRepositoryImpl(
+        userLocalDataSource: UserLocalDataSourceImpl(),
+        profileRemoteDataSource: ProfileRemoteDataSourceImpl(
+          myFoodDio: MyFoodDio(
+            dataStore: DataStoreImpl(),
+          ),
         ),
       ),
-      profileRemoteDataSource: ProfileRemoteDataSourceImpl(
-        myFoodDio: MyFoodDio(
-          dataStore: DataStoreImpl(),
-        ),
-      ),
-      dataStore: DataStoreImpl(),
     ),
   );
 
@@ -92,7 +98,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(50),
       ),
-      border:  OutlineInputBorder(
+      border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(50),
       ),
       labelText: labelText,

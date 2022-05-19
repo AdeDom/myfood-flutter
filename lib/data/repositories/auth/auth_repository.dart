@@ -2,60 +2,31 @@ import 'dart:convert';
 
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/models/user/user_entity.dart';
-import 'package:myfood/data/models/user_profile/user_profile.dart';
-import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/resource.dart';
+import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
+import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final UserLocalDataSource userLocalDataSource;
-  final AuthRemoteDataSource authRemoteDataSource;
-  final ProfileRemoteDataSource profileRemoteDataSource;
-  final DataStore dataStore;
+  final AuthLoginRepository authLoginRepository;
+  final AuthUserProfileRepository authUserProfileRepository;
 
   AuthRepositoryImpl({
-    required this.userLocalDataSource,
-    required this.authRemoteDataSource,
-    required this.profileRemoteDataSource,
-    required this.dataStore,
+    required this.authLoginRepository,
+    required this.authUserProfileRepository,
   });
 
   @override
-  Future<Resource<bool>> callLogin({required LoginRequest loginRequest}) async {
+  Future<Resource<Object>> callLogin({
+    required LoginRequest loginRequest,
+  }) async {
     try {
-      final loginResponse = await authRemoteDataSource.callLogin(
-        loginRequest: loginRequest,
-      );
-      String accessToken = loginResponse.result?.accessToken ?? "";
-      String refreshToken = loginResponse.result?.refreshToken ?? "";
-      dataStore.setAccessToken(accessToken: accessToken);
-      dataStore.setRefreshToken(refreshToken: refreshToken);
+      await authLoginRepository.callLogin(loginRequest: loginRequest);
 
-      final userProfileResponse =
-          await profileRemoteDataSource.callUserProfile();
-      UserProfile? userProfile = userProfileResponse.result;
-      if (userProfile != null) {
-        await userLocalDataSource.deleteUserAll();
-        UserEntity userEntity = UserEntity(
-          userId: userProfile.userId,
-          email: userProfile.email,
-          name: userProfile.name,
-          mobileNo: userProfile.mobileNo,
-          address: userProfile.address,
-          image: userProfile.image,
-          status: userProfile.status,
-          created: userProfile.created,
-          updated: userProfile.updated,
-        );
-        await userLocalDataSource.saveUser(userEntity);
-      }
+      await authUserProfileRepository.callUserProfile();
 
-      return Resource.success(data: true);
+      return Resource.success(data: null);
     } on ApiServiceManagerException catch (error) {
       Map<String, dynamic> jsonError = json.decode(error.message);
       BaseError baseError = BaseError.fromJson(jsonError);
