@@ -1,12 +1,34 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user_profile.g.dart';
+
+@JsonSerializable()
 class UserProfile {
+  @JsonKey(name: "userId")
   String? userId;
+
+  @JsonKey(name: "email")
   String? email;
+
+  @JsonKey(name: "name")
   String? name;
+
+  @JsonKey(name: "mobileNo")
   String? mobileNo;
+
+  @JsonKey(name: "address")
   String? address;
+
+  @JsonKey(name: "image")
   String? image;
+
+  @JsonKey(name: "status")
   String? status;
+
+  @JsonKey(name: "created")
   String? created;
+
+  @JsonKey(name: "updated")
   String? updated;
 
   UserProfile({
@@ -21,29 +43,9 @@ class UserProfile {
     this.updated,
   });
 
-  UserProfile.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
-    email = json['email'];
-    name = json['name'];
-    mobileNo = json['mobileNo'];
-    address = json['address'];
-    image = json['image'];
-    status = json['status'];
-    created = json['created'];
-    updated = json['updated'];
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return _$UserProfileFromJson(json);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['userId'] = userId;
-    data['email'] = email;
-    data['name'] = name;
-    data['mobileNo'] = mobileNo;
-    data['address'] = address;
-    data['image'] = image;
-    data['status'] = status;
-    data['created'] = created;
-    data['updated'] = updated;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 }

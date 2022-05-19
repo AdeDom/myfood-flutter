@@ -1,5 +1,13 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'token.g.dart';
+
+@JsonSerializable()
 class Token {
+  @JsonKey(name: "accessToken")
   String? accessToken;
+
+  @JsonKey(name: "refreshToken")
   String? refreshToken;
 
   Token({
@@ -7,15 +15,9 @@ class Token {
     this.refreshToken,
   });
 
-  Token.fromJson(Map<String, dynamic> json) {
-    accessToken = json['accessToken'];
-    refreshToken = json['refreshToken'];
+  factory Token.fromJson(Map<String, dynamic> json) {
+    return _$TokenFromJson(json);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['accessToken'] = accessToken;
-    data['refreshToken'] = refreshToken;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$TokenToJson(this);
 }

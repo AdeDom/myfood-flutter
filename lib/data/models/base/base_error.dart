@@ -1,5 +1,13 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'base_error.g.dart';
+
+@JsonSerializable()
 class BaseError {
+  @JsonKey(name: "code")
   String? code;
+
+  @JsonKey(name: "message")
   String? message;
 
   BaseError({
@@ -7,15 +15,9 @@ class BaseError {
     this.message,
   });
 
-  BaseError.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    message = json['message'];
+  factory BaseError.fromJson(Map<String, dynamic> json) {
+    return _$BaseErrorFromJson(json);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['code'] = code;
-    data['message'] = message;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$BaseErrorToJson(this);
 }
