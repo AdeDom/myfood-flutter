@@ -41,6 +41,13 @@ void main() {
     );
 
     expect(result, resourceSuccess);
+    verify(
+      () => authRepository.callLoginAlreadyToUserProfile(
+        loginRequest: any(
+          named: "loginRequest",
+        ),
+      ),
+    ).called(1);
   });
 
   test("callLogin_returnError", () async {
@@ -61,6 +68,13 @@ void main() {
     );
 
     expect(result, resourceError);
+    verify(
+      () => authRepository.callLoginAlreadyToUserProfile(
+        loginRequest: any(
+          named: "loginRequest",
+        ),
+      ),
+    ).called(1);
   });
 
   test("validateEmail_correct_returnNull", () {

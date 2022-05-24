@@ -58,6 +58,14 @@ void main() {
     expect(result.isSuccess, true);
     expect(result.error, null);
     expect(result.data, null);
+    verify(
+      () => authLoginRepository.callLogin(
+        loginRequest: loginRequest,
+      ),
+    ).called(1);
+    verify(
+      () => authUserProfileRepository.callUserProfile(),
+    ).called(1);
   });
 
   test("callLoginAlreadyToUserProfile_callLogin_returnError", () async {
@@ -98,6 +106,14 @@ void main() {
     expect(result.error?.code, code);
     expect(result.error?.message, message);
     expect(result.data, null);
+    verify(
+      () => authLoginRepository.callLogin(
+        loginRequest: loginRequest,
+      ),
+    ).called(1);
+    verifyNever(
+      () => authUserProfileRepository.callUserProfile(),
+    ).called(0);
   });
 
   test("callLoginAlreadyToUserProfile_callUserProfile_returnError", () async {
@@ -138,5 +154,13 @@ void main() {
     expect(result.error?.code, code);
     expect(result.error?.message, message);
     expect(result.data, null);
+    verify(
+      () => authLoginRepository.callLogin(
+        loginRequest: loginRequest,
+      ),
+    ).called(1);
+    verify(
+      () => authUserProfileRepository.callUserProfile(),
+    ).called(1);
   });
 }

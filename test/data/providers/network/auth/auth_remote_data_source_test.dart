@@ -66,6 +66,12 @@ void main() {
     expect(login.result, isNotNull);
     expect(login.result?.accessToken, accessToken);
     expect(login.result?.refreshToken, refreshToken);
+    verify(
+      () => myFoodDio.post(
+        path,
+        data: loginRequest,
+      ),
+    ).called(1);
   });
 
   test("callLogin_returnError", () async {
@@ -111,5 +117,11 @@ void main() {
     expect(login.error?.code, code);
     expect(login.error?.message, message);
     expect(login.result, result);
+    verify(
+      () => myFoodDio.post(
+        path,
+        data: loginRequest,
+      ),
+    ).called(1);
   });
 }

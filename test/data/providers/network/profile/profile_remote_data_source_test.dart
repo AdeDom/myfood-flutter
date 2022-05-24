@@ -78,6 +78,7 @@ void main() {
     expect(result?.status, statusResponse);
     expect(result?.created, created);
     expect(result?.updated, updated);
+    verify(() => dioAddAuth.get(path)).called(1);
   });
 
   test("callUserProfile_returnSuccess", () async {
@@ -114,5 +115,6 @@ void main() {
     expect(userProfileResponse.error?.code, code);
     expect(userProfileResponse.error?.message, message);
     expect(userProfileResponse.result, result);
+    verify(() => dioAddAuth.get(path)).called(1);
   });
 }

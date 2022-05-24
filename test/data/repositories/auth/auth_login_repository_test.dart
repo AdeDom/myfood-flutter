@@ -53,6 +53,11 @@ void main() {
 
     expect(dataStore.getAccessToken(), accessToken);
     expect(dataStore.getRefreshToken(), refreshToken);
+    verify(
+      () => authRemoteDataSource.callLogin(
+        loginRequest: loginRequest,
+      ),
+    ).called(1);
   });
 
   test("callLogin_noToken_returnSuccess", () async {
@@ -73,5 +78,10 @@ void main() {
 
     expect(dataStore.getAccessToken(), "");
     expect(dataStore.getRefreshToken(), "");
+    verify(
+      () => authRemoteDataSource.callLogin(
+        loginRequest: loginRequest,
+      ),
+    ).called(1);
   });
 }

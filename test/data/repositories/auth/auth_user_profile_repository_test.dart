@@ -63,6 +63,7 @@ void main() {
     expect(userEntity?.status, status);
     expect(userEntity?.created, created);
     expect(userEntity?.updated, updated);
+    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
   });
 
   test("callUserProfile_clearUserProfileOld_returnSuccess", () async {
@@ -115,6 +116,7 @@ void main() {
     expect(userEntity?.status, status);
     expect(userEntity?.created, created);
     expect(userEntity?.updated, updated);
+    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
   });
 
   test("callUserProfile_noUserProfile_returnError", () async {
@@ -135,5 +137,6 @@ void main() {
     expect(userEntity?.status, null);
     expect(userEntity?.created, null);
     expect(userEntity?.updated, null);
+    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
   });
 }
