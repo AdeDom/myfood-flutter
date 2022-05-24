@@ -42,10 +42,14 @@ void main() {
       () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
-    ).thenAnswer((_) => Future.value(null));
+    ).thenAnswer((_) async {
+      return;
+    });
     when(
       () => authUserProfileRepository.callUserProfile(),
-    ).thenAnswer((_) => Future.value(null));
+    ).thenAnswer((_) async {
+      return;
+    });
 
     final result = await repository.callLoginAlreadyToUserProfile(
       loginRequest: loginRequest,
@@ -82,7 +86,9 @@ void main() {
     );
     when(
       () => authUserProfileRepository.callUserProfile(),
-    ).thenAnswer((_) => Future.value(null));
+    ).thenAnswer((_) async {
+      return;
+    });
 
     final result = await repository.callLoginAlreadyToUserProfile(
       loginRequest: loginRequest,
@@ -112,7 +118,9 @@ void main() {
       () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
-    ).thenAnswer((_) => Future.value(null));
+    ).thenAnswer((_) async {
+      return;
+    });
     when(
       () => authUserProfileRepository.callUserProfile(),
     ).thenAnswer(

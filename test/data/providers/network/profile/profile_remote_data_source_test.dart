@@ -60,7 +60,7 @@ void main() {
     );
     final dioAddAuth = MockMyFoodDio();
     when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
-    when(() => dioAddAuth.get(path)).thenAnswer((_) => Future.value(response));
+    when(() => dioAddAuth.get(path)).thenAnswer((_) async => response);
 
     final userProfileResponse = await dataSource.callUserProfile();
 
@@ -104,7 +104,7 @@ void main() {
     );
     final dioAddAuth = MockMyFoodDio();
     when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
-    when(() => dioAddAuth.get(path)).thenAnswer((_) => Future.value(response));
+    when(() => dioAddAuth.get(path)).thenAnswer((_) async => response);
 
     final userProfileResponse = await dataSource.callUserProfile();
 

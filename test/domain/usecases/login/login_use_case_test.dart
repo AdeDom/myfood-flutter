@@ -33,7 +33,7 @@ void main() {
           named: "loginRequest",
         ),
       ),
-    ).thenAnswer((_) => Future.value(resourceSuccess));
+    ).thenAnswer((_) async => resourceSuccess);
 
     final result = await useCase(
       email: email,
@@ -53,7 +53,7 @@ void main() {
           named: "loginRequest",
         ),
       ),
-    ).thenAnswer((_) => Future.value(resourceError));
+    ).thenAnswer((_) async => resourceError);
 
     final result = await useCase(
       email: email,

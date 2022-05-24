@@ -47,7 +47,7 @@ void main() {
       () => authRemoteDataSource.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
-    ).thenAnswer((_) => Future.value(loginResponse));
+    ).thenAnswer((_) async => loginResponse);
 
     await repository.callLogin(loginRequest: loginRequest);
 
@@ -67,7 +67,7 @@ void main() {
       () => authRemoteDataSource.callLogin(
         loginRequest: any(named: "loginRequest"),
       ),
-    ).thenAnswer((_) => Future.value(loginResponse));
+    ).thenAnswer((_) async => loginResponse);
 
     await repository.callLogin(loginRequest: loginRequest);
 

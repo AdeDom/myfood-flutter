@@ -56,7 +56,7 @@ void main() {
         path,
         data: loginRequest,
       ),
-    ).thenAnswer((_) => Future.value(response));
+    ).thenAnswer((_) async => response);
 
     final login = await dataSource.callLogin(loginRequest: loginRequest);
 
@@ -101,7 +101,7 @@ void main() {
         path,
         data: loginRequest,
       ),
-    ).thenAnswer((_) => Future.value(response));
+    ).thenAnswer((_) async => response);
 
     final login = await dataSource.callLogin(loginRequest: loginRequest);
 

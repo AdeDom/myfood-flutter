@@ -49,7 +49,7 @@ void main() {
     final userProfileResponse = BaseResponse(result: userProfile);
     when(
       () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) => Future.value(userProfileResponse));
+    ).thenAnswer((_) async => userProfileResponse);
 
     await repository.callUserProfile();
 
@@ -101,7 +101,7 @@ void main() {
     await userLocalDataSource.saveUser(user);
     when(
       () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) => Future.value(userProfileResponse));
+    ).thenAnswer((_) async => userProfileResponse);
 
     await repository.callUserProfile();
 
@@ -121,7 +121,7 @@ void main() {
     final userProfileResponse = BaseResponse<UserProfile>();
     when(
       () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) => Future.value(userProfileResponse));
+    ).thenAnswer((_) async => userProfileResponse);
 
     await repository.callUserProfile();
 

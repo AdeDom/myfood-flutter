@@ -5,19 +5,17 @@ class FakeUserLocalDataSource with UserLocalDataSource {
   UserEntity? userEntity;
 
   @override
-  Future<UserEntity?> getUser() {
-    return Future.value(userEntity);
+  Future<UserEntity?> getUser() async {
+    return userEntity;
   }
 
   @override
-  Future<void> saveUser(UserEntity user) {
+  Future<void> saveUser(UserEntity user) async {
     userEntity = user;
-    return Future.value();
   }
 
   @override
-  Future<void> deleteUserAll() {
+  Future<void> deleteUserAll() async {
     userEntity = null;
-    return Future.value();
   }
 }
