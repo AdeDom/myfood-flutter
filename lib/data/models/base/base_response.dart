@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:myfood/data/models/base/base_error.dart';
 
+part 'base_response.g.dart';
+
+@JsonSerializable(genericArgumentFactories: true)
 class BaseResponse<T> {
   String? version;
   String? status;
@@ -13,28 +17,14 @@ class BaseResponse<T> {
     this.result,
   });
 
-  BaseResponse.fromJson(
+  factory BaseResponse.fromJson(
     Map<String, dynamic> json,
     T Function(dynamic json) fromJsonT,
   ) {
-    version = json['version'];
-    status = json['status'];
-    error = json['error'] != null ? BaseError.fromJson(json['error']) : null;
-    result = json['result'] != null ? fromJsonT(json['result']) : null;
+    return _$BaseResponseFromJson(json, fromJsonT);
   }
 
-  Map<String, dynamic> toJson(
-    dynamic Function(T value) toJsonT,
-  ) {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['version'] = version;
-    data['status'] = status;
-    if (error != null) {
-      data['error'] = error!.toJson();
-    }
-    if (result != null) {
-      data['result'] = toJsonT(result!);
-    }
-    return data;
+  Map<String, dynamic> toJson(dynamic Function(T value) toJsonT) {
+    return _$BaseResponseToJson(this, toJsonT);
   }
 }
