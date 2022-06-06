@@ -2,9 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/models/token/token.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
 
@@ -30,26 +28,20 @@ void main() {
       email: email,
       password: password,
     );
-    String accessToken = "abc123";
-    String refreshToken = "xyz456";
-    Token token = Token(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    );
-    String version = "1.0";
-    String status = "success";
     BaseError? baseError;
-    final baseResponse = BaseResponse(
-      version: version,
-      status: status,
-      error: baseError,
-      result: token,
-    );
+    final baseResponse = {
+      "version": "1.0",
+      "status": "success",
+      "result": {
+        "accessToken": "abc123",
+        "refreshToken": "xyz456",
+      }
+    };
     String path = "api/auth/login";
     RequestOptions requestOptions = RequestOptions(path: path);
     Response response = Response(
       requestOptions: requestOptions,
-      data: baseResponse.toJson((value) => value.toJson()),
+      data: baseResponse,
     );
     when(
       () => myFoodDio.post(
@@ -60,12 +52,12 @@ void main() {
 
     final login = await dataSource.callLogin(loginRequest: loginRequest);
 
-    expect(login.version, version);
-    expect(login.status, status);
+    expect(login.version, "1.0");
+    expect(login.status, "success");
     expect(login.error, baseError);
     expect(login.result, isNotNull);
-    expect(login.result?.accessToken, accessToken);
-    expect(login.result?.refreshToken, refreshToken);
+    expect(login.result?.accessToken, "abc123");
+    expect(login.result?.refreshToken, "xyz456");
     verify(
       () => myFoodDio.post(
         path,
@@ -81,26 +73,19 @@ void main() {
       email: email,
       password: password,
     );
-    String version = "1.0";
-    String status = "error";
-    String code = "error-999";
-    String message = "Api error.";
-    BaseError? baseError = BaseError(
-      code: code,
-      message: message,
-    );
-    Object? result;
-    final baseResponse = BaseResponse(
-      version: version,
-      status: status,
-      error: baseError,
-      result: result,
-    );
+    final baseResponse = {
+      "version": "1.0",
+      "status": "error",
+      "error": {
+        "code": "error-999",
+        "message": "Api error.",
+      }
+    };
     String path = "api/auth/login";
     RequestOptions requestOptions = RequestOptions(path: path);
     Response response = Response(
       requestOptions: requestOptions,
-      data: baseResponse.toJson((value) => result),
+      data: baseResponse,
     );
     when(
       () => myFoodDio.post(
@@ -111,12 +96,12 @@ void main() {
 
     final login = await dataSource.callLogin(loginRequest: loginRequest);
 
-    expect(login.version, version);
-    expect(login.status, status);
+    expect(login.version, "1.0");
+    expect(login.status, "error");
     expect(login.error, isNotNull);
-    expect(login.error?.code, code);
-    expect(login.error?.message, message);
-    expect(login.result, result);
+    expect(login.error?.code, "error-999");
+    expect(login.error?.message, "Api error.");
+    expect(login.result, null);
     verify(
       () => myFoodDio.post(
         path,

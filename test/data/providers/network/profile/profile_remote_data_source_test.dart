@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/models/base/base_response.dart';
 import 'package:myfood/data/models/user_profile/user_profile.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
@@ -23,40 +21,26 @@ void main() {
   });
 
   test("callUserProfile_returnSuccess", () async {
-    String version = "1.0";
-    String status = "success";
-    BaseError? baseError;
-    String userId = "aaa";
-    String emailResponse = "bbb";
-    String name = "ccc";
-    String mobileNo = "ddd";
-    String address = "eee";
-    String image = "fff";
-    String statusResponse = "ggg";
-    String created = "hhh";
-    String updated = "iii";
-    UserProfile userProfile = UserProfile(
-      userId: userId,
-      email: emailResponse,
-      name: name,
-      mobileNo: mobileNo,
-      address: address,
-      image: image,
-      status: statusResponse,
-      created: created,
-      updated: updated,
-    );
-    final baseResponse = BaseResponse(
-      version: version,
-      status: status,
-      error: baseError,
-      result: userProfile,
-    );
+    final baseResponse = {
+      "version": "1.0",
+      "status": "success",
+      "result": {
+        "userId": "7e6e4db6a09c43d1a1e3ed8156750e88",
+        "email": "dom6",
+        "name": "Change profile",
+        "mobileNo": "1234567890",
+        "address": "Phayao",
+        "image": "https://picsum.photos/300/300",
+        "status": "active",
+        "created": "26/3/2022 18:23",
+        "updated": "10/5/2022 19:5"
+      }
+    };
     String path = "api/profile/user";
     RequestOptions requestOptions = RequestOptions(path: path);
     Response response = Response(
       requestOptions: requestOptions,
-      data: baseResponse.toJson((value) => value.toJson()),
+      data: baseResponse,
     );
     final dioAddAuth = MockMyFoodDio();
     when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
@@ -65,43 +49,33 @@ void main() {
     final userProfileResponse = await dataSource.callUserProfile();
 
     UserProfile? result = userProfileResponse.result;
-    expect(userProfileResponse.version, version);
-    expect(userProfileResponse.status, status);
-    expect(userProfileResponse.error, baseError);
+    expect(userProfileResponse.version, "1.0");
+    expect(userProfileResponse.status, "success");
+    expect(userProfileResponse.error, null);
     expect(result, isNotNull);
-    expect(result?.userId, userId);
-    expect(result?.email, emailResponse);
-    expect(result?.name, name);
-    expect(result?.mobileNo, mobileNo);
-    expect(result?.address, address);
-    expect(result?.image, image);
-    expect(result?.status, statusResponse);
-    expect(result?.created, created);
-    expect(result?.updated, updated);
+    expect(result?.userId, "7e6e4db6a09c43d1a1e3ed8156750e88");
+    expect(result?.email, "dom6");
+    expect(result?.name, "Change profile");
+    expect(result?.mobileNo, "1234567890");
+    expect(result?.address, "Phayao");
+    expect(result?.image, "https://picsum.photos/300/300");
+    expect(result?.status, "active");
+    expect(result?.created, "26/3/2022 18:23");
+    expect(result?.updated, "10/5/2022 19:5");
     verify(() => dioAddAuth.get(path)).called(1);
   });
 
-  test("callUserProfile_returnSuccess", () async {
-    String version = "1.0";
-    String status = "success";
-    String code = "error-999";
-    String message = "Api error.";
-    BaseError? baseError = BaseError(
-      code: code,
-      message: message,
-    );
-    Object? result;
-    final baseResponse = BaseResponse(
-      version: version,
-      status: status,
-      error: baseError,
-      result: result,
-    );
+  test("callUserProfile_returnError", () async {
+    final baseResponse = {
+      "version": "1.0",
+      "status": "error",
+      "error": {"code": "error-999", "message": "Api error."}
+    };
     String path = "api/profile/user";
     RequestOptions requestOptions = RequestOptions(path: path);
     Response response = Response(
       requestOptions: requestOptions,
-      data: baseResponse.toJson((value) => result),
+      data: baseResponse,
     );
     final dioAddAuth = MockMyFoodDio();
     when(() => myFoodDio.addAuth()).thenAnswer((_) => dioAddAuth);
@@ -109,12 +83,12 @@ void main() {
 
     final userProfileResponse = await dataSource.callUserProfile();
 
-    expect(userProfileResponse.version, version);
-    expect(userProfileResponse.status, status);
+    expect(userProfileResponse.version, "1.0");
+    expect(userProfileResponse.status, "error");
     expect(userProfileResponse.error, isNotNull);
-    expect(userProfileResponse.error?.code, code);
-    expect(userProfileResponse.error?.message, message);
-    expect(userProfileResponse.result, result);
+    expect(userProfileResponse.error?.code, "error-999");
+    expect(userProfileResponse.error?.message, "Api error.");
+    expect(userProfileResponse.result, null);
     verify(() => dioAddAuth.get(path)).called(1);
   });
 }
