@@ -26,7 +26,7 @@ Map<String, dynamic> _$BaseResponseToJson<T>(
     <String, dynamic>{
       'version': instance.version,
       'status': instance.status,
-      'error': instance.error,
+      'error': instance.error?.toJson(),
       'result': _$nullableGenericToJson(instance.result, toJsonT),
     };
 

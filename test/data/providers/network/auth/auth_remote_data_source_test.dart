@@ -82,7 +82,7 @@ void main() {
       password: password,
     );
     String version = "1.0";
-    String status = "success";
+    String status = "error";
     String code = "error-999";
     String message = "Api error.";
     BaseError? baseError = BaseError(
