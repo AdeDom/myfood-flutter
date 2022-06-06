@@ -1,23 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'token.freezed.dart';
 part 'token.g.dart';
 
-@JsonSerializable()
-class Token {
-  @JsonKey(name: "accessToken")
-  String? accessToken;
+@Freezed()
+class Token with _$Token {
+  factory Token({
+    @JsonKey(name: "accessToken") String? accessToken,
+    @JsonKey(name: "refreshToken") String? refreshToken,
+  }) = _Token;
 
-  @JsonKey(name: "refreshToken")
-  String? refreshToken;
-
-  Token({
-    this.accessToken,
-    this.refreshToken,
-  });
-
-  factory Token.fromJson(Map<String, dynamic> json) {
-    return _$TokenFromJson(json);
-  }
-
-  Map<String, dynamic> toJson() => _$TokenToJson(this);
+  factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);
 }
