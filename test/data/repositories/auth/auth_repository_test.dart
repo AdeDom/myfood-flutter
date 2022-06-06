@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
@@ -75,13 +74,10 @@ void main() {
       email: email,
       password: password,
     );
-    String code = "APP-999";
-    String message = "Api error.";
-    BaseError baseError = BaseError(
-      code: code,
-      message: message,
-    );
-    String jsonError = jsonEncode(baseError.toJson());
+    final jsonError = {
+      "code": "error-999",
+      "message": "Api error.",
+    };
     when(
       () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
@@ -89,7 +85,7 @@ void main() {
     ).thenAnswer(
       (_) => throw ApiServiceManagerException(
         requestOptions: RequestOptions(path: ""),
-        error: jsonError,
+        error: json.encode(jsonError),
       ),
     );
     when(
@@ -103,8 +99,8 @@ void main() {
     );
 
     expect(result.isSuccess, false);
-    expect(result.error?.code, code);
-    expect(result.error?.message, message);
+    expect(result.error?.code, "error-999");
+    expect(result.error?.message, "Api error.");
     expect(result.data, null);
     verify(
       () => authLoginRepository.callLogin(
@@ -123,13 +119,10 @@ void main() {
       email: email,
       password: password,
     );
-    String code = "APP-999";
-    String message = "Api error.";
-    BaseError baseError = BaseError(
-      code: code,
-      message: message,
-    );
-    String jsonError = jsonEncode(baseError.toJson());
+    final jsonError = {
+      "code": "error-999",
+      "message": "Api error.",
+    };
     when(
       () => authLoginRepository.callLogin(
         loginRequest: any(named: "loginRequest"),
@@ -142,7 +135,7 @@ void main() {
     ).thenAnswer(
       (_) => throw ApiServiceManagerException(
         requestOptions: RequestOptions(path: ""),
-        error: jsonError,
+        error: json.encode(jsonError),
       ),
     );
 
@@ -151,8 +144,8 @@ void main() {
     );
 
     expect(result.isSuccess, false);
-    expect(result.error?.code, code);
-    expect(result.error?.message, message);
+    expect(result.error?.code, "error-999");
+    expect(result.error?.message, "Api error.");
     expect(result.data, null);
     verify(
       () => authLoginRepository.callLogin(

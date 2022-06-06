@@ -33,7 +33,7 @@ void main() {
         "image": "https://picsum.photos/300/300",
         "status": "active",
         "created": "26/3/2022 18:23",
-        "updated": "10/5/2022 19:5"
+        "updated": "10/5/2022 19:5",
       }
     };
     String path = "api/profile/user";
@@ -69,7 +69,10 @@ void main() {
     final baseResponse = {
       "version": "1.0",
       "status": "error",
-      "error": {"code": "error-999", "message": "Api error."}
+      "error": {
+        "code": "error-999",
+        "message": "Api error.",
+      }
     };
     String path = "api/profile/user";
     RequestOptions requestOptions = RequestOptions(path: path);
