@@ -1,23 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'base_error.freezed.dart';
 part 'base_error.g.dart';
 
-@JsonSerializable()
-class BaseError {
-  @JsonKey(name: "code")
-  String? code;
+@Freezed()
+class BaseError with _$BaseError {
+  factory BaseError({
+    @JsonKey(name: "code") String? code,
+    @JsonKey(name: "message") String? message,
+  }) = _BaseError;
 
-  @JsonKey(name: "message")
-  String? message;
-
-  BaseError({
-    this.code,
-    this.message,
-  });
-
-  factory BaseError.fromJson(Map<String, dynamic> json) {
-    return _$BaseErrorFromJson(json);
-  }
-
-  Map<String, dynamic> toJson() => _$BaseErrorToJson(this);
+  factory BaseError.fromJson(Map<String, dynamic> json) =>
+      _$BaseErrorFromJson(json);
 }

@@ -22,33 +22,24 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 mixin _$UserProfile {
   @JsonKey(name: "userId")
   String? get userId => throw _privateConstructorUsedError;
-
   @JsonKey(name: "email")
   String? get email => throw _privateConstructorUsedError;
-
   @JsonKey(name: "name")
   String? get name => throw _privateConstructorUsedError;
-
   @JsonKey(name: "mobileNo")
   String? get mobileNo => throw _privateConstructorUsedError;
-
   @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
-
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
-
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $UserProfileCopyWith<UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -59,7 +50,6 @@ abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: "userId") String? userId,
       @JsonKey(name: "email") String? email,
@@ -77,7 +67,6 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
   _$UserProfileCopyWithImpl(this._value, this._then);
 
   final UserProfile _value;
-
   // ignore: unused_field
   final $Res Function(UserProfile) _then;
 
@@ -140,7 +129,6 @@ abstract class _$$_UserProfileCopyWith<$Res>
   factory _$$_UserProfileCopyWith(
           _$_UserProfile value, $Res Function(_$_UserProfile) then) =
       __$$_UserProfileCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: "userId") String? userId,
@@ -326,39 +314,30 @@ abstract class _UserProfile implements UserProfile {
   @override
   @JsonKey(name: "userId")
   String? get userId => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "email")
   String? get email => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "name")
   String? get name => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "mobileNo")
   String? get mobileNo => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
