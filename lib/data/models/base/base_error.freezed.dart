@@ -22,12 +22,10 @@ BaseError _$BaseErrorFromJson(Map<String, dynamic> json) {
 mixin _$BaseError {
   @JsonKey(name: "code")
   String? get code => throw _privateConstructorUsedError;
-
   @JsonKey(name: "message")
   String? get message => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $BaseErrorCopyWith<BaseError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -37,7 +35,6 @@ mixin _$BaseError {
 abstract class $BaseErrorCopyWith<$Res> {
   factory $BaseErrorCopyWith(BaseError value, $Res Function(BaseError) then) =
       _$BaseErrorCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: "code") String? code,
       @JsonKey(name: "message") String? message});
@@ -48,7 +45,6 @@ class _$BaseErrorCopyWithImpl<$Res> implements $BaseErrorCopyWith<$Res> {
   _$BaseErrorCopyWithImpl(this._value, this._then);
 
   final BaseError _value;
-
   // ignore: unused_field
   final $Res Function(BaseError) _then;
 
@@ -75,7 +71,6 @@ abstract class _$$_BaseErrorCopyWith<$Res> implements $BaseErrorCopyWith<$Res> {
   factory _$$_BaseErrorCopyWith(
           _$_BaseError value, $Res Function(_$_BaseError) then) =
       __$$_BaseErrorCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: "code") String? code,
@@ -170,11 +165,9 @@ abstract class _BaseError implements BaseError {
   @override
   @JsonKey(name: "code")
   String? get code => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "message")
   String? get message => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_BaseErrorCopyWith<_$_BaseError> get copyWith =>
