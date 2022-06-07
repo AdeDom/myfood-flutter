@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
+import 'package:myfood/data/models/user_profile/user_profile.dart';
 
 part 'user_entity.g.dart';
 
@@ -9,10 +10,10 @@ class UserEntity {
   String? userId;
 
   @HiveField(1)
-  String? name;
+  String? email;
 
   @HiveField(2)
-  String? email;
+  String? name;
 
   @HiveField(3)
   String? mobileNo;
@@ -68,5 +69,19 @@ class UserEntity {
     data[DatabaseConstant.columnCreated] = created;
     data[DatabaseConstant.columnUpdated] = updated;
     return data;
+  }
+
+  UserProfile mapToUserProfile() {
+    return UserProfile(
+      userId: userId,
+      email: email,
+      name: name,
+      mobileNo: mobileNo,
+      address: address,
+      image: image,
+      status: status,
+      created: created,
+      updated: updated,
+    );
   }
 }

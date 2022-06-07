@@ -18,8 +18,8 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
     };
     return UserEntity(
       userId: fields[0] as String?,
-      email: fields[2] as String?,
-      name: fields[1] as String?,
+      email: fields[1] as String?,
+      name: fields[2] as String?,
       mobileNo: fields[3] as String?,
       address: fields[4] as String?,
       image: fields[5] as String?,
@@ -36,9 +36,9 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(2)
       ..write(obj.email)
+      ..writeByte(2)
+      ..write(obj.name)
       ..writeByte(3)
       ..write(obj.mobileNo)
       ..writeByte(4)
