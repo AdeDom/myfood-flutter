@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
@@ -58,9 +59,7 @@ void main() {
     expect(result.error, null);
     expect(result.data, null);
     verify(
-      () => authLoginRepository.callLogin(
-        loginRequest: loginRequest,
-      ),
+      () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);
     verify(
       () => authUserProfileRepository.callUserProfile(),
@@ -98,14 +97,12 @@ void main() {
       loginRequest: loginRequest,
     );
 
+    final objectError = BaseError.fromJson(jsonError);
     expect(result.isSuccess, false);
-    expect(result.error?.code, "error-999");
-    expect(result.error?.message, "Api error.");
+    expect(result.error, objectError);
     expect(result.data, null);
     verify(
-      () => authLoginRepository.callLogin(
-        loginRequest: loginRequest,
-      ),
+      () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);
     verifyNever(
       () => authUserProfileRepository.callUserProfile(),
@@ -143,14 +140,12 @@ void main() {
       loginRequest: loginRequest,
     );
 
+    final objectError = BaseError.fromJson(jsonError);
     expect(result.isSuccess, false);
-    expect(result.error?.code, "error-999");
-    expect(result.error?.message, "Api error.");
+    expect(result.error, objectError);
     expect(result.data, null);
     verify(
-      () => authLoginRepository.callLogin(
-        loginRequest: loginRequest,
-      ),
+      () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);
     verify(
       () => authUserProfileRepository.callUserProfile(),

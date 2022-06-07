@@ -7,7 +7,7 @@ class Resource<T> {
     this.data,
   });
 
-  Resource.success({required this.data})
+  Resource.success({this.data})
       : isSuccess = true,
         error = null;
 

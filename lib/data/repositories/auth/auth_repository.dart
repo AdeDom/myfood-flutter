@@ -26,7 +26,7 @@ class AuthRepositoryImpl with AuthRepository {
 
       await authUserProfileRepository.callUserProfile();
 
-      return Resource.success(data: null);
+      return Resource.success();
     } on ApiServiceManagerException catch (error) {
       Map<String, dynamic> jsonError = json.decode(error.message);
       BaseError baseError = BaseError.fromJson(jsonError);
