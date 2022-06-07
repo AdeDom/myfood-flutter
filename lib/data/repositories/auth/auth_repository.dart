@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/repositories/resource.dart';
+import 'package:myfood/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
@@ -18,7 +18,7 @@ class AuthRepositoryImpl with AuthRepository {
   });
 
   @override
-  Future<Resource<Object>> callLoginAlreadyToUserProfile({
+  Future<Result> callLoginAlreadyToUserProfile({
     required LoginRequest loginRequest,
   }) async {
     try {
@@ -26,14 +26,14 @@ class AuthRepositoryImpl with AuthRepository {
 
       await authUserProfileRepository.callUserProfile();
 
-      return Resource.success();
+      return const Result.success();
     } on ApiServiceManagerException catch (error) {
       Map<String, dynamic> jsonError = json.decode(error.message);
       BaseError baseError = BaseError.fromJson(jsonError);
-      return Resource.error(error: baseError);
+      return Result.error(baseError);
     } catch (error) {
       BaseError baseError = BaseError(message: error.toString());
-      return Resource.error(error: baseError);
+      return Result.error(baseError);
     }
   }
 

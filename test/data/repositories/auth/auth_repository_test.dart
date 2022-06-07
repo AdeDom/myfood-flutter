@@ -7,6 +7,7 @@ import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/providers/network/api_service_manager.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
@@ -55,9 +56,7 @@ void main() {
       loginRequest: loginRequest,
     );
 
-    expect(result.isSuccess, true);
-    expect(result.error, null);
-    expect(result.data, null);
+    expect(result, const Result.success());
     verify(
       () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);
@@ -98,9 +97,7 @@ void main() {
     );
 
     final objectError = BaseError.fromJson(jsonError);
-    expect(result.isSuccess, false);
-    expect(result.error, objectError);
-    expect(result.data, null);
+    expect(result, Result.error(objectError));
     verify(
       () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);
@@ -141,9 +138,7 @@ void main() {
     );
 
     final objectError = BaseError.fromJson(jsonError);
-    expect(result.isSuccess, false);
-    expect(result.error, objectError);
-    expect(result.data, null);
+    expect(result, Result.error(objectError));
     verify(
       () => authLoginRepository.callLogin(loginRequest: loginRequest),
     ).called(1);

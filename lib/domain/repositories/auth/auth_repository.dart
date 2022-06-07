@@ -1,8 +1,8 @@
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/repositories/resource.dart';
+import 'package:myfood/data/repositories/result.dart';
 
 mixin AuthRepository {
-  Future<Resource<Object>> callLoginAlreadyToUserProfile({
+  Future<Result> callLoginAlreadyToUserProfile({
     required LoginRequest loginRequest,
   });
 

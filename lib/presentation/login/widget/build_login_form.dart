@@ -10,7 +10,7 @@ import 'package:myfood/data/providers/store/data_store.dart';
 import 'package:myfood/data/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/data/repositories/auth/auth_user_profile_repository.dart';
-import 'package:myfood/data/repositories/resource.dart';
+import 'package:myfood/data/repositories/result.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {
@@ -136,21 +136,24 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
     if (_formKey.currentState?.saveAndValidate() == true) {
       _showLoadingDialog();
       _setLoginButton(false);
-      final _formData = _formKey.currentState?.value ?? <String, dynamic>{};
-      final _email = _formData[(AppConstant.emailKey)];
-      final _password = _formData[(AppConstant.passwordKey)];
-      _loginUseCase(email: _email, password: _password).then(_responseLogin);
+      final formData = _formKey.currentState?.value ?? <String, dynamic>{};
+      final email = formData[(AppConstant.emailKey)];
+      final password = formData[(AppConstant.passwordKey)];
+      _loginUseCase(email: email, password: password).then(_responseLogin);
     }
   }
 
-  void _responseLogin(Resource resource) {
+  void _responseLogin(Result result) {
     Navigator.pop(context);
     _setLoginButton(true);
-    if (resource.isSuccess) {
-      _navigatorToFoodPage();
-    } else {
-      _showErrorDialog(error: resource.error);
-    }
+    result.when(
+      success: (data) {
+        _navigatorToFoodPage();
+      },
+      error: (error) {
+        _showErrorDialog(error: error);
+      },
+    );
   }
 
   void _showLoadingDialog() {

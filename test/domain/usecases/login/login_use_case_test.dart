@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/repositories/resource.dart';
+import 'package:myfood/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
@@ -24,21 +24,21 @@ void main() {
   test("callLogin_returnSuccess", () async {
     String email = "dom6";
     String password = "dom6";
-    Resource<Object> resourceSuccess = Resource.success();
+    Result resultSuccess = const Result.success();
     when(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(
           named: "loginRequest",
         ),
       ),
-    ).thenAnswer((_) async => resourceSuccess);
+    ).thenAnswer((_) async => resultSuccess);
 
     final result = await useCase(
       email: email,
       password: password,
     );
 
-    expect(result, resourceSuccess);
+    expect(result, resultSuccess);
     verify(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(
@@ -52,21 +52,21 @@ void main() {
     String email = "dom6";
     String password = "dom6";
     BaseError error = BaseError();
-    Resource<Object> resourceError = Resource.error(error: error);
+    Result resultError = Result.error(error);
     when(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(
           named: "loginRequest",
         ),
       ),
-    ).thenAnswer((_) async => resourceError);
+    ).thenAnswer((_) async => resultError);
 
     final result = await useCase(
       email: email,
       password: password,
     );
 
-    expect(result, resourceError);
+    expect(result, resultError);
     verify(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(
