@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:myfood/data/models/base/base_error.dart';
 import 'package:myfood/data/models/login/login_request.dart';
 import 'package:myfood/data/repositories/resource.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
@@ -23,10 +24,7 @@ void main() {
   test("callLogin_returnSuccess", () async {
     String email = "dom6";
     String password = "dom6";
-    final resourceSuccess = Resource(
-      isSuccess: true,
-      data: true,
-    );
+    Resource<Object> resourceSuccess = Resource.success();
     when(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(
@@ -53,7 +51,8 @@ void main() {
   test("callLogin_returnError", () async {
     String email = "dom6";
     String password = "dom6";
-    final resourceError = Resource(data: false);
+    BaseError error = BaseError();
+    Resource<Object> resourceError = Resource.error(error: error);
     when(
       () => authRepository.callLoginAlreadyToUserProfile(
         loginRequest: any(

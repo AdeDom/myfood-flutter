@@ -1,12 +1,6 @@
 import 'package:myfood/data/models/base/base_error.dart';
 
 class Resource<T> {
-  Resource({
-    this.isSuccess = false,
-    this.error,
-    this.data,
-  });
-
   Resource.success({this.data})
       : isSuccess = true,
         error = null;

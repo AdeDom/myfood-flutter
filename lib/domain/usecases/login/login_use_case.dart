@@ -18,11 +18,11 @@ class LoginUseCase {
     String? validatePasswordString = validatePassword(password);
     if (validateEmailString != null) {
       BaseError error = BaseError(message: validateEmailString);
-      Resource<bool> resourceError = Resource(error: error);
+      Resource<Object> resourceError = Resource.error(error: error);
       return Future.value(resourceError);
     } else if (validatePasswordString != null) {
       BaseError error = BaseError(message: validatePasswordString);
-      Resource<bool> resourceError = Resource(error: error);
+      Resource<Object> resourceError = Resource.error(error: error);
       return Future.value(resourceError);
     } else {
       LoginRequest loginRequest = LoginRequest(
