@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/home/controllers/home_controller.dart';
 
-class BuildCategoryListSection extends StatelessWidget {
+class BuildCategoryListSection extends GetView<HomeController> {
   const BuildCategoryListSection({Key? key}) : super(key: key);
 
   @override
