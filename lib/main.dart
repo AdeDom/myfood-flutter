@@ -12,26 +12,17 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
   await Hive.openBox(DatabaseConstant.tableUser);
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: AppPages.INITIAL,
-      defaultTransition: Transition.native,
-      getPages: AppPages.routes,
-      title: 'My Food',
-      theme: ThemeData(
-        primarySwatch: Colors.yellow,
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFFFFD700),
-        ),
+  runApp(GetMaterialApp(
+    initialRoute: AppPages.INITIAL,
+    defaultTransition: Transition.native,
+    getPages: AppPages.routes,
+    title: 'My Food',
+    theme: ThemeData(
+      primarySwatch: Colors.yellow,
+      colorScheme: ColorScheme.fromSwatch(
+        accentColor: const Color(0xFFFFD700),
       ),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+    ),
+    debugShowCheckedModeBanner: false,
+  ));
 }
