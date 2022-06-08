@@ -4,8 +4,8 @@ import 'package:myfood/data/models/base/base_error.dart';
 part 'result.freezed.dart';
 
 @freezed
-class Result with _$Result {
-  const factory Result.success({dynamic data}) = Success;
+class Result<T> with _$Result<T> {
+  const factory Result.success({T? data}) = Success;
 
   const factory Result.error(BaseError error) = Error;
 }
