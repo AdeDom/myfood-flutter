@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 
-class BuildWelcomeTopSection extends StatelessWidget {
+class BuildWelcomeTopSection extends GetView<WelcomeController> {
   const BuildWelcomeTopSection({Key? key}) : super(key: key);
 
   @override

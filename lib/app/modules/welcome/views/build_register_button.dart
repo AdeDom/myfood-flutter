@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 
-class BuildRegisterButton extends StatelessWidget {
+class BuildRegisterButton extends GetView<WelcomeController> {
   const BuildRegisterButton({Key? key}) : super(key: key);
 
   @override

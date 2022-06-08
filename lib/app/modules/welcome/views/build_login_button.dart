@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 
-class BuildLoginButton extends StatelessWidget {
+class BuildLoginButton extends GetView<WelcomeController> {
   const BuildLoginButton({Key? key}) : super(key: key);
 
   @override

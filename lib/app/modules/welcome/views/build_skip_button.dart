@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 
-class BuildSkipButton extends StatelessWidget {
+class BuildSkipButton extends GetView<WelcomeController> {
   const BuildSkipButton({Key? key}) : super(key: key);
 
   @override
