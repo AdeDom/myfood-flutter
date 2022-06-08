@@ -6,9 +6,6 @@ import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/providers/store/data_store.dart';
-import 'package:myfood/presentation/food/food.dart';
-import 'package:myfood/presentation/login/login.dart';
-import 'package:myfood/presentation/register/register.dart';
 import 'package:myfood/presentation/welcome/welcome.dart';
 
 void main() async {
@@ -16,23 +13,15 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
   await Hive.openBox(DatabaseConstant.tableUser);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final _route = <String, WidgetBuilder>{
-    "/welcome": (BuildContext context) => const Welcome(),
-    "/login": (BuildContext context) => const Login(),
-    "/register": (BuildContext context) => const Register(),
-    "/food": (BuildContext context) => const Food(),
-  };
-
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      routes: _route,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       title: 'My Food',
