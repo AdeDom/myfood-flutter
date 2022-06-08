@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/register/controllers/register_controller.dart';
 
-class BuildAlreadyHaveAccount extends StatelessWidget {
+class BuildAlreadyHaveAccount extends GetView<RegisterController> {
   const BuildAlreadyHaveAccount({Key? key}) : super(key: key);
 
   @override
