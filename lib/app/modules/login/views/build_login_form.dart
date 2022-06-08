@@ -146,7 +146,7 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   }
 
   void _responseLogin(Result result) {
-    Navigator.pop(context);
+    Get.back();
     _setLoginButton(true);
     result.when(
       success: (data) {
@@ -159,43 +159,33 @@ class _BuildLoginFormState extends State<BuildLoginForm> {
   }
 
   void _showLoadingDialog() {
-    showDialog(
-      context: context,
+    Get.defaultDialog(
+      title: "Loading",
       barrierDismissible: false,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text("Loading"),
-          content: SizedBox(
-            width: 50,
-            height: 200,
-            child: CircularProgressIndicator(
-              color: Colors.white,
-              backgroundColor: Color(0xFFFFD700),
-            ),
-          ),
-        );
-      },
+      onWillPop: () => Future.value(false),
+      content: const SizedBox(
+        width: 200,
+        height: 200,
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          backgroundColor: Color(0xFFFFD700),
+        ),
+      ),
     );
   }
 
-  void _showErrorDialog({required BaseError? error}) {
-    showDialog(
-      context: context,
+  void _showErrorDialog({required BaseError error}) {
+    Get.defaultDialog(
       barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Error"),
-          content: Text(error?.message ?? "-"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
+      onWillPop: () => Future.value(false),
+      title: "Error",
+      middleText: error.message ?? "-",
+      actions: [
+        TextButton(
+          onPressed: Get.back,
+          child: const Text("OK"),
+        ),
+      ],
     );
   }
 
