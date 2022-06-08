@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
+import 'package:myfood/app/data/models/user/user_entity.dart';
 import 'package:myfood/app/modules/home/views/build_category_list_section.dart';
-import 'package:myfood/data/models/user/user_entity.dart';
 
 import '../controllers/home_controller.dart';
 

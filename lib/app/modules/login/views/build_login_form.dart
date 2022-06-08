@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:myfood/app/config/app_constant.dart';
-import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/providers/database/user/user_local_data_source.dart';
-import 'package:myfood/data/providers/network/api_service_manager.dart';
-import 'package:myfood/data/providers/network/auth/auth_remote_data_source.dart';
-import 'package:myfood/data/providers/network/profile/profile_remote_data_source.dart';
-import 'package:myfood/data/providers/store/data_store.dart';
-import 'package:myfood/data/repositories/auth/auth_login_repository.dart';
-import 'package:myfood/data/repositories/auth/auth_repository.dart';
-import 'package:myfood/data/repositories/auth/auth_user_profile_repository.dart';
-import 'package:myfood/data/repositories/result.dart';
+import 'package:myfood/app/data/models/base/base_error.dart';
+import 'package:myfood/app/data/providers/database/user/user_local_data_source.dart';
+import 'package:myfood/app/data/providers/network/api_service_manager.dart';
+import 'package:myfood/app/data/providers/network/auth/auth_remote_data_source.dart';
+import 'package:myfood/app/data/providers/network/profile/profile_remote_data_source.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
+import 'package:myfood/app/data/repositories/auth/auth_login_repository.dart';
+import 'package:myfood/app/data/repositories/auth/auth_repository.dart';
+import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
+import 'package:myfood/app/data/repositories/result.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
 class BuildLoginForm extends StatefulWidget {

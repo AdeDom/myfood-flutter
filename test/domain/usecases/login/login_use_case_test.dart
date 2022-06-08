@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:myfood/data/models/base/base_error.dart';
-import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/repositories/result.dart';
+import 'package:myfood/app/data/models/base/base_error.dart';
+import 'package:myfood/app/data/models/login/login_request.dart';
+import 'package:myfood/app/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 

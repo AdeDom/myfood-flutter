@@ -1,5 +1,5 @@
-import 'package:myfood/data/models/login/login_request.dart';
-import 'package:myfood/data/repositories/result.dart';
+import 'package:myfood/app/data/models/login/login_request.dart';
+import 'package:myfood/app/data/repositories/result.dart';
 
 mixin AuthRepository {
   Future<Result> callLoginAlreadyToUserProfile({

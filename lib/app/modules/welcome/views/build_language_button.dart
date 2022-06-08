@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/data/providers/store/data_store.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
 
 class BuildLanguageButton extends StatefulWidget {
   const BuildLanguageButton({Key? key}) : super(key: key);
