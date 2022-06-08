@@ -8,17 +8,8 @@ class FoodDetailView extends GetView<FoodDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('FoodDetailView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'FoodDetailView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+    return const Scaffold(
+      body: Text("Food detail (foodId = Hello)"),
     );
   }
 }
