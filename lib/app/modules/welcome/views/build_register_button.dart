@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 class BuildRegisterButton extends GetView<WelcomeController> {
   const BuildRegisterButton({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class BuildRegisterButton extends GetView<WelcomeController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _navigatorToRegisterPage(context);
+        _navigatorToRegisterPage();
       },
       child: Container(
         width: 360,
@@ -34,7 +35,7 @@ class BuildRegisterButton extends GetView<WelcomeController> {
     );
   }
 
-  void _navigatorToRegisterPage(BuildContext context) {
-    Navigator.pushNamed(context, "/register");
+  void _navigatorToRegisterPage() {
+    Get.toNamed(Routes.REGISTER);
   }
 }

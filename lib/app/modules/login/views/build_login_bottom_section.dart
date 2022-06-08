@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/login/controllers/login_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 class BuildLoginBottomSection extends GetView<LoginController> {
   const BuildLoginBottomSection({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class BuildLoginBottomSection extends GetView<LoginController> {
   Widget _buildLoginBottomSection(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _navigatorToRegisterPage(context);
+        _navigatorToRegisterPage();
       },
       child: Column(
         children: [
@@ -44,7 +45,7 @@ class BuildLoginBottomSection extends GetView<LoginController> {
     );
   }
 
-  void _navigatorToRegisterPage(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/register");
+  void _navigatorToRegisterPage() {
+    Get.offAndToNamed(Routes.REGISTER);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/register/controllers/register_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 class BuildAlreadyHaveAccount extends GetView<RegisterController> {
   const BuildAlreadyHaveAccount({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class BuildAlreadyHaveAccount extends GetView<RegisterController> {
   Widget _buildAlreadyHaveAccount(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _navigatorToLoginPage(context);
+        _navigatorToLoginPage();
       },
       child: Column(
         children: [
@@ -44,7 +45,7 @@ class BuildAlreadyHaveAccount extends GetView<RegisterController> {
     );
   }
 
-  void _navigatorToLoginPage(BuildContext context) {
-    Navigator.pushReplacementNamed(context, "/login");
+  void _navigatorToLoginPage() {
+    Get.offAndToNamed(Routes.LOGIN);
   }
 }

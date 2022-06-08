@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 class BuildLoginButton extends GetView<WelcomeController> {
   const BuildLoginButton({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class BuildLoginButton extends GetView<WelcomeController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _navigatorToLoginPage(context);
+        _navigatorToLoginPage();
       },
       child: Container(
         width: 360,
@@ -31,7 +32,7 @@ class BuildLoginButton extends GetView<WelcomeController> {
     );
   }
 
-  void _navigatorToLoginPage(BuildContext context) {
-    Navigator.pushNamed(context, "/login");
+  void _navigatorToLoginPage() {
+    Get.toNamed(Routes.LOGIN);
   }
 }

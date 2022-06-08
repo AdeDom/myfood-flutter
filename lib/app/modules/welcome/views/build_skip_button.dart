@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 class BuildSkipButton extends GetView<WelcomeController> {
   const BuildSkipButton({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class BuildSkipButton extends GetView<WelcomeController> {
   Widget _buildSkipButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _navigatorToFoodPage(context);
+        _navigatorToFoodPage();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +40,7 @@ class BuildSkipButton extends GetView<WelcomeController> {
     );
   }
 
-  void _navigatorToFoodPage(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, "/food", (route) => false);
+  void _navigatorToFoodPage() {
+    Get.offAllNamed(Routes.HOME);
   }
 }
