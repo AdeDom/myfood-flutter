@@ -6,7 +6,6 @@ import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 import 'package:myfood/data/models/user/user_entity.dart';
 import 'package:myfood/data/providers/store/data_store.dart';
-import 'package:myfood/presentation/welcome/welcome.dart';
 
 void main() async {
   await GetStorage.init(DataStoreImpl.storeFile);
@@ -23,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute: AppPages.INITIAL,
+      defaultTransition: Transition.native,
       getPages: AppPages.routes,
       title: 'My Food',
       theme: ThemeData(
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Welcome(),
     );
   }
 }
