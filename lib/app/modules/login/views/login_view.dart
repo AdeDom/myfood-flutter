@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myfood/app/modules/login/views/build_login_bottom_section.dart';
+import 'package:myfood/app/modules/login/views/build_login_center_section.dart';
+import 'package:myfood/app/modules/login/views/build_login_top_section.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -9,15 +12,13 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('LoginView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'LoginView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      resizeToAvoidBottomInset: false, // Bottom view move on top key board
+      body: Column(
+        children: const [
+          BuildLoginTopSection(),
+          BuildLoginCenterSection(),
+          BuildLoginBottomSection(),
+        ],
       ),
     );
   }

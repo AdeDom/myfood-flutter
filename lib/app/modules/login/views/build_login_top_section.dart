@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myfood/presentation/login/widget/build_login_form.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/login/controllers/login_controller.dart';
+import 'package:myfood/app/modules/login/views/build_login_form.dart';
 
-class BuildLoginTopSection extends StatelessWidget {
+class BuildLoginTopSection extends GetView<LoginController> {
   const BuildLoginTopSection({Key? key}) : super(key: key);
 
   @override

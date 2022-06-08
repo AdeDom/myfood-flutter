@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfood/app/modules/login/controllers/login_controller.dart';
 
-class BuildLoginBottomSection extends StatelessWidget {
+class BuildLoginBottomSection extends GetView<LoginController> {
   const BuildLoginBottomSection({Key? key}) : super(key: key);
 
   @override
