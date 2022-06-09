@@ -2,26 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/config/app_constant.dart';
-import 'package:myfood/app/data/models/base/base_error.dart';
 import 'package:myfood/app/modules/login/controllers/login_controller.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 
 class LoginPage extends GetView<LoginController> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool isLoginButtonStatus;
+  String? email;
+  String? password;
 
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({
+    Key? key,
+    required this.isLoginButtonStatus,
+    this.email,
+    this.password,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false, // Bottom view move on top key board
-      body: Column(
-        children: [
-          _buildLoginTopSection(),
-          _buildLoginCenterSection(),
-          _buildLoginBottomSection(),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildLoginTopSection(),
+        _buildLoginCenterSection(),
+        _buildLoginBottomSection(),
+      ],
     );
   }
 
@@ -97,6 +101,7 @@ class LoginPage extends GetView<LoginController> {
         validator: controller.validateEmail,
         name: AppConstant.emailKey,
         onChanged: controller.setEmail,
+        initialValue: email,
       ),
     );
   }
@@ -111,6 +116,7 @@ class LoginPage extends GetView<LoginController> {
         validator: controller.validatePassword,
         name: AppConstant.passwordKey,
         onChanged: controller.setPassword,
+        initialValue: password,
       ),
     );
   }
@@ -133,70 +139,32 @@ class LoginPage extends GetView<LoginController> {
   }
 
   Widget _buildLoginButton() {
-    return Obx(() {
-      return GestureDetector(
-        onTap: controller.isLoginButtonStatus.value ? _requestLogin : null,
-        child: Container(
-          width: 360,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            color: controller.isLoginButtonStatus.value
-                ? const Color(0xFFFFD700)
-                : Colors.grey,
-          ),
-          child: const Center(
-            child: Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-              ),
+    return GestureDetector(
+      onTap: isLoginButtonStatus ? _requestLogin : null,
+      child: Container(
+        width: 360,
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: isLoginButtonStatus ? const Color(0xFFFFD700) : Colors.grey,
+        ),
+        child: const Center(
+          child: Text(
+            "Login",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
             ),
           ),
-        ),
-      );
-    });
-  }
-
-  void _requestLogin() {
-    if (_formKey.currentState?.saveAndValidate() == true) {
-      _showLoadingDialog();
-      controller.callLogin((error) {
-        _showErrorDialog(error: error);
-      });
-    }
-  }
-
-  void _showLoadingDialog() {
-    Get.defaultDialog(
-      title: "Loading",
-      barrierDismissible: false,
-      onWillPop: () => Future.value(false),
-      content: const SizedBox(
-        width: 200,
-        height: 200,
-        child: CircularProgressIndicator(
-          color: Colors.white,
-          backgroundColor: Color(0xFFFFD700),
         ),
       ),
     );
   }
 
-  void _showErrorDialog({required BaseError error}) {
-    Get.defaultDialog(
-      barrierDismissible: false,
-      onWillPop: () => Future.value(false),
-      title: "Error",
-      middleText: error.message ?? "-",
-      actions: [
-        TextButton(
-          onPressed: Get.back,
-          child: const Text("OK"),
-        ),
-      ],
-    );
+  void _requestLogin() {
+    if (_formKey.currentState?.saveAndValidate() == true) {
+      controller.callLogin();
+    }
   }
 
   /// BuildLoginCenterSection //////////////////////////////////////////////////
