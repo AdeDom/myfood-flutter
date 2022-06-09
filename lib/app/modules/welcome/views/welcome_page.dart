@@ -104,7 +104,7 @@ class WelcomePage extends GetView<WelcomeController> {
   Widget _buildLoginButton() {
     return GestureDetector(
       onTap: () {
-        _navigatorToLoginPage();
+        Get.toNamed(Routes.LOGIN);
       },
       child: Container(
         width: 360,
@@ -126,14 +126,10 @@ class WelcomePage extends GetView<WelcomeController> {
     );
   }
 
-  void _navigatorToLoginPage() {
-    Get.toNamed(Routes.LOGIN);
-  }
-
   Widget _buildRegisterButton() {
     return GestureDetector(
       onTap: () {
-        _navigatorToRegisterPage();
+        Get.toNamed(Routes.REGISTER);
       },
       child: Container(
         width: 360,
@@ -158,14 +154,10 @@ class WelcomePage extends GetView<WelcomeController> {
     );
   }
 
-  void _navigatorToRegisterPage() {
-    Get.toNamed(Routes.REGISTER);
-  }
-
   Widget _buildSkipButton() {
     return GestureDetector(
       onTap: () {
-        _navigatorToFoodPage();
+        Get.offAllNamed(Routes.HOME);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -189,10 +181,6 @@ class WelcomePage extends GetView<WelcomeController> {
         ],
       ),
     );
-  }
-
-  void _navigatorToFoodPage() {
-    Get.offAllNamed(Routes.HOME);
   }
 
   Widget _buildLanguageButton() {
