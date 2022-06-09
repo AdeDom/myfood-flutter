@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
-  bool _isLanguageEn = false;
-  final DataStore dataStore = DataStoreImpl();
+  bool? isLanguageEn;
 
-  WelcomePage({Key? key}) : super(key: key);
+  WelcomePage({
+    Key? key,
+    this.isLanguageEn,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +185,7 @@ class WelcomePage extends GetView<WelcomeController> {
   }
 
   Widget _buildLanguageButton() {
-    if (_isLanguageEn) {
+    if (isLanguageEn ?? false) {
       return _buildLanguageEnButton();
     } else {
       return _buildLanguageThButton();
@@ -193,7 +194,7 @@ class WelcomePage extends GetView<WelcomeController> {
 
   Widget _buildLanguageThButton() {
     return GestureDetector(
-      onTap: setLanguage,
+      onTap: controller.setLanguage,
       child: Stack(
         children: [
           Row(
@@ -262,7 +263,7 @@ class WelcomePage extends GetView<WelcomeController> {
 
   Widget _buildLanguageEnButton() {
     return GestureDetector(
-      onTap: setLanguage,
+      onTap: controller.setLanguage,
       child: Stack(
         children: [
           Row(
@@ -332,10 +333,5 @@ class WelcomePage extends GetView<WelcomeController> {
         ],
       ),
     );
-  }
-
-  void setLanguage() {
-    dataStore.setIsLanguageEn(isLanguageEn: !_isLanguageEn);
-    _isLanguageEn = !_isLanguageEn;
   }
 }

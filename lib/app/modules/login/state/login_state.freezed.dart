@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   bool get isLoginButtonStatus => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoginButtonStatus) initial,
@@ -32,7 +31,6 @@ mixin _$LoginState {
         currentPage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoginButtonStatus)? initial,
@@ -45,7 +43,6 @@ mixin _$LoginState {
         currentPage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoginButtonStatus)? initial,
@@ -59,7 +56,6 @@ mixin _$LoginState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
@@ -68,7 +64,6 @@ mixin _$LoginState {
     required TResult Function(CurrentPage value) currentPage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -77,7 +72,6 @@ mixin _$LoginState {
     TResult Function(CurrentPage value)? currentPage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -98,7 +92,6 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
-
   $Res call({bool isLoginButtonStatus});
 }
 
@@ -107,7 +100,6 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   _$LoginStateCopyWithImpl(this._value, this._then);
 
   final LoginState _value;
-
   // ignore: unused_field
   final $Res Function(LoginState) _then;
 
@@ -128,7 +120,6 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-
   @override
   $Res call({bool isLoginButtonStatus});
 }
@@ -280,7 +271,6 @@ abstract class Initial implements LoginState {
 
   @override
   bool get isLoginButtonStatus => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$InitialCopyWith<_$Initial> get copyWith =>
@@ -291,7 +281,6 @@ abstract class Initial implements LoginState {
 abstract class _$$LoadingCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
       __$$LoadingCopyWithImpl<$Res>;
-
   @override
   $Res call({bool isLoginButtonStatus, String? email, String? password});
 }
@@ -468,11 +457,8 @@ abstract class Loading implements LoginState {
 
   @override
   bool get isLoginButtonStatus => throw _privateConstructorUsedError;
-
   String? get email => throw _privateConstructorUsedError;
-
   String? get password => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$LoadingCopyWith<_$Loading> get copyWith =>
@@ -485,7 +471,6 @@ abstract class _$$LoginErrorCopyWith<$Res>
   factory _$$LoginErrorCopyWith(
           _$LoginError value, $Res Function(_$LoginError) then) =
       __$$LoginErrorCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {BaseError error,
@@ -686,14 +671,10 @@ abstract class LoginError implements LoginState {
       required final String? password}) = _$LoginError;
 
   BaseError get error => throw _privateConstructorUsedError;
-
   @override
   bool get isLoginButtonStatus => throw _privateConstructorUsedError;
-
   String? get email => throw _privateConstructorUsedError;
-
   String? get password => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$LoginErrorCopyWith<_$LoginError> get copyWith =>
@@ -706,7 +687,6 @@ abstract class _$$CurrentPageCopyWith<$Res>
   factory _$$CurrentPageCopyWith(
           _$CurrentPage value, $Res Function(_$CurrentPage) then) =
       __$$CurrentPageCopyWithImpl<$Res>;
-
   @override
   $Res call({bool isLoginButtonStatus, String? email, String? password});
 }
@@ -884,11 +864,8 @@ abstract class CurrentPage implements LoginState {
 
   @override
   bool get isLoginButtonStatus => throw _privateConstructorUsedError;
-
   String? get email => throw _privateConstructorUsedError;
-
   String? get password => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$CurrentPageCopyWith<_$CurrentPage> get copyWith =>

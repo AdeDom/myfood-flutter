@@ -5,12 +5,21 @@ import 'package:myfood/app/modules/welcome/views/welcome_page.dart';
 import '../controllers/welcome_controller.dart';
 
 class WelcomeView extends GetView<WelcomeController> {
-  WelcomeView({Key? key}) : super(key: key);
+  const WelcomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WelcomePage(),
+      body: Obx(() {
+        return controller.state.value.when(
+          initial: () {
+            return WelcomePage();
+          },
+          changeLanguage: (isLanguageEn) {
+            return WelcomePage(isLanguageEn: isLanguageEn);
+          },
+        );
+      }),
     );
   }
 }

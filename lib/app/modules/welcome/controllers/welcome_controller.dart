@@ -1,20 +1,21 @@
 import 'package:get/get.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
+import 'package:myfood/app/modules/welcome/state/welcome_state.dart';
 
 class WelcomeController extends GetxController {
-  final count = 0.obs;
+  final state = const WelcomeState.initial().obs;
+  final DataStore dataStore = DataStoreImpl();
 
   @override
   void onInit() {
     super.onInit();
+    bool isLanguageEn = dataStore.getIsLanguageEn();
+    state.value = WelcomeState.changeLanguage(isLanguageEn: isLanguageEn);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void setLanguage() {
+    bool isLanguageEn = dataStore.getIsLanguageEn();
+    dataStore.setIsLanguageEn(isLanguageEn: !isLanguageEn);
+    state.value = WelcomeState.changeLanguage(isLanguageEn: !isLanguageEn);
   }
-
-  @override
-  void onClose() {}
-
-  void increment() => count.value++;
 }
