@@ -12,8 +12,8 @@ import 'package:myfood/app/routes/app_pages.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
 
 class LoginController extends GetxController {
-  String? email = "";
-  String? password = "";
+  String? _email = "";
+  String? _password = "";
   final isLoginButtonStatus = true.obs;
 
   final LoginUseCase _loginUseCase = LoginUseCase(
@@ -38,11 +38,19 @@ class LoginController extends GetxController {
   );
 
   void setEmail(String? email) {
-    this.email = email;
+    _email = email;
+  }
+
+  String? getEmail() {
+    return _email;
   }
 
   void setPassword(String? password) {
-    this.password = password;
+    _password = password;
+  }
+
+  String? getPassword() {
+    return _password;
   }
 
   String? validateEmail(String? email) {
@@ -55,7 +63,7 @@ class LoginController extends GetxController {
 
   void callLogin(Function(BaseError) baseError) {
     isLoginButtonStatus.value = false;
-    _loginUseCase(email: email, password: password).then((result) {
+    _loginUseCase(email: _email, password: _password).then((result) {
       result.when(
         success: (_) {
           Get.back();
