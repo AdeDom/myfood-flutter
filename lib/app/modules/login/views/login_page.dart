@@ -4,14 +4,74 @@ import 'package:get/get.dart';
 import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/app/data/models/base/base_error.dart';
 import 'package:myfood/app/modules/login/controllers/login_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
-class BuildLoginForm extends GetView<LoginController> {
+class LoginPage extends GetView<LoginController> {
   final _formKey = GlobalKey<FormBuilderState>();
 
-  BuildLoginForm({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false, // Bottom view move on top key board
+      body: Column(
+        children: [
+          _buildLoginTopSection(),
+          _buildLoginCenterSection(),
+          _buildLoginBottomSection(),
+        ],
+      ),
+    );
+  }
+
+  /// BuildLoginTopSection /////////////////////////////////////////////////////
+  Widget _buildLoginTopSection() {
+    return Column(
+      children: [
+        const SizedBox(height: 64),
+        _buildLoginTitle(),
+        const SizedBox(height: 16),
+        _buildLoginSubTitle(),
+        const SizedBox(height: 32),
+        _buildLoginForm(),
+        const SizedBox(height: 32),
+        _buildForgetPasswordButton(),
+      ],
+    );
+  }
+
+  Widget _buildLoginTitle() {
+    return const Text(
+      "Login",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 32,
+      ),
+    );
+  }
+
+  Widget _buildLoginSubTitle() {
+    return const Text(
+      "Add your details to login",
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildForgetPasswordButton() {
+    return const Text(
+      "Forget your password?",
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildLoginForm() {
     return FormBuilder(
       key: _formKey,
       child: Column(
@@ -136,6 +196,48 @@ class BuildLoginForm extends GetView<LoginController> {
           child: const Text("OK"),
         ),
       ],
+    );
+  }
+
+  /// BuildLoginCenterSection //////////////////////////////////////////////////
+  Widget _buildLoginCenterSection() {
+    return Expanded(
+      child: Container(),
+    );
+  }
+
+  /// BuildLoginBottomSection //////////////////////////////////////////////////
+  Widget _buildLoginBottomSection() {
+    return GestureDetector(
+      onTap: () {
+        Get.offAndToNamed(Routes.REGISTER);
+      },
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                "Don't have an Account?",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                "Sign Up",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFFFFD700),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
     );
   }
 }
