@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
 
 import '../controllers/welcome_controller.dart';
 
 class WelcomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(WelcomeController());
+    DataStore dataStore = Get.find();
+    Get.put(WelcomeController(dataStore: dataStore));
   }
 }

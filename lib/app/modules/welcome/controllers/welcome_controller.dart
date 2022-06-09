@@ -5,7 +5,12 @@ import 'package:myfood/app/modules/welcome/state/welcome_state.dart';
 
 class WelcomeController extends GetxController {
   final state = const WelcomeState.initial().obs;
-  final DataStore dataStore = DataStoreImpl();
+
+  DataStore dataStore;
+
+  WelcomeController({
+    required this.dataStore,
+  });
 
   @override
   void onInit() {
