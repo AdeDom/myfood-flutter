@@ -15,7 +15,7 @@ class BuildLoginTopSection extends GetView<LoginController> {
         const SizedBox(height: 16),
         _buildLoginSubTitle(),
         const SizedBox(height: 32),
-        const BuildLoginForm(),
+        BuildLoginForm(),
         const SizedBox(height: 32),
         _buildForgetPasswordButton(),
       ],
