@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfood/app/modules/welcome/controllers/welcome_controller.dart';
 import 'package:myfood/app/routes/app_pages.dart';
+import 'package:myfood/generated/locales.g.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   bool? isLanguageEn;
@@ -114,10 +115,10 @@ class WelcomePage extends GetView<WelcomeController> {
           borderRadius: BorderRadius.circular(50),
           color: const Color(0xFFFFD700),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            "Login",
-            style: TextStyle(
+            LocaleKeys.login.tr,
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.black,
             ),
@@ -142,10 +143,10 @@ class WelcomePage extends GetView<WelcomeController> {
             color: const Color(0xFFFFD700),
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            "Create an Account",
-            style: TextStyle(
+            LocaleKeys.create_an_account.tr,
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.black,
             ),
@@ -162,18 +163,18 @@ class WelcomePage extends GetView<WelcomeController> {
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
-            "Don't want login?",
-            style: TextStyle(
+            LocaleKeys.don_t_want_login.tr,
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.grey,
             ),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
-            "Skip",
-            style: TextStyle(
+            LocaleKeys.skip.tr,
+            style: const TextStyle(
               fontSize: 18,
               color: Color(0xFFFFD700),
               fontWeight: FontWeight.bold,

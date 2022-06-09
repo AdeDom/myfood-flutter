@@ -6,6 +6,7 @@ import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/data/models/user/user_entity.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/routes/app_pages.dart';
+import 'package:myfood/generated/main_translation.dart';
 
 void main() async {
   await GetStorage.init(DataStoreImpl.storeFile);
@@ -15,6 +16,7 @@ void main() async {
   runApp(GetMaterialApp(
     initialRoute: AppPages.INITIAL,
     defaultTransition: Transition.native,
+    translations: MainTranslation(),
     getPages: AppPages.routes,
     title: 'My Food',
     theme: ThemeData(
