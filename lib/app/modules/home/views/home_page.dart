@@ -16,10 +16,22 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildTitleSection() {
-    return Container(
+    return const SizedBox(
       width: double.infinity,
-      height: 100,
-      color: Colors.grey,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 16,
+          left: 16,
+          bottom: 16,
+        ),
+        child: Text(
+          "Food",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 32,
+          ),
+        ),
+      ),
     );
   }
 
