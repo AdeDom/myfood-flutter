@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
 import 'package:myfood/app/config/app_constant.dart';
+import 'package:myfood/app/modules/home/controllers/home_controller.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -18,21 +21,32 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildTitleSection() {
-    return const SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: 16,
-          left: 16,
-        ),
-        child: Text(
-          "Food",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 32,
+    return Row(
+      children: [
+        const SizedBox(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 16,
+              left: 16,
+            ),
+            child: Text(
+              "Food",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+              ),
+            ),
           ),
         ),
-      ),
+        Expanded(child: Container()),
+        IconButton(
+          onPressed: () {
+            controller.setLogout();
+            Get.offAllNamed(Routes.WELCOME);
+          },
+          icon: const Icon(Icons.logout),
+        ),
+      ],
     );
   }
 
