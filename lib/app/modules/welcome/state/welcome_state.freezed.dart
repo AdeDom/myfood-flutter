@@ -22,14 +22,12 @@ mixin _$WelcomeState {
     required TResult Function(bool isLanguageEn) changeLanguage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isLanguageEn)? changeLanguage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -37,21 +35,18 @@ mixin _$WelcomeState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(ChangeLanguage value) changeLanguage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(ChangeLanguage value)? changeLanguage,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -73,7 +68,6 @@ class _$WelcomeStateCopyWithImpl<$Res> implements $WelcomeStateCopyWith<$Res> {
   _$WelcomeStateCopyWithImpl(this._value, this._then);
 
   final WelcomeState _value;
-
   // ignore: unused_field
   final $Res Function(WelcomeState) _then;
 }
@@ -185,7 +179,6 @@ abstract class _$$ChangeLanguageCopyWith<$Res> {
   factory _$$ChangeLanguageCopyWith(
           _$ChangeLanguage value, $Res Function(_$ChangeLanguage) then) =
       __$$ChangeLanguageCopyWithImpl<$Res>;
-
   $Res call({bool isLanguageEn});
 }
 
@@ -312,7 +305,6 @@ abstract class ChangeLanguage implements WelcomeState {
       _$ChangeLanguage;
 
   bool get isLanguageEn => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$ChangeLanguageCopyWith<_$ChangeLanguage> get copyWith =>
       throw _privateConstructorUsedError;
