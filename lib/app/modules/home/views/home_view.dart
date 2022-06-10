@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/data/models/user/user_entity.dart';
-import 'package:myfood/app/modules/home/views/build_category_list_section.dart';
+import 'package:myfood/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -13,16 +13,10 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Column(
         children: [
-          Column(
-            children: [
-              _buildTitleSection(),
-              _buildSearchSection(),
-              const BuildCategoryListSection(),
-              _buildFoodListSection(),
-            ],
-          )
+          _buildLogoutButton(),
+          _buildSearchSection(),
         ],
       ),
     );
@@ -32,6 +26,16 @@ class HomeView extends GetView<HomeController> {
     return Container(
       height: 300,
       color: Colors.red,
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return TextButton(
+      onPressed: () {
+        controller.setLogout();
+        Get.offAllNamed(Routes.WELCOME);
+      },
+      child: const Text("Logout"),
     );
   }
 

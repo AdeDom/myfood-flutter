@@ -1,20 +1,16 @@
 import 'package:get/get.dart';
+import 'package:myfood/app/config/auth_role.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
 
 class HomeController extends GetxController {
-  final count = 0.obs;
+  DataStore dataStore;
 
-  @override
-  void onInit() {
-    super.onInit();
+  HomeController({
+    required this.dataStore,
+  });
+
+  void setLogout() {
+    int authRole = AuthRole.unAuth.name;
+    dataStore.setAuthRole(authRole: authRole);
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-
-  void increment() => count.value++;
 }
