@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:myfood/app/config/auth_role.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/modules/welcome/state/welcome_state.dart';
 
@@ -33,5 +34,10 @@ class WelcomeController extends GetxController {
       Get.updateLocale(const Locale("th", "TH"));
     }
     state.value = WelcomeState.changeLanguage(isLanguageEn: !isLanguageEn);
+  }
+
+  void setRoleGuest() {
+    int authRole = AuthRole.guest.name;
+    dataStore.setAuthRole(authRole: authRole);
   }
 }

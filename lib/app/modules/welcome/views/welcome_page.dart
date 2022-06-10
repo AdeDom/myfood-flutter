@@ -159,6 +159,7 @@ class WelcomePage extends GetView<WelcomeController> {
   Widget _buildSkipButton() {
     return GestureDetector(
       onTap: () {
+        controller.setRoleGuest();
         Get.offAllNamed(Routes.HOME);
       },
       child: Row(
