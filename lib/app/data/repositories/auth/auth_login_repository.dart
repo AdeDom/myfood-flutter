@@ -1,3 +1,4 @@
+import 'package:myfood/app/config/auth_role.dart';
 import 'package:myfood/app/data/models/login/login_request.dart';
 import 'package:myfood/app/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
@@ -21,5 +22,10 @@ class AuthLoginRepositoryImpl with AuthLoginRepository {
     String refreshToken = loginResponse.result?.refreshToken ?? "";
     dataStore.setAccessToken(accessToken: accessToken);
     dataStore.setRefreshToken(refreshToken: refreshToken);
+    bool isAuthRole = accessToken.isNotEmpty && refreshToken.isNotEmpty;
+    if (isAuthRole) {
+      int authRole = AuthRole.auth.name;
+      dataStore.setAuthRole(authRole: authRole);
+    }
   }
 }

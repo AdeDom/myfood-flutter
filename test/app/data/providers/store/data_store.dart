@@ -4,6 +4,7 @@ class FakeDataStoreImpl with DataStore {
   bool isLanguageEn = false;
   String accessToken = "";
   String refreshToken = "";
+  int authRole = 0;
 
   @override
   void setIsLanguageEn({required bool isLanguageEn}) {
@@ -33,5 +34,15 @@ class FakeDataStoreImpl with DataStore {
   @override
   String getRefreshToken() {
     return refreshToken;
+  }
+
+  @override
+  void setAuthRole({required int authRole}) {
+    this.authRole = authRole;
+  }
+
+  @override
+  int getAuthRole() {
+    return authRole;
   }
 }

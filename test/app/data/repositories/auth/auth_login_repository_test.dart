@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:myfood/app/config/auth_role.dart';
 import 'package:myfood/app/data/models/base/base_response.dart';
 import 'package:myfood/app/data/models/login/login_request.dart';
 import 'package:myfood/app/data/models/token/token.dart';
@@ -53,6 +54,7 @@ void main() {
 
     expect(dataStore.getAccessToken(), accessToken);
     expect(dataStore.getRefreshToken(), refreshToken);
+    expect(dataStore.getAuthRole(), AuthRole.auth.name);
     verify(
       () => authRemoteDataSource.callLogin(
         loginRequest: loginRequest,
@@ -78,6 +80,7 @@ void main() {
 
     expect(dataStore.getAccessToken(), "");
     expect(dataStore.getRefreshToken(), "");
+    expect(dataStore.getAuthRole(), 0);
     verify(
       () => authRemoteDataSource.callLogin(
         loginRequest: loginRequest,
