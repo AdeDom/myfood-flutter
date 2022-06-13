@@ -3,7 +3,7 @@ import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/data/models/category/category_entity.dart';
 
 mixin CategoryLocalDataSource {
-  Future<List<CategoryEntity>?> getCategoryAll();
+  List<CategoryEntity>? getCategoryAll();
 
   Future<void> saveCategoryAll(List<CategoryEntity> categoryAll);
 
@@ -14,8 +14,17 @@ class CategoryLocalDataSourceImpl with CategoryLocalDataSource {
   final box = Hive.box(DatabaseConstant.tableCategory);
 
   @override
-  Future<List<CategoryEntity>?> getCategoryAll() async {
-    return await box.get(DatabaseConstant.tableCategory);
+  List<CategoryEntity>? getCategoryAll() {
+    return box.values.map((element) {
+      return CategoryEntity(
+        categoryId: element.categoryId,
+        categoryName: element.categoryName,
+        image: element.image,
+        categoryTypeName: element.categoryTypeName,
+        created: element.created,
+        updated: element.updated,
+      );
+    }).toList();
   }
 
   @override
@@ -25,6 +34,8 @@ class CategoryLocalDataSourceImpl with CategoryLocalDataSource {
 
   @override
   Future<void> deleteCategoryAll() async {
-    await box.delete(DatabaseConstant.tableCategory);
+    for (var element in box.keys) {
+      await box.delete(element);
+    }
   }
 }

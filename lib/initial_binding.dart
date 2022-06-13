@@ -75,6 +75,7 @@ class InitialBinding extends Bindings {
 
     Get.put<HomeRepository>(
       HomeRepositoryImpl(
+        categoryLocalDataSource: categoryLocalDataSource,
         categoryRepository: categoryRepository,
         foodRepository: foodRepository,
       ),
