@@ -163,8 +163,8 @@ class __$$_CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Category implements _Category {
-  _$_Category(
+class _$_Category with DiagnosticableTreeMixin implements _Category {
+  const _$_Category(
       {@JsonKey(name: "categoryId") this.categoryId,
       @JsonKey(name: "categoryName") this.categoryName,
       @JsonKey(name: "image") this.image,
@@ -195,8 +195,21 @@ class _$_Category implements _Category {
   final String? updated;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Category(categoryId: $categoryId, categoryName: $categoryName, image: $image, categoryTypeName: $categoryTypeName, created: $created, updated: $updated)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Category'))
+      ..add(DiagnosticsProperty('categoryId', categoryId))
+      ..add(DiagnosticsProperty('categoryName', categoryName))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('categoryTypeName', categoryTypeName))
+      ..add(DiagnosticsProperty('created', created))
+      ..add(DiagnosticsProperty('updated', updated));
   }
 
   @override
@@ -238,7 +251,7 @@ class _$_Category implements _Category {
 }
 
 abstract class _Category implements Category {
-  factory _Category(
+  const factory _Category(
       {@JsonKey(name: "categoryId") final int? categoryId,
       @JsonKey(name: "categoryName") final String? categoryName,
       @JsonKey(name: "image") final String? image,

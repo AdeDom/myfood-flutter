@@ -207,8 +207,8 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserProfile implements _UserProfile {
-  _$_UserProfile(
+class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
+  const _$_UserProfile(
       {@JsonKey(name: "userId") this.userId,
       @JsonKey(name: "email") this.email,
       @JsonKey(name: "name") this.name,
@@ -251,8 +251,24 @@ class _$_UserProfile implements _UserProfile {
   final String? updated;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfile(userId: $userId, email: $email, name: $name, mobileNo: $mobileNo, address: $address, image: $image, status: $status, created: $created, updated: $updated)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfile'))
+      ..add(DiagnosticsProperty('userId', userId))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('mobileNo', mobileNo))
+      ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('created', created))
+      ..add(DiagnosticsProperty('updated', updated));
   }
 
   @override
@@ -297,7 +313,7 @@ class _$_UserProfile implements _UserProfile {
 }
 
 abstract class _UserProfile implements UserProfile {
-  factory _UserProfile(
+  const factory _UserProfile(
       {@JsonKey(name: "userId") final String? userId,
       @JsonKey(name: "email") final String? email,
       @JsonKey(name: "name") final String? name,

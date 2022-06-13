@@ -148,15 +148,23 @@ class __$$InitialCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Initial implements Initial {
+class _$Initial with DiagnosticableTreeMixin implements Initial {
   const _$Initial({required this.isLoginButtonStatus});
 
   @override
   final bool isLoginButtonStatus;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LoginState.initial(isLoginButtonStatus: $isLoginButtonStatus)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginState.initial'))
+      ..add(DiagnosticsProperty('isLoginButtonStatus', isLoginButtonStatus));
   }
 
   @override
@@ -319,7 +327,7 @@ class __$$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Loading implements Loading {
+class _$Loading with DiagnosticableTreeMixin implements Loading {
   const _$Loading(
       {required this.isLoginButtonStatus,
       required this.email,
@@ -333,8 +341,18 @@ class _$Loading implements Loading {
   final String? password;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LoginState.loading(isLoginButtonStatus: $isLoginButtonStatus, email: $email, password: $password)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginState.loading'))
+      ..add(DiagnosticsProperty('isLoginButtonStatus', isLoginButtonStatus))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('password', password));
   }
 
   @override
@@ -528,7 +546,7 @@ class __$$LoginErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoginError implements LoginError {
+class _$LoginError with DiagnosticableTreeMixin implements LoginError {
   const _$LoginError(
       {required this.error,
       required this.isLoginButtonStatus,
@@ -545,8 +563,19 @@ class _$LoginError implements LoginError {
   final String? password;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LoginState.loginError(error: $error, isLoginButtonStatus: $isLoginButtonStatus, email: $email, password: $password)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginState.loginError'))
+      ..add(DiagnosticsProperty('error', error))
+      ..add(DiagnosticsProperty('isLoginButtonStatus', isLoginButtonStatus))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('password', password));
   }
 
   @override
@@ -726,7 +755,7 @@ class __$$CurrentPageCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CurrentPage implements CurrentPage {
+class _$CurrentPage with DiagnosticableTreeMixin implements CurrentPage {
   const _$CurrentPage(
       {required this.isLoginButtonStatus,
       required this.email,
@@ -740,8 +769,18 @@ class _$CurrentPage implements CurrentPage {
   final String? password;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LoginState.currentPage(isLoginButtonStatus: $isLoginButtonStatus, email: $email, password: $password)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginState.currentPage'))
+      ..add(DiagnosticsProperty('isLoginButtonStatus', isLoginButtonStatus))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('password', password));
   }
 
   @override

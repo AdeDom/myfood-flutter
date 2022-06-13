@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_profile.freezed.dart';
 part 'user_profile.g.dart';
 
-@Freezed()
+@freezed
 class UserProfile with _$UserProfile {
-  factory UserProfile({
+  const factory UserProfile({
     @JsonKey(name: "userId") String? userId,
     @JsonKey(name: "email") String? email,
     @JsonKey(name: "name") String? name,

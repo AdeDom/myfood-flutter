@@ -90,12 +90,18 @@ class __$$InitialCopyWithImpl<$Res> extends _$WelcomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Initial implements Initial {
+class _$Initial with DiagnosticableTreeMixin implements Initial {
   const _$Initial();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'WelcomeState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'WelcomeState.initial'));
   }
 
   @override
@@ -208,15 +214,23 @@ class __$$ChangeLanguageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChangeLanguage implements ChangeLanguage {
+class _$ChangeLanguage with DiagnosticableTreeMixin implements ChangeLanguage {
   const _$ChangeLanguage({required this.isLanguageEn});
 
   @override
   final bool isLanguageEn;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'WelcomeState.changeLanguage(isLanguageEn: $isLanguageEn)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'WelcomeState.changeLanguage'))
+      ..add(DiagnosticsProperty('isLanguageEn', isLanguageEn));
   }
 
   @override

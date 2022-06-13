@@ -107,8 +107,8 @@ class __$$_BaseErrorCopyWithImpl<$Res> extends _$BaseErrorCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BaseError implements _BaseError {
-  _$_BaseError(
+class _$_BaseError with DiagnosticableTreeMixin implements _BaseError {
+  const _$_BaseError(
       {@JsonKey(name: "code") this.code,
       @JsonKey(name: "message") this.message});
 
@@ -123,8 +123,17 @@ class _$_BaseError implements _BaseError {
   final String? message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BaseError(code: $code, message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BaseError'))
+      ..add(DiagnosticsProperty('code', code))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -155,7 +164,7 @@ class _$_BaseError implements _BaseError {
 }
 
 abstract class _BaseError implements BaseError {
-  factory _BaseError(
+  const factory _BaseError(
       {@JsonKey(name: "code") final String? code,
       @JsonKey(name: "message") final String? message}) = _$_BaseError;
 

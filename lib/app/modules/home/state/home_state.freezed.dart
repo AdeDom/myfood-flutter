@@ -24,7 +24,6 @@ mixin _$HomeState {
         loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
@@ -32,7 +31,6 @@ mixin _$HomeState {
         loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -41,21 +39,18 @@ mixin _$HomeState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -76,7 +71,6 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   _$HomeStateCopyWithImpl(this._value, this._then);
 
   final HomeState _value;
-
   // ignore: unused_field
   final $Res Function(HomeState) _then;
 }
@@ -191,7 +185,6 @@ abstract class Initial implements HomeState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-
   $Res call({List<Category>? categoryList, List<Category>? foodList});
 }
 
@@ -231,7 +224,6 @@ class _$Loaded implements Loaded {
         _foodList = foodList;
 
   final List<Category>? _categoryList;
-
   @override
   List<Category>? get categoryList {
     final value = _categoryList;
@@ -241,7 +233,6 @@ class _$Loaded implements Loaded {
   }
 
   final List<Category>? _foodList;
-
   @override
   List<Category>? get foodList {
     final value = _foodList;
@@ -349,9 +340,7 @@ abstract class Loaded implements HomeState {
       final List<Category>? foodList}) = _$Loaded;
 
   List<Category>? get categoryList => throw _privateConstructorUsedError;
-
   List<Category>? get foodList => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

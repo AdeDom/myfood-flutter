@@ -105,7 +105,7 @@ class __$$_TokenCopyWithImpl<$Res> extends _$TokenCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Token with DiagnosticableTreeMixin implements _Token {
-  _$_Token(
+  const _$_Token(
       {@JsonKey(name: "accessToken") this.accessToken,
       @JsonKey(name: "refreshToken") this.refreshToken});
 
@@ -163,7 +163,7 @@ class _$_Token with DiagnosticableTreeMixin implements _Token {
 }
 
 abstract class _Token implements Token {
-  factory _Token(
+  const factory _Token(
       {@JsonKey(name: "accessToken") final String? accessToken,
       @JsonKey(name: "refreshToken") final String? refreshToken}) = _$_Token;
 
