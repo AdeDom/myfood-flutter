@@ -12,7 +12,6 @@ import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
-import 'package:myfood/domain/repositories/category/category_repository.dart';
 import 'package:myfood/domain/repositories/home/home_repository.dart';
 
 class InitialBinding extends Bindings {
@@ -21,41 +20,22 @@ class InitialBinding extends Bindings {
     Get.put<DataStore>(DataStoreImpl());
     DataStore dataStore = Get.find();
 
-    Get.put<MyFoodDio>(MyFoodDio(dataStore: dataStore));
-    MyFoodDio myFoodDio = Get.find();
-
-    Get.put<AuthRemoteDataSource>(
-      AuthRemoteDataSourceImpl(
-        myFoodDio: myFoodDio,
-      ),
+    MyFoodDio myFoodDio = MyFoodDio(dataStore: dataStore);
+    AuthRemoteDataSource authRemoteDataSource = AuthRemoteDataSourceImpl(
+      myFoodDio: myFoodDio,
     );
-    AuthRemoteDataSource authRemoteDataSource = Get.find();
-
-    Get.put<AuthLoginRepository>(
-      AuthLoginRepositoryImpl(
-        authRemoteDataSource: authRemoteDataSource,
-        dataStore: dataStore,
-      ),
+    AuthLoginRepository authLoginRepository = AuthLoginRepositoryImpl(
+      authRemoteDataSource: authRemoteDataSource,
+      dataStore: dataStore,
     );
-    AuthLoginRepository authLoginRepository = Get.find();
-
-    Get.put<UserLocalDataSource>(UserLocalDataSourceImpl());
-    UserLocalDataSource userLocalDataSource = Get.find();
-
-    Get.put<ProfileRemoteDataSource>(
-      ProfileRemoteDataSourceImpl(
-        myFoodDio: myFoodDio,
-      ),
+    UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
+    ProfileRemoteDataSource profileRemoteDataSource = ProfileRemoteDataSourceImpl(
+      myFoodDio: myFoodDio,
     );
-    ProfileRemoteDataSource profileRemoteDataSource = Get.find();
-
-    Get.put<AuthUserProfileRepository>(
-      AuthUserProfileRepositoryImpl(
-        userLocalDataSource: userLocalDataSource,
-        profileRemoteDataSource: profileRemoteDataSource,
-      ),
+    AuthUserProfileRepository authUserProfileRepository = AuthUserProfileRepositoryImpl(
+      userLocalDataSource: userLocalDataSource,
+      profileRemoteDataSource: profileRemoteDataSource,
     );
-    AuthUserProfileRepository authUserProfileRepository = Get.find();
 
     Get.put<AuthRepository>(
       AuthRepositoryImpl(
@@ -64,12 +44,9 @@ class InitialBinding extends Bindings {
       ),
     );
 
-    Get.put<CategoryRepository>(CategoryRepositoryImpl());
-    CategoryRepository categoryRepository = Get.find();
-
     Get.put<HomeRepository>(
       HomeRepositoryImpl(
-        categoryRepository: categoryRepository,
+        categoryRepository: CategoryRepositoryImpl(),
       ),
     );
   }
