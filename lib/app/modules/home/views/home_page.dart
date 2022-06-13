@@ -8,20 +8,26 @@ import 'package:myfood/app/routes/app_pages.dart';
 
 class HomePage extends GetView<HomeController> {
   final List<Category>? categoryList;
+  final List<Category>? foodList;
 
   const HomePage({
     Key? key,
     this.categoryList,
+    this.foodList,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTitleSection(),
         _buildSearchSection(),
         _buildCategoryListSection(),
-        _buildFoodListSection(),
+        _buildCategoryNameSection(),
+        Expanded(
+          child: _buildFoodListSection(),
+        ),
       ],
     );
   }
@@ -117,6 +123,7 @@ class HomePage extends GetView<HomeController> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -129,11 +136,100 @@ class HomePage extends GetView<HomeController> {
     }
   }
 
-  Widget _buildFoodListSection() {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      color: Colors.cyan,
+  Widget _buildCategoryNameSection() {
+    return const Padding(
+      padding: EdgeInsets.only(left: 16),
+      child: Text(
+        "Category name",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 32,
+        ),
+      ),
     );
+  }
+
+  Widget _buildFoodListSection() {
+    if (foodList == null) {
+      return Container();
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(
+          left: 8,
+          top: 8,
+          right: 8,
+        ),
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: foodList?.length,
+          itemBuilder: (context, index) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      child: Image.network(
+                        foodList![index].image ?? "",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        foodList![index].categoryName ?? "",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        foodList![index].categoryName ?? "",
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.star,
+                            size: 18,
+                            color: Colors.amber,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            "4.5",
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    }
   }
 }

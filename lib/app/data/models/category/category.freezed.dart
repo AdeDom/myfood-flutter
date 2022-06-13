@@ -22,24 +22,18 @@ Category _$CategoryFromJson(Map<String, dynamic> json) {
 mixin _$Category {
   @JsonKey(name: "categoryId")
   int? get categoryId => throw _privateConstructorUsedError;
-
   @JsonKey(name: "categoryName")
   String? get categoryName => throw _privateConstructorUsedError;
-
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @JsonKey(name: "categoryTypeName")
   String? get categoryTypeName => throw _privateConstructorUsedError;
-
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CategoryCopyWith<Category> get copyWith =>
       throw _privateConstructorUsedError;
@@ -49,7 +43,6 @@ mixin _$Category {
 abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: "categoryId") int? categoryId,
       @JsonKey(name: "categoryName") String? categoryName,
@@ -64,7 +57,6 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
   _$CategoryCopyWithImpl(this._value, this._then);
 
   final Category _value;
-
   // ignore: unused_field
   final $Res Function(Category) _then;
 
@@ -111,7 +103,6 @@ abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   factory _$$_CategoryCopyWith(
           _$_Category value, $Res Function(_$_Category) then) =
       __$$_CategoryCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: "categoryId") int? categoryId,
@@ -260,27 +251,21 @@ abstract class _Category implements Category {
   @override
   @JsonKey(name: "categoryId")
   int? get categoryId => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "categoryName")
   String? get categoryName => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "categoryTypeName")
   String? get categoryTypeName => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_CategoryCopyWith<_$_Category> get copyWith =>
