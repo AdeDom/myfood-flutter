@@ -23,7 +23,10 @@ class HomePage extends GetView<HomeController> {
       children: [
         _buildTitleSection(),
         _buildSearchSection(),
-        _buildCategoryListSection(),
+        SizedBox(
+          height: 150,
+          child: _buildCategoryListSection(),
+        ),
         _buildCategoryNameSection(),
         Expanded(
           child: _buildFoodListSection(),
@@ -94,43 +97,40 @@ class HomePage extends GetView<HomeController> {
     } else {
       return Padding(
         padding: const EdgeInsets.only(left: 8),
-        child: SizedBox(
-          height: 150,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categoryList?.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                        child: Image.network(
-                          categoryList![index].image ?? "",
-                          fit: BoxFit.cover,
-                        ),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categoryList?.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      child: Image.network(
+                        categoryList![index].image ?? "",
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      categoryList![index].categoryName ?? "",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    categoryList![index].categoryName ?? "",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       );
     }
