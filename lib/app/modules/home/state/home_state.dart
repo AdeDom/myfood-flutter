@@ -8,7 +8,6 @@ class HomeState with _$HomeState {
   const factory HomeState.initial() = Initial;
 
   const factory HomeState.loaded({
-    List<Category>? categoryList,
     List<Category>? foodList,
   }) = Loaded;
 }

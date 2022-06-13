@@ -19,23 +19,19 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<Category>? categoryList, List<Category>? foodList)
-        loaded,
+    required TResult Function(List<Category>? foodList) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,9 +110,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<Category>? categoryList, List<Category>? foodList)
-        loaded,
+    required TResult Function(List<Category>? foodList) loaded,
   }) {
     return initial();
   }
@@ -125,8 +119,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
   }) {
     return initial?.call();
   }
@@ -135,8 +128,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -185,7 +177,8 @@ abstract class Initial implements HomeState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Category>? categoryList, List<Category>? foodList});
+
+  $Res call({List<Category>? foodList});
 }
 
 /// @nodoc
@@ -199,14 +192,9 @@ class __$$LoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? categoryList = freezed,
     Object? foodList = freezed,
   }) {
     return _then(_$Loaded(
-      categoryList: categoryList == freezed
-          ? _value._categoryList
-          : categoryList // ignore: cast_nullable_to_non_nullable
-              as List<Category>?,
       foodList: foodList == freezed
           ? _value._foodList
           : foodList // ignore: cast_nullable_to_non_nullable
@@ -218,19 +206,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Loaded implements Loaded {
-  const _$Loaded(
-      {final List<Category>? categoryList, final List<Category>? foodList})
-      : _categoryList = categoryList,
-        _foodList = foodList;
-
-  final List<Category>? _categoryList;
-  @override
-  List<Category>? get categoryList {
-    final value = _categoryList;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  const _$Loaded({final List<Category>? foodList}) : _foodList = foodList;
 
   final List<Category>? _foodList;
   @override
@@ -243,7 +219,7 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'HomeState.loaded(categoryList: $categoryList, foodList: $foodList)';
+    return 'HomeState.loaded(foodList: $foodList)';
   }
 
   @override
@@ -251,16 +227,12 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality()
-                .equals(other._categoryList, _categoryList) &&
             const DeepCollectionEquality().equals(other._foodList, _foodList));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_categoryList),
-      const DeepCollectionEquality().hash(_foodList));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_foodList));
 
   @JsonKey(ignore: true)
   @override
@@ -271,33 +243,29 @@ class _$Loaded implements Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<Category>? categoryList, List<Category>? foodList)
-        loaded,
+    required TResult Function(List<Category>? foodList) loaded,
   }) {
-    return loaded(categoryList, foodList);
+    return loaded(foodList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
   }) {
-    return loaded?.call(categoryList, foodList);
+    return loaded?.call(foodList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Category>? categoryList, List<Category>? foodList)?
-        loaded,
+    TResult Function(List<Category>? foodList)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(categoryList, foodList);
+      return loaded(foodList);
     }
     return orElse();
   }
@@ -335,11 +303,8 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements HomeState {
-  const factory Loaded(
-      {final List<Category>? categoryList,
-      final List<Category>? foodList}) = _$Loaded;
+  const factory Loaded({final List<Category>? foodList}) = _$Loaded;
 
-  List<Category>? get categoryList => throw _privateConstructorUsedError;
   List<Category>? get foodList => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>

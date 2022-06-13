@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/app_constant.dart';
+import 'package:myfood/app/config/database_constant.dart';
 import 'package:myfood/app/data/models/category/category.dart';
+import 'package:myfood/app/data/models/category/category_entity.dart';
 import 'package:myfood/app/modules/home/controllers/home_controller.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 
 class HomePage extends GetView<HomeController> {
-  final List<Category>? categoryList;
   final List<Category>? foodList;
 
   const HomePage({
     Key? key,
-    this.categoryList,
     this.foodList,
   }) : super(key: key);
 
@@ -92,48 +93,50 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _buildCategoryListSection() {
-    if (categoryList == null) {
-      return Container();
-    } else {
-      return Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categoryList?.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      child: Image.network(
-                        categoryList![index].image ?? "",
-                        fit: BoxFit.cover,
+    return ValueListenableBuilder(
+      valueListenable: Hive.box(DatabaseConstant.tableCategory).listenable(),
+      builder: (context, Box box, widget) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: box.length,
+            itemBuilder: (context, index) {
+              final category = box.getAt(index) as CategoryEntity;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        child: Image.network(
+                          category.image ?? "",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    categoryList![index].categoryName ?? "",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(height: 4),
+                    Text(
+                      category.categoryName ?? "",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    }
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildCategoryNameSection() {

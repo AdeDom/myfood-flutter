@@ -17,9 +17,8 @@ class HomeView extends GetView<HomeController> {
             initial: () {
               return const HomePage();
             },
-            loaded: (categoryList, foodList) {
+            loaded: (foodList) {
               return HomePage(
-                categoryList: categoryList,
                 foodList: foodList,
               );
             },
