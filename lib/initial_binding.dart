@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/data/providers/network/auth/auth_remote_data_source.dart';
@@ -25,6 +26,7 @@ class InitialBinding extends Bindings {
     MyFoodDio myFoodDio = MyFoodDio(dataStore: dataStore);
 
     UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
+    CategoryLocalDataSource categoryLocalDataSource = CategoryLocalDataSourceImpl();
 
     AuthRemoteDataSource authRemoteDataSource = AuthRemoteDataSourceImpl(
       myFoodDio: myFoodDio,
@@ -49,6 +51,7 @@ class InitialBinding extends Bindings {
     );
     CategoryRepository categoryRepository = CategoryRepositoryImpl(
       categoryRemoteDataSource: categoryRemoteDataSource,
+      categoryLocalDataSource: categoryLocalDataSource,
     );
 
     Get.put<AuthRepository>(
