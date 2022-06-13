@@ -4,18 +4,14 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:myfood/app/config/app_constant.dart';
 import 'package:myfood/app/config/database_constant.dart';
-import 'package:myfood/app/data/models/category/category.dart';
 import 'package:myfood/app/data/models/category/category_entity.dart';
+import 'package:myfood/app/data/models/food/food_entity.dart';
 import 'package:myfood/app/modules/home/controllers/home_controller.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 
 class HomePage extends GetView<HomeController> {
-  final List<Category>? foodList;
 
-  const HomePage({
-    Key? key,
-    this.foodList,
-  }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -153,86 +149,88 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _buildFoodListSection() {
-    if (foodList == null) {
-      return Container();
-    } else {
-      return Padding(
-        padding: const EdgeInsets.only(
-          left: 8,
-          top: 8,
-          right: 8,
-        ),
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: foodList?.length,
-          itemBuilder: (context, index) {
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      child: Image.network(
-                        foodList![index].image ?? "",
-                        fit: BoxFit.cover,
+    return ValueListenableBuilder(
+      valueListenable: Hive.box(DatabaseConstant.tableFood).listenable(),
+      builder: (context, Box box, widget) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 8,
+            top: 8,
+            right: 8,
+          ),
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: box.length,
+            itemBuilder: (context, index) {
+              final food = box.getAt(index) as FoodEntity;
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        child: Image.network(
+                          food.image ?? "",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        foodList![index].categoryName ?? "",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        foodList![index].categoryName ?? "",
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.star,
-                            size: 18,
-                            color: Colors.amber,
+                  const SizedBox(width: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          food.foodName ?? "",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(width: 4),
-                          Text(
-                            "4.5",
-                            style: TextStyle(
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          food.alias ?? "-",
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          children: const [
+                            Icon(
+                              Icons.star,
+                              size: 18,
                               color: Colors.amber,
-                              fontSize: 14,
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(width: 4),
+                            Text(
+                              "4.5",
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
-        ),
-      );
-    }
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

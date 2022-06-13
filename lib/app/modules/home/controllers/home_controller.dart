@@ -23,9 +23,6 @@ class HomeController extends GetxController {
     result.then((result) {
       result.when(
         success: (data) {
-          state.value = HomeState.loaded(
-            foodList: data?.categoryList,
-          );
         },
         error: (error) {},
       );

@@ -1,20 +1,24 @@
 import 'package:get/get.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
+import 'package:myfood/app/data/providers/database/food/food_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/data/providers/network/auth/auth_remote_data_source.dart';
 import 'package:myfood/app/data/providers/network/category/category_remote_data_source.dart';
+import 'package:myfood/app/data/providers/network/food/food_remote_data_source.dart';
 import 'package:myfood/app/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/data/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/app/data/repositories/category/category_repository.dart';
+import 'package:myfood/app/data/repositories/food/food_repository.dart';
 import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
+import 'package:myfood/domain/repositories/food/food_repository.dart';
 import 'package:myfood/domain/repositories/home/home_repository.dart';
 
 class InitialBinding extends Bindings {
@@ -27,6 +31,7 @@ class InitialBinding extends Bindings {
 
     UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
     CategoryLocalDataSource categoryLocalDataSource = CategoryLocalDataSourceImpl();
+    FoodLocalDataSource foodLocalDataSource = FoodLocalDataSourceImpl();
 
     AuthRemoteDataSource authRemoteDataSource = AuthRemoteDataSourceImpl(
       myFoodDio: myFoodDio,
@@ -37,6 +42,9 @@ class InitialBinding extends Bindings {
     );
     CategoryRemoteDataSource categoryRemoteDataSource =
         CategoryRemoteDataSourceImpl(
+      myFoodDio: myFoodDio,
+    );
+    FoodRemoteDataSource foodRemoteDataSource = FoodRemoteDatSourceImpl(
       myFoodDio: myFoodDio,
     );
 
@@ -53,6 +61,10 @@ class InitialBinding extends Bindings {
       categoryRemoteDataSource: categoryRemoteDataSource,
       categoryLocalDataSource: categoryLocalDataSource,
     );
+    FoodRepository foodRepository = FoodRepositoryImpl(
+      foodLocalDataSource: foodLocalDataSource,
+      foodRemoteDataSource: foodRemoteDataSource,
+    );
 
     Get.put<AuthRepository>(
       AuthRepositoryImpl(
@@ -64,6 +76,7 @@ class InitialBinding extends Bindings {
     Get.put<HomeRepository>(
       HomeRepositoryImpl(
         categoryRepository: categoryRepository,
+        foodRepository: foodRepository,
       ),
     );
   }
