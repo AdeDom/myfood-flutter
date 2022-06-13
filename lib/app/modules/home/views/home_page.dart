@@ -206,16 +206,16 @@ class HomePage extends GetView<HomeController> {
                         ),
                         const SizedBox(height: 4),
                         Row(
-                          children: const [
-                            Icon(
+                          children: [
+                            const Icon(
                               Icons.star,
                               size: 18,
                               color: Colors.amber,
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
-                              "4.5",
-                              style: TextStyle(
+                              food.ratingScoreCount ?? "-",
+                              style: const TextStyle(
                                 color: Colors.amber,
                                 fontSize: 14,
                               ),

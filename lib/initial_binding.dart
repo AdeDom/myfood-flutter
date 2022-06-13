@@ -62,6 +62,7 @@ class InitialBinding extends Bindings {
       categoryRemoteDataSource: categoryRemoteDataSource,
     );
     FoodRepository foodRepository = FoodRepositoryImpl(
+      categoryLocalDataSource: categoryLocalDataSource,
       foodLocalDataSource: foodLocalDataSource,
       foodRemoteDataSource: foodRemoteDataSource,
     );
@@ -75,7 +76,6 @@ class InitialBinding extends Bindings {
 
     Get.put<HomeRepository>(
       HomeRepositoryImpl(
-        categoryLocalDataSource: categoryLocalDataSource,
         categoryRepository: categoryRepository,
         foodRepository: foodRepository,
       ),
