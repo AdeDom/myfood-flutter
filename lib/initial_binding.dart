@@ -7,9 +7,13 @@ import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/data/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
+import 'package:myfood/app/data/repositories/category/category_repository.dart';
+import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
+import 'package:myfood/domain/repositories/category/category_repository.dart';
+import 'package:myfood/domain/repositories/home/home_repository.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -57,6 +61,15 @@ class InitialBinding extends Bindings {
       AuthRepositoryImpl(
         authLoginRepository: authLoginRepository,
         authUserProfileRepository: authUserProfileRepository,
+      ),
+    );
+
+    Get.put<CategoryRepository>(CategoryRepositoryImpl());
+    CategoryRepository categoryRepository = Get.find();
+
+    Get.put<HomeRepository>(
+      HomeRepositoryImpl(
+        categoryRepository: categoryRepository,
       ),
     );
   }

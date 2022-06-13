@@ -9,10 +9,22 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: HomePage(),
+        child: Obx(() {
+          return controller.state.value.when(
+            initial: () {
+              return const HomePage();
+            },
+            loaded: (categoryList, foodList) {
+              return HomePage(
+                categoryList: categoryList,
+                foodList: foodList,
+              );
+            },
+          );
+        }),
       ),
     );
   }

@@ -1,11 +1,10 @@
 import 'package:myfood/app/data/models/base/base_response.dart';
 import 'package:myfood/app/data/models/category/category.dart';
-import 'package:myfood/app/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 
 class CategoryRepositoryImpl with CategoryRepository {
   @override
-  Future<Result<List<Category>>> callCategoryAll() {
+  Future<List<Category>> callCategoryAll() {
     final json = {
       "version": "1.0",
       "status": "success",
@@ -55,7 +54,6 @@ class CategoryRepositoryImpl with CategoryRepository {
         return categoryAll.toList();
       },
     );
-    Result<List<Category>> result = Result.success(data: categoryAll.result);
-    return Future.value(result);
+    return Future.value(categoryAll.result);
   }
 }
