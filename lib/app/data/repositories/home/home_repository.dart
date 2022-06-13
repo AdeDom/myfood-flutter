@@ -1,5 +1,7 @@
-import 'package:myfood/app/data/models/category/category.dart';
-import 'package:myfood/app/data/models/home/home_model.dart';
+import 'dart:convert';
+
+import 'package:myfood/app/data/models/base/base_error.dart';
+import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/data/repositories/result.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
@@ -15,12 +17,20 @@ class HomeRepositoryImpl with HomeRepository {
   });
 
   @override
-  Future<Result<HomeModel>> callHomePage() async {
-    List<Category> categoryList = await categoryRepository.callCategoryAll();
-    await foodRepository.callFoodListByCategoryId(categoryId: 11);
-    HomeModel homeModel = HomeModel(
-      categoryList: categoryList,
-    );
-    return Result.success(data: homeModel);
+  Future<Result> callHomePage() async {
+    try {
+      await categoryRepository.callCategoryAll();
+
+      await foodRepository.callFoodListByCategoryId(categoryId: 11);
+
+      return const Result.success();
+    } on ApiServiceManagerException catch (error) {
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
+      return Result.error(baseError);
+    } catch (error) {
+      BaseError baseError = BaseError(message: error.toString());
+      return Result.error(baseError);
+    }
   }
 }

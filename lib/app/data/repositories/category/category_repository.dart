@@ -1,20 +1,19 @@
-import 'package:myfood/app/data/models/category/category.dart';
 import 'package:myfood/app/data/models/category/category_entity.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/category/category_remote_data_source.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 
 class CategoryRepositoryImpl with CategoryRepository {
-  final CategoryRemoteDataSource categoryRemoteDataSource;
   final CategoryLocalDataSource categoryLocalDataSource;
+  final CategoryRemoteDataSource categoryRemoteDataSource;
 
   CategoryRepositoryImpl({
-    required this.categoryRemoteDataSource,
     required this.categoryLocalDataSource,
+    required this.categoryRemoteDataSource,
   });
 
   @override
-  Future<List<Category>> callCategoryAll() async {
+  Future<void> callCategoryAll() async {
     final categoryResponse = await categoryRemoteDataSource.callCategoryAll();
     final categoryAll = categoryResponse.result;
     if (categoryAll != null) {
@@ -31,6 +30,5 @@ class CategoryRepositoryImpl with CategoryRepository {
       }).toList();
       await categoryLocalDataSource.saveCategoryAll(categoryEntity);
     }
-    return Future.value(categoryAll);
   }
 }

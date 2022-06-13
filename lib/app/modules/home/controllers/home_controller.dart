@@ -22,9 +22,10 @@ class HomeController extends GetxController {
     final result = homePageUseCase();
     result.then((result) {
       result.when(
-        success: (data) {
+        success: (_) {},
+        error: (error) {
+          state.value = HomeState.homePageError(error: error);
         },
-        error: (error) {},
       );
     });
   }
