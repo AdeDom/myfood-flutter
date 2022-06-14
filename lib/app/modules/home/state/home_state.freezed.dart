@@ -178,7 +178,6 @@ abstract class _$$HomePageErrorCopyWith<$Res> {
   factory _$$HomePageErrorCopyWith(
           _$HomePageError value, $Res Function(_$HomePageError) then) =
       __$$HomePageErrorCopyWithImpl<$Res>;
-
   $Res call({BaseError error});
 
   $BaseErrorCopyWith<$Res> get error;
@@ -312,7 +311,6 @@ abstract class HomePageError implements HomeState {
       _$HomePageError;
 
   BaseError get error => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$HomePageErrorCopyWith<_$HomePageError> get copyWith =>
       throw _privateConstructorUsedError;

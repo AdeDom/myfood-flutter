@@ -13,7 +13,7 @@ class GetFoodListByCategoryIdUseCase {
     if (categoryId != null) {
       return homeRepository.getFoodListByCategoryId(categoryId: categoryId);
     } else {
-      String message = "Category is null.";
+      String message = "Category id is null.";
       BaseError error = BaseError(message: message);
       Result resultError = Result.error(error);
       return Future.value(resultError);

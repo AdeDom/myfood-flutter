@@ -6,6 +6,10 @@ mixin FoodRemoteDataSource {
   Future<BaseResponse<List<Food>>> callFoodListByCategoryId({
     required int categoryId,
   });
+
+  Future<BaseResponse<Food>> callFoodDetail({
+    required int foodId,
+  });
 }
 
 class FoodRemoteDatSourceImpl with FoodRemoteDataSource {
@@ -28,5 +32,15 @@ class FoodRemoteDatSourceImpl with FoodRemoteDataSource {
       final foodList = jsonList.map((json) => Food.fromJson(json));
       return foodList.toList();
     });
+  }
+
+  @override
+  Future<BaseResponse<Food>> callFoodDetail({required int foodId}) async {
+    final response = await myFoodDio.get("api/food/detail?foodId=$foodId");
+
+    return BaseResponse<Food>.fromJson(
+      response.data,
+      (json) => Food.fromJson(json),
+    );
   }
 }

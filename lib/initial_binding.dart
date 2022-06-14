@@ -14,12 +14,14 @@ import 'package:myfood/app/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/app/data/repositories/category/category_repository.dart';
 import 'package:myfood/app/data/repositories/food/food_repository.dart';
+import 'package:myfood/app/data/repositories/food_detail/food_detail_repository.dart';
 import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
+import 'package:myfood/domain/repositories/food_detail/food_detail_repository.dart';
 import 'package:myfood/domain/repositories/home/home_repository.dart';
 
 class InitialBinding extends Bindings {
@@ -82,6 +84,12 @@ class InitialBinding extends Bindings {
       HomeRepositoryImpl(
         categoryRepository: categoryRepository,
         foodRepository: foodRepository,
+      ),
+    );
+
+    Get.put<FoodDetailRepository>(
+      FoodDetailRepositoryImpl(
+        foodRemoteDataSource: foodRemoteDataSource,
       ),
     );
   }

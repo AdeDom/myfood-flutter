@@ -22,45 +22,32 @@ Food _$FoodFromJson(Map<String, dynamic> json) {
 mixin _$Food {
   @JsonKey(name: "foodId")
   int? get foodId => throw _privateConstructorUsedError;
-
   @JsonKey(name: "foodName")
   String? get foodName => throw _privateConstructorUsedError;
-
   @JsonKey(name: "alias")
   String? get alias => throw _privateConstructorUsedError;
-
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @JsonKey(name: "price")
   double? get price => throw _privateConstructorUsedError;
-
   @JsonKey(name: "description")
   String? get description => throw _privateConstructorUsedError;
-
   @JsonKey(name: "favorite")
   int? get favorite => throw _privateConstructorUsedError;
-
   @JsonKey(name: "ratingScore")
   double? get ratingScore => throw _privateConstructorUsedError;
-
   @JsonKey(name: "ratingScoreCount")
   String? get ratingScoreCount => throw _privateConstructorUsedError;
-
   @JsonKey(name: "categoryId")
   int? get categoryId => throw _privateConstructorUsedError;
-
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
-
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $FoodCopyWith<Food> get copyWith => throw _privateConstructorUsedError;
 }
@@ -69,7 +56,6 @@ mixin _$Food {
 abstract class $FoodCopyWith<$Res> {
   factory $FoodCopyWith(Food value, $Res Function(Food) then) =
       _$FoodCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: "foodId") int? foodId,
       @JsonKey(name: "foodName") String? foodName,
@@ -91,7 +77,6 @@ class _$FoodCopyWithImpl<$Res> implements $FoodCopyWith<$Res> {
   _$FoodCopyWithImpl(this._value, this._then);
 
   final Food _value;
-
   // ignore: unused_field
   final $Res Function(Food) _then;
 
@@ -172,7 +157,6 @@ class _$FoodCopyWithImpl<$Res> implements $FoodCopyWith<$Res> {
 abstract class _$$_FoodCopyWith<$Res> implements $FoodCopyWith<$Res> {
   factory _$$_FoodCopyWith(_$_Food value, $Res Function(_$_Food) then) =
       __$$_FoodCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: "foodId") int? foodId,
@@ -431,55 +415,42 @@ abstract class _Food implements Food {
   @override
   @JsonKey(name: "foodId")
   int? get foodId => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "foodName")
   String? get foodName => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "alias")
   String? get alias => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "image")
   String? get image => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "price")
   double? get price => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "description")
   String? get description => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "favorite")
   int? get favorite => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "ratingScore")
   double? get ratingScore => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "ratingScoreCount")
   String? get ratingScoreCount => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "categoryId")
   int? get categoryId => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "created")
   String? get created => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(name: "updated")
   String? get updated => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_FoodCopyWith<_$_Food> get copyWith => throw _privateConstructorUsedError;
