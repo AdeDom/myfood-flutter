@@ -5,6 +5,8 @@ import 'package:myfood/app/data/models/category/category_entity.dart';
 mixin CategoryLocalDataSource {
   List<CategoryEntity> getCategoryAll();
 
+  CategoryEntity? getCategoryByCategoryId({required int categoryId});
+
   Future<void> saveCategoryAll(List<CategoryEntity> categoryAll);
 
   Future<void> deleteCategoryAll();
@@ -25,6 +27,20 @@ class CategoryLocalDataSourceImpl with CategoryLocalDataSource {
         updated: element.updated,
       );
     }).toList();
+  }
+
+  @override
+  CategoryEntity? getCategoryByCategoryId({required int categoryId}) {
+    return box.values.map((element) {
+      return CategoryEntity(
+        categoryId: element.categoryId,
+        categoryName: element.categoryName,
+        image: element.image,
+        categoryTypeName: element.categoryTypeName,
+        created: element.created,
+        updated: element.updated,
+      );
+    }).firstWhere((element) => element.categoryId == categoryId);
   }
 
   @override

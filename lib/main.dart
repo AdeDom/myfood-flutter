@@ -20,6 +20,7 @@ void main() async {
   await Hive.openBox(DatabaseConstant.tableUser);
   await Hive.openBox(DatabaseConstant.tableCategory);
   await Hive.openBox(DatabaseConstant.tableFood);
+  await Hive.openBox(DatabaseConstant.tempCategory);
   await Hive.openBox(DatabaseConstant.tempFood);
   runApp(GetMaterialApp(
     initialRoute: AppPages.INITIAL,

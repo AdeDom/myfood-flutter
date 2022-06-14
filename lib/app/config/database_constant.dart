@@ -3,6 +3,7 @@ class DatabaseConstant {
   static const String tableUser = "user";
   static const String tableCategory = "category";
   static const String tableFood = "food";
+  static const String tempCategory = "temp_category";
   static const String tempFood = "temp_food";
   static const String columnUserId = "userId";
   static const String columnName = "name";

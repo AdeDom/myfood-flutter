@@ -2,6 +2,7 @@ import 'package:myfood/app/data/models/base/base_response.dart';
 import 'package:myfood/app/data/models/food/food.dart';
 import 'package:myfood/app/data/models/food/food_entity.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
+import 'package:myfood/app/data/providers/database/category/temp_category_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/food/food_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/food/temp_food_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/food/food_remote_data_source.dart';
@@ -12,6 +13,7 @@ class FoodRepositoryImpl with FoodRepository {
   final DataStore dataStore;
   final CategoryLocalDataSource categoryLocalDataSource;
   final FoodLocalDataSource foodLocalDataSource;
+  final TempCategoryLocalDataSource tempCategoryLocalDataSource;
   final TempFoodLocalDataSource tempFoodLocalDataSource;
   final FoodRemoteDataSource foodRemoteDataSource;
 
@@ -19,6 +21,7 @@ class FoodRepositoryImpl with FoodRepository {
     required this.dataStore,
     required this.categoryLocalDataSource,
     required this.foodLocalDataSource,
+    required this.tempCategoryLocalDataSource,
     required this.tempFoodLocalDataSource,
     required this.foodRemoteDataSource,
   });
@@ -63,8 +66,14 @@ class FoodRepositoryImpl with FoodRepository {
       }
     });
 
-    await tempFoodLocalDataSource.deleteFoodAll();
     int categoryId = dataStore.getCurrentCategoryId();
+    await tempCategoryLocalDataSource.deleteCategory();
+    final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
+      categoryId: categoryId,
+    );
+    await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
+
+    await tempFoodLocalDataSource.deleteFoodAll();
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
       categoryId,
     );
@@ -74,6 +83,12 @@ class FoodRepositoryImpl with FoodRepository {
   @override
   Future<void> getFoodListByCategoryId({required int categoryId}) async {
     dataStore.setCurrentCategoryId(categoryId: categoryId);
+
+    await tempCategoryLocalDataSource.deleteCategory();
+    final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
+      categoryId: categoryId,
+    );
+    await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
 
     await tempFoodLocalDataSource.deleteFoodAll();
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(

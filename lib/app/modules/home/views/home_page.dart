@@ -141,15 +141,21 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget _buildCategoryNameSection() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 16),
-      child: Text(
-        "Category name",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 32,
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box(DatabaseConstant.tempCategory).listenable(),
+      builder: (context, Box box, widget) {
+        CategoryEntity? category = box.get(DatabaseConstant.tempCategory);
+        return Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Text(
+            category?.categoryName ?? "-",
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 32,
+            ),
+          ),
+        );
+      },
     );
   }
 
