@@ -3,17 +3,20 @@ import 'package:myfood/app/data/models/food/food.dart';
 import 'package:myfood/app/data/models/food/food_entity.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/food/food_local_data_source.dart';
+import 'package:myfood/app/data/providers/database/food/temp_food_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/food/food_remote_data_source.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
 
 class FoodRepositoryImpl with FoodRepository {
   final CategoryLocalDataSource categoryLocalDataSource;
   final FoodLocalDataSource foodLocalDataSource;
+  final TempFoodLocalDataSource tempFoodLocalDataSource;
   final FoodRemoteDataSource foodRemoteDataSource;
 
   FoodRepositoryImpl({
     required this.categoryLocalDataSource,
     required this.foodLocalDataSource,
+    required this.tempFoodLocalDataSource,
     required this.foodRemoteDataSource,
   });
 
@@ -21,7 +24,7 @@ class FoodRepositoryImpl with FoodRepository {
   Future<void> callFoodListByCategoryId() async {
     final categoryAll = categoryLocalDataSource.getCategoryAll();
     List<Future<BaseResponse<List<Food>>>> futureList = [];
-    categoryAll?.forEach((element) async {
+    categoryAll.forEach((element) async {
       int? categoryId = element.categoryId;
       if (categoryId != null) {
         final foodResponse = foodRemoteDataSource.callFoodListByCategoryId(
@@ -56,5 +59,8 @@ class FoodRepositoryImpl with FoodRepository {
         await foodLocalDataSource.saveFoodList(foodEntity);
       }
     });
+
+    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(1);
+    tempFoodLocalDataSource.saveFoodList(foodHomePageList);
   }
 }

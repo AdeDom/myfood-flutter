@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/food/food_local_data_source.dart';
+import 'package:myfood/app/data/providers/database/food/temp_food_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/user/user_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/data/providers/network/auth/auth_remote_data_source.dart';
@@ -32,6 +33,7 @@ class InitialBinding extends Bindings {
     UserLocalDataSource userLocalDataSource = UserLocalDataSourceImpl();
     CategoryLocalDataSource categoryLocalDataSource = CategoryLocalDataSourceImpl();
     FoodLocalDataSource foodLocalDataSource = FoodLocalDataSourceImpl();
+    TempFoodLocalDataSource tempFoodLocalDataSource = TempFoodLocalDataSourceImpl();
 
     AuthRemoteDataSource authRemoteDataSource = AuthRemoteDataSourceImpl(
       myFoodDio: myFoodDio,
@@ -64,6 +66,7 @@ class InitialBinding extends Bindings {
     FoodRepository foodRepository = FoodRepositoryImpl(
       categoryLocalDataSource: categoryLocalDataSource,
       foodLocalDataSource: foodLocalDataSource,
+      tempFoodLocalDataSource: tempFoodLocalDataSource,
       foodRemoteDataSource: foodRemoteDataSource,
     );
 

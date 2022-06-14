@@ -150,7 +150,7 @@ class HomePage extends GetView<HomeController> {
 
   Widget _buildFoodListSection() {
     return ValueListenableBuilder(
-      valueListenable: Hive.box(DatabaseConstant.tableFood).listenable(),
+      valueListenable: Hive.box(DatabaseConstant.tempFood).listenable(),
       builder: (context, Box box, widget) {
         return Padding(
           padding: const EdgeInsets.only(
