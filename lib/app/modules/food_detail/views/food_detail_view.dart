@@ -8,8 +8,8 @@ class FoodDetailView extends GetView<FoodDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("Food detail (foodId = Hello)"),
+    return Scaffold(
+      body: Text("Food detail (foodId = ${Get.arguments})"),
     );
   }
 }
