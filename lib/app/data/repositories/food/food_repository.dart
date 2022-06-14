@@ -5,15 +5,18 @@ import 'package:myfood/app/data/providers/database/category/category_local_data_
 import 'package:myfood/app/data/providers/database/food/food_local_data_source.dart';
 import 'package:myfood/app/data/providers/database/food/temp_food_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/food/food_remote_data_source.dart';
+import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
 
 class FoodRepositoryImpl with FoodRepository {
+  final DataStore dataStore;
   final CategoryLocalDataSource categoryLocalDataSource;
   final FoodLocalDataSource foodLocalDataSource;
   final TempFoodLocalDataSource tempFoodLocalDataSource;
   final FoodRemoteDataSource foodRemoteDataSource;
 
   FoodRepositoryImpl({
+    required this.dataStore,
     required this.categoryLocalDataSource,
     required this.foodLocalDataSource,
     required this.tempFoodLocalDataSource,
@@ -60,7 +63,11 @@ class FoodRepositoryImpl with FoodRepository {
       }
     });
 
-    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(1);
+    await tempFoodLocalDataSource.deleteFoodAll();
+    int categoryId = dataStore.getCurrentCategoryId();
+    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
+      categoryId,
+    );
     tempFoodLocalDataSource.saveFoodList(foodHomePageList);
   }
 }

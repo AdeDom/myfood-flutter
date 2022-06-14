@@ -16,6 +16,10 @@ mixin DataStore {
   void setAuthRole({required int authRole});
 
   int getAuthRole();
+
+  void setCurrentCategoryId({required int categoryId});
+
+  int getCurrentCategoryId();
 }
 
 class DataStoreImpl with DataStore {
@@ -24,6 +28,7 @@ class DataStoreImpl with DataStore {
   static const String _accessTokenKey = "access_token";
   static const String _refreshTokenKey = "refresh_token";
   static const String _authRole = "auth_role";
+  static const String _currentCategoryId = "current_category_id";
 
   static final _storeBox = () => GetStorage(storeFile);
 
@@ -31,6 +36,7 @@ class DataStoreImpl with DataStore {
   final accessToken = ReadWriteValue(_accessTokenKey, "", _storeBox);
   final refreshToken = ReadWriteValue(_refreshTokenKey, "", _storeBox);
   final authRole = ReadWriteValue(_authRole, 0, _storeBox);
+  final currentCategoryId = ReadWriteValue(_currentCategoryId, 1, _storeBox);
 
   @override
   void setIsLanguageEn({required bool isLanguageEn}) {
@@ -70,5 +76,15 @@ class DataStoreImpl with DataStore {
   @override
   int getAuthRole() {
     return authRole.val;
+  }
+
+  @override
+  void setCurrentCategoryId({required int categoryId}) {
+    currentCategoryId.val = categoryId;
+  }
+
+  @override
+  int getCurrentCategoryId() {
+    return currentCategoryId.val;
   }
 }

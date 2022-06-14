@@ -64,6 +64,7 @@ class InitialBinding extends Bindings {
       categoryRemoteDataSource: categoryRemoteDataSource,
     );
     FoodRepository foodRepository = FoodRepositoryImpl(
+      dataStore: dataStore,
       categoryLocalDataSource: categoryLocalDataSource,
       foodLocalDataSource: foodLocalDataSource,
       tempFoodLocalDataSource: tempFoodLocalDataSource,
