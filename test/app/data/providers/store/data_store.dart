@@ -5,6 +5,7 @@ class FakeDataStoreImpl with DataStore {
   String accessToken = "";
   String refreshToken = "";
   int authRole = 0;
+  int currentCategoryId = 1;
 
   @override
   void setIsLanguageEn({required bool isLanguageEn}) {
@@ -44,5 +45,15 @@ class FakeDataStoreImpl with DataStore {
   @override
   int getAuthRole() {
     return authRole;
+  }
+
+  @override
+  void setCurrentCategoryId({required int categoryId}) {
+    currentCategoryId = categoryId;
+  }
+
+  @override
+  int getCurrentCategoryId() {
+    return currentCategoryId;
   }
 }
