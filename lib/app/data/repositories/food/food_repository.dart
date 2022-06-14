@@ -70,4 +70,15 @@ class FoodRepositoryImpl with FoodRepository {
     );
     tempFoodLocalDataSource.saveFoodList(foodHomePageList);
   }
+
+  @override
+  Future<void> getFoodListByCategoryId({required int categoryId}) async {
+    dataStore.setCurrentCategoryId(categoryId: categoryId);
+
+    await tempFoodLocalDataSource.deleteFoodAll();
+    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
+      categoryId,
+    );
+    tempFoodLocalDataSource.saveFoodList(foodHomePageList);
+  }
 }

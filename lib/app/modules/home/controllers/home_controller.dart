@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:myfood/app/config/auth_role.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/modules/home/state/home_state.dart';
+import 'package:myfood/domain/usecases/home/Get_food_list_by_category_id_use_case.dart';
 import 'package:myfood/domain/usecases/home/home_page_use_case.dart';
 
 class HomeController extends GetxController {
@@ -9,10 +10,12 @@ class HomeController extends GetxController {
 
   DataStore dataStore;
   final HomePageUseCase homePageUseCase;
+  final GetFoodListByCategoryIdUseCase getFoodListByCategoryIdUseCase;
 
   HomeController({
     required this.dataStore,
     required this.homePageUseCase,
+    required this.getFoodListByCategoryIdUseCase,
   });
 
   @override
@@ -20,6 +23,18 @@ class HomeController extends GetxController {
     super.onInit();
 
     final result = homePageUseCase();
+    result.then((result) {
+      result.when(
+        success: (_) {},
+        error: (error) {
+          state.value = HomeState.homePageError(error: error);
+        },
+      );
+    });
+  }
+
+  void getFoodListByCategoryId(int? categoryId) {
+    final result = getFoodListByCategoryIdUseCase(categoryId);
     result.then((result) {
       result.when(
         success: (_) {},

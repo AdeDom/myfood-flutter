@@ -33,4 +33,20 @@ class HomeRepositoryImpl with HomeRepository {
       return Result.error(baseError);
     }
   }
+
+  @override
+  Future<Result> getFoodListByCategoryId({required int categoryId}) async {
+    try {
+      await foodRepository.getFoodListByCategoryId(categoryId: categoryId);
+
+      return const Result.success();
+    } on ApiServiceManagerException catch (error) {
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
+      return Result.error(baseError);
+    } catch (error) {
+      BaseError baseError = BaseError(message: error.toString());
+      return Result.error(baseError);
+    }
+  }
 }

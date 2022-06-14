@@ -99,33 +99,38 @@ class HomePage extends GetView<HomeController> {
             itemCount: box.length,
             itemBuilder: (context, index) {
               final category = box.getAt(index) as CategoryEntity;
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                        child: Image.network(
-                          category.image ?? "",
-                          fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  controller.getFoodListByCategoryId(category.categoryId);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                          child: Image.network(
+                            category.image ?? "",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      category.categoryName ?? "",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 4),
+                      Text(
+                        category.categoryName ?? "",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
