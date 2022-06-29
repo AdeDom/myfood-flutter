@@ -15,13 +15,11 @@ import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.d
 import 'package:myfood/app/data/repositories/category/category_repository.dart';
 import 'package:myfood/app/data/repositories/food/food_repository.dart';
 import 'package:myfood/app/data/repositories/food_detail/food_detail_repository.dart';
-import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
 import 'package:myfood/domain/repositories/food_detail/food_detail_repository.dart';
-import 'package:myfood/domain/repositories/home/home_repository.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -72,7 +70,6 @@ class InitialBinding extends Bindings {
         categoryRemoteDataSource: categoryRemoteDataSource,
       ),
     );
-    CategoryRepository categoryRepository = Get.find();
 
     Get.put<FoodRepository>(
       FoodRepositoryImpl(
@@ -82,14 +79,6 @@ class InitialBinding extends Bindings {
         tempCategoryLocalDataSource: tempCategoryLocalDataSource,
         tempFoodLocalDataSource: tempFoodLocalDataSource,
         foodRemoteDataSource: foodRemoteDataSource,
-      ),
-    );
-    FoodRepository foodRepository = Get.find();
-
-    Get.put<HomeRepository>(
-      HomeRepositoryImpl(
-        categoryRepository: categoryRepository,
-        foodRepository: foodRepository,
       ),
     );
 

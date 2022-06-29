@@ -1,17 +1,20 @@
 import 'package:myfood/app/data/models/base/base_error.dart';
 import 'package:myfood/app/data/repositories/result.dart';
-import 'package:myfood/domain/repositories/home/home_repository.dart';
+import 'package:myfood/domain/repositories/food/food_repository.dart';
 
 class GetFoodListByCategoryIdUseCase {
-  final HomeRepository homeRepository;
+  final FoodRepository foodRepository;
 
   GetFoodListByCategoryIdUseCase({
-    required this.homeRepository,
+    required this.foodRepository,
   });
 
-  Future<Result> call(int? categoryId) {
+  Future<Result> call(int? categoryId) async {
     if (categoryId != null) {
-      return homeRepository.getFoodListByCategoryId(categoryId: categoryId);
+      await foodRepository.getFoodListByCategoryId(
+        categoryId: categoryId,
+      );
+      return const Result.success();
     } else {
       String message = "Category id is null.";
       BaseError error = BaseError(message: message);
