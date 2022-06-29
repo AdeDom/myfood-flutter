@@ -21,7 +21,7 @@ class HomeRepositoryImpl with HomeRepository {
     try {
       await categoryRepository.callCategoryAll();
 
-      await foodRepository.callFoodListByCategoryId();
+      await foodRepository.callFoodListByCategoryId(categoryId: 0);
 
       return const Result.success();
     } on ApiServiceManagerException catch (error) {

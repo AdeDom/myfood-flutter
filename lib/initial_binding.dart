@@ -52,15 +52,6 @@ class InitialBinding extends Bindings {
       myFoodDio: myFoodDio,
     );
 
-    FoodRepository foodRepository = FoodRepositoryImpl(
-      dataStore: dataStore,
-      categoryLocalDataSource: categoryLocalDataSource,
-      foodLocalDataSource: foodLocalDataSource,
-      tempCategoryLocalDataSource: tempCategoryLocalDataSource,
-      tempFoodLocalDataSource: tempFoodLocalDataSource,
-      foodRemoteDataSource: foodRemoteDataSource,
-    );
-
     Get.put<AuthLoginRepository>(
       AuthLoginRepositoryImpl(
         authRemoteDataSource: authRemoteDataSource,
@@ -82,6 +73,18 @@ class InitialBinding extends Bindings {
       ),
     );
     CategoryRepository categoryRepository = Get.find();
+
+    Get.put<FoodRepository>(
+      FoodRepositoryImpl(
+        dataStore: dataStore,
+        categoryLocalDataSource: categoryLocalDataSource,
+        foodLocalDataSource: foodLocalDataSource,
+        tempCategoryLocalDataSource: tempCategoryLocalDataSource,
+        tempFoodLocalDataSource: tempFoodLocalDataSource,
+        foodRemoteDataSource: foodRemoteDataSource,
+      ),
+    );
+    FoodRepository foodRepository = Get.find();
 
     Get.put<HomeRepository>(
       HomeRepositoryImpl(
