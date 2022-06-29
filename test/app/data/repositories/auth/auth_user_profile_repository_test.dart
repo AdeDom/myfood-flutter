@@ -25,8 +25,8 @@ void main() {
     );
   });
 
-  test("callUserProfile_hasUserProfile_returnSuccess", () async {
-    UserProfile userProfile = UserProfile(
+  test("callUserProfile_returnUserProfile", () async {
+    UserProfile userProfile = const UserProfile(
       userId: "aaa",
       email: "bbb",
       name: "ccc",
@@ -41,26 +41,23 @@ void main() {
       () => profileRemoteDataSource.callUserProfile(),
     ).thenAnswer((_) async => BaseResponse(result: userProfile));
 
-    await repository.callUserProfile();
+    final result = await repository.callUserProfile();
 
-    UserEntity? userEntity = await userLocalDataSource.getUser();
-    expect(userEntity?.mapToUserProfile(), userProfile);
-    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
+    expect(result, userProfile);
   });
 
-  test("callUserProfile_clearUserProfileOld_returnSuccess", () async {
-    UserProfile userProfile = UserProfile(
-      userId: "aaa",
-      email: "bbb",
-      name: "ccc",
-      mobileNo: "ddd",
-      address: "eee",
-      image: "fff",
-      status: "ggg",
-      created: "hhh",
-      updated: "iii",
-    );
-    UserEntity user = UserEntity(
+  test("callUserProfile_returnUserProfileIsNull", () async {
+    when(
+      () => profileRemoteDataSource.callUserProfile(),
+    ).thenAnswer((_) async => BaseResponse<UserProfile>());
+
+    final result = await repository.callUserProfile();
+
+    expect(result, null);
+  });
+
+  test("saveUser", () async {
+    UserEntity userEntity = UserEntity(
       userId: "userId",
       email: "email",
       name: "name",
@@ -71,27 +68,9 @@ void main() {
       created: "created",
       updated: "updated",
     );
-    await userLocalDataSource.saveUser(user);
-    when(
-      () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) async => BaseResponse(result: userProfile));
 
-    await repository.callUserProfile();
+    await repository.saveUser(userEntity);
 
-    UserEntity? userEntity = await userLocalDataSource.getUser();
-    expect(userEntity?.mapToUserProfile(), userProfile);
-    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
-  });
-
-  test("callUserProfile_noUserProfile_returnError", () async {
-    when(
-      () => profileRemoteDataSource.callUserProfile(),
-    ).thenAnswer((_) async => BaseResponse<UserProfile>());
-
-    await repository.callUserProfile();
-
-    UserEntity? userEntity = await userLocalDataSource.getUser();
-    expect(userEntity?.mapToUserProfile(), UserProfile());
-    verify(() => profileRemoteDataSource.callUserProfile()).called(1);
+    expect(await userLocalDataSource.getUser(), userEntity);
   });
 }
