@@ -1,3 +1,4 @@
+import 'package:myfood/app/data/models/category/category.dart';
 import 'package:myfood/app/data/models/category/category_entity.dart';
 import 'package:myfood/app/data/providers/database/category/category_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/category/category_remote_data_source.dart';
@@ -13,22 +14,14 @@ class CategoryRepositoryImpl with CategoryRepository {
   });
 
   @override
-  Future<void> callCategoryAll() async {
+  Future<List<Category>?> callCategoryAll() async {
     final categoryResponse = await categoryRemoteDataSource.callCategoryAll();
-    final categoryAll = categoryResponse.result;
-    if (categoryAll != null) {
-      await categoryLocalDataSource.deleteCategoryAll();
-      List<CategoryEntity> categoryEntity = categoryAll.map((category) {
-        return CategoryEntity(
-          categoryId: category.categoryId,
-          categoryName: category.categoryName,
-          image: category.image,
-          categoryTypeName: category.categoryTypeName,
-          created: category.created,
-          updated: category.updated,
-        );
-      }).toList();
-      await categoryLocalDataSource.saveCategoryAll(categoryEntity);
-    }
+    return categoryResponse.result;
+  }
+
+  @override
+  Future<void> saveCategoryAll(List<CategoryEntity> categoryEntity) async {
+    await categoryLocalDataSource.deleteCategoryAll();
+    await categoryLocalDataSource.saveCategoryAll(categoryEntity);
   }
 }
