@@ -14,21 +14,14 @@ class AuthUserProfileRepositoryImpl with AuthUserProfileRepository {
   });
 
   @override
-  Future<void> callUserProfile() async {
+  Future<UserProfile?> callUserProfile() async {
     final userProfileResponse = await profileRemoteDataSource.callUserProfile();
-    UserProfile? userProfile = userProfileResponse.result;
+    return userProfileResponse.result;
+  }
+
+  @override
+  Future<void> saveUser(UserEntity userEntity) async {
     await userLocalDataSource.deleteUserAll();
-    UserEntity userEntity = UserEntity(
-      userId: userProfile?.userId,
-      email: userProfile?.email,
-      name: userProfile?.name,
-      mobileNo: userProfile?.mobileNo,
-      address: userProfile?.address,
-      image: userProfile?.image,
-      status: userProfile?.status,
-      created: userProfile?.created,
-      updated: userProfile?.updated,
-    );
     await userLocalDataSource.saveUser(userEntity);
   }
 }
