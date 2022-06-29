@@ -68,7 +68,7 @@ class FoodRepositoryImpl with FoodRepository {
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
       categoryId,
     );
-    tempFoodLocalDataSource.saveFoodList(foodHomePageList);
+    await tempFoodLocalDataSource.saveFoodList(foodHomePageList);
   }
 
   @override
@@ -85,6 +85,6 @@ class FoodRepositoryImpl with FoodRepository {
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
       categoryId,
     );
-    tempFoodLocalDataSource.saveFoodList(foodHomePageList);
+    await tempFoodLocalDataSource.saveFoodList(foodHomePageList);
   }
 }

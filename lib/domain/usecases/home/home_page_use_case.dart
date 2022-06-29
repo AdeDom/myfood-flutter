@@ -46,7 +46,7 @@ class HomePageUseCase {
           updated: category.updated,
         );
       }).toList();
-      categoryRepository.saveCategoryAll(categoryEntity);
+      await categoryRepository.saveCategoryAll(categoryEntity);
     }
 
     return await callFoodListByCategoryId();
@@ -91,9 +91,9 @@ class HomePageUseCase {
       }
     });
 
-    foodRepository.saveTampCategory();
+    await foodRepository.saveTampCategory();
 
-    foodRepository.saveTampFood();
+    await foodRepository.saveTampFood();
 
     return const Result.success();
   }
