@@ -12,8 +12,6 @@ class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
 class MockProfileRemoteDataSource extends Mock implements ProfileRemoteDataSource {}
 
-class MockAuthRepository extends Mock implements AuthRepository {}
-
 class MockAuthLoginRepository extends Mock implements AuthLoginRepository {}
 
 class MockAuthUserProfileRepository extends Mock implements AuthUserProfileRepository {}

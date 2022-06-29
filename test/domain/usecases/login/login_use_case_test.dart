@@ -13,7 +13,6 @@ void main() {
     registerFallbackValue(LoginRequest());
   });
 
-  late AuthRepository authRepository;
   late LoginUseCase useCase;
 
   setUp(() {

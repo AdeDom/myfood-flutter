@@ -11,14 +11,12 @@ import 'package:myfood/app/data/providers/network/food/food_remote_data_source.d
 import 'package:myfood/app/data/providers/network/profile/profile_remote_data_source.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/data/repositories/auth/auth_login_repository.dart';
-import 'package:myfood/app/data/repositories/auth/auth_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/app/data/repositories/category/category_repository.dart';
 import 'package:myfood/app/data/repositories/food/food_repository.dart';
 import 'package:myfood/app/data/repositories/food_detail/food_detail_repository.dart';
 import 'package:myfood/app/data/repositories/home/home_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
-import 'package:myfood/domain/repositories/auth/auth_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
 import 'package:myfood/domain/repositories/category/category_repository.dart';
 import 'package:myfood/domain/repositories/food/food_repository.dart';
@@ -73,20 +71,11 @@ class InitialBinding extends Bindings {
         dataStore: dataStore,
       ),
     );
-    AuthLoginRepository authLoginRepository = Get.find();
 
     Get.put<AuthUserProfileRepository>(
       AuthUserProfileRepositoryImpl(
         userLocalDataSource: userLocalDataSource,
         profileRemoteDataSource: profileRemoteDataSource,
-      ),
-    );
-    AuthUserProfileRepository authUserProfileRepository = Get.find();
-
-    Get.put<AuthRepository>(
-      AuthRepositoryImpl(
-        authLoginRepository: authLoginRepository,
-        authUserProfileRepository: authUserProfileRepository,
       ),
     );
 
