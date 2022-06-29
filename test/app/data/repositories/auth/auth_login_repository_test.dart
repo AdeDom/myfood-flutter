@@ -30,7 +30,7 @@ void main() {
     );
   });
 
-  test("callLogin_hasToken_returnSuccess", () async {
+  test("callLogin_returnHaveToken", () async {
     String accessToken = "abc123";
     String refreshToken = "xyz456";
     String email = "dom6";
@@ -50,11 +50,9 @@ void main() {
       ),
     ).thenAnswer((_) async => loginResponse);
 
-    await repository.callLogin(loginRequest: loginRequest);
+    final result = await repository.callLogin(loginRequest: loginRequest);
 
-    expect(dataStore.getAccessToken(), accessToken);
-    expect(dataStore.getRefreshToken(), refreshToken);
-    expect(dataStore.getAuthRole(), AuthRole.auth.name);
+    expect(result, token);
     verify(
       () => authRemoteDataSource.callLogin(
         loginRequest: loginRequest,
@@ -62,7 +60,7 @@ void main() {
     ).called(1);
   });
 
-  test("callLogin_noToken_returnSuccess", () async {
+  test("callLogin_returnTokenIsNull", () async {
     String email = "dom6";
     String password = "dom6";
     LoginRequest loginRequest = LoginRequest(
@@ -76,15 +74,32 @@ void main() {
       ),
     ).thenAnswer((_) async => loginResponse);
 
-    await repository.callLogin(loginRequest: loginRequest);
+    final result = await repository.callLogin(loginRequest: loginRequest);
 
-    expect(dataStore.getAccessToken(), "");
-    expect(dataStore.getRefreshToken(), "");
-    expect(dataStore.getAuthRole(), 0);
+    expect(result, null);
     verify(
       () => authRemoteDataSource.callLogin(
         loginRequest: loginRequest,
       ),
     ).called(1);
+  });
+
+  test("saveToken_returnToken", () async {
+    String accessToken = "abc";
+    String refreshToken = "xyz";
+
+    repository.saveToken(
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    );
+
+    expect(dataStore.getAccessToken(), accessToken);
+    expect(dataStore.getRefreshToken(), refreshToken);
+  });
+
+  test("saveAuthRole_returnAuthRole", () async {
+    repository.saveAuthRole();
+
+    expect(dataStore.getAuthRole(), AuthRole.auth.name);
   });
 }
