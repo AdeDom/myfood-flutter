@@ -12,14 +12,14 @@ import 'package:myfood/app/data/providers/network/profile/profile_remote_data_so
 import 'package:myfood/app/data/providers/store/data_store.dart';
 import 'package:myfood/app/data/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/app/data/repositories/auth/auth_user_profile_repository.dart';
-import 'package:myfood/app/data/repositories/category/category_repository.dart';
-import 'package:myfood/app/data/repositories/food/food_repository.dart';
 import 'package:myfood/app/data/repositories/food_detail/food_detail_repository.dart';
+import 'package:myfood/app/data/repositories/home/home_category_repository.dart';
+import 'package:myfood/app/data/repositories/home/home_food_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_login_repository.dart';
 import 'package:myfood/domain/repositories/auth/auth_user_profile_repository.dart';
-import 'package:myfood/domain/repositories/category/category_repository.dart';
-import 'package:myfood/domain/repositories/food/food_repository.dart';
 import 'package:myfood/domain/repositories/food_detail/food_detail_repository.dart';
+import 'package:myfood/domain/repositories/home/home_category_repository.dart';
+import 'package:myfood/domain/repositories/home/home_food_repository.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -64,15 +64,15 @@ class InitialBinding extends Bindings {
       ),
     );
 
-    Get.put<CategoryRepository>(
-      CategoryRepositoryImpl(
+    Get.put<HomeCategoryRepository>(
+      HomeCategoryRepositoryImpl(
         categoryLocalDataSource: categoryLocalDataSource,
         categoryRemoteDataSource: categoryRemoteDataSource,
       ),
     );
 
-    Get.put<FoodRepository>(
-      FoodRepositoryImpl(
+    Get.put<HomeFoodRepository>(
+      HomeFoodRepositoryImpl(
         dataStore: dataStore,
         categoryLocalDataSource: categoryLocalDataSource,
         foodLocalDataSource: foodLocalDataSource,

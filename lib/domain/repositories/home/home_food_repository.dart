@@ -3,7 +3,7 @@ import 'package:myfood/app/data/models/category/category_entity.dart';
 import 'package:myfood/app/data/models/food/food.dart';
 import 'package:myfood/app/data/models/food/food_entity.dart';
 
-mixin FoodRepository {
+mixin HomeFoodRepository {
   List<CategoryEntity> getCategoryAll();
 
   Future<BaseResponse<List<Food>?>> callFoodListByCategoryId({

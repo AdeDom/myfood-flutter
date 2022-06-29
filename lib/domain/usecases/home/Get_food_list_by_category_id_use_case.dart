@@ -1,9 +1,9 @@
 import 'package:myfood/app/data/models/base/base_error.dart';
 import 'package:myfood/app/data/repositories/result.dart';
-import 'package:myfood/domain/repositories/food/food_repository.dart';
+import 'package:myfood/domain/repositories/home/home_food_repository.dart';
 
 class GetFoodListByCategoryIdUseCase {
-  final FoodRepository foodRepository;
+  final HomeFoodRepository foodRepository;
 
   GetFoodListByCategoryIdUseCase({
     required this.foodRepository,

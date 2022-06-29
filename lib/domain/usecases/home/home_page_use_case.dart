@@ -7,12 +7,12 @@ import 'package:myfood/app/data/models/food/food.dart';
 import 'package:myfood/app/data/models/food/food_entity.dart';
 import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/data/repositories/result.dart';
-import 'package:myfood/domain/repositories/category/category_repository.dart';
-import 'package:myfood/domain/repositories/food/food_repository.dart';
+import 'package:myfood/domain/repositories/home/home_category_repository.dart';
+import 'package:myfood/domain/repositories/home/home_food_repository.dart';
 
 class HomePageUseCase {
-  final CategoryRepository categoryRepository;
-  final FoodRepository foodRepository;
+  final HomeCategoryRepository categoryRepository;
+  final HomeFoodRepository foodRepository;
 
   HomePageUseCase({
     required this.categoryRepository,

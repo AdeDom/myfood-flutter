@@ -8,9 +8,9 @@ import 'package:myfood/app/data/providers/database/food/food_local_data_source.d
 import 'package:myfood/app/data/providers/database/food/temp_food_local_data_source.dart';
 import 'package:myfood/app/data/providers/network/food/food_remote_data_source.dart';
 import 'package:myfood/app/data/providers/store/data_store.dart';
-import 'package:myfood/domain/repositories/food/food_repository.dart';
+import 'package:myfood/domain/repositories/home/home_food_repository.dart';
 
-class FoodRepositoryImpl with FoodRepository {
+class HomeFoodRepositoryImpl with HomeFoodRepository {
   final DataStore dataStore;
   final CategoryLocalDataSource categoryLocalDataSource;
   final FoodLocalDataSource foodLocalDataSource;
@@ -18,7 +18,7 @@ class FoodRepositoryImpl with FoodRepository {
   final TempFoodLocalDataSource tempFoodLocalDataSource;
   final FoodRemoteDataSource foodRemoteDataSource;
 
-  FoodRepositoryImpl({
+  HomeFoodRepositoryImpl({
     required this.dataStore,
     required this.categoryLocalDataSource,
     required this.foodLocalDataSource,
