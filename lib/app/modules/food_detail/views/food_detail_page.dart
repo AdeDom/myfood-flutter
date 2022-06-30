@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfood/app/data/models/food/food.dart';
 import 'package:myfood/app/modules/food_detail/controllers/food_detail_controller.dart';
+import 'package:myfood/domain/models/food/food_model.dart';
 
 class FoodDetailPage extends GetView<FoodDetailController> {
-  final Food? food;
+  final FoodModel? foodModel;
 
   const FoodDetailPage({
     Key? key,
-    this.food,
+    this.foodModel,
   }) : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
           height: double.infinity,
           width: double.infinity,
           child: Image.network(
-            food?.image ?? "",
+            foodModel?.image ?? "",
             fit: BoxFit.cover,
           ),
         ),
@@ -112,7 +112,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            food?.foodName ?? "",
+            foodModel?.foodName ?? "",
             style: const TextStyle(
               color: Colors.black,
               fontSize: 24,
@@ -128,7 +128,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
               ),
               const SizedBox(width: 4),
               Text(
-                food?.ratingScoreCount ?? "-",
+                foodModel?.ratingScoreCount ?? "-",
                 style: const TextStyle(
                   color: Colors.amber,
                   fontSize: 14,
@@ -138,7 +138,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                 child: Container(),
               ),
               Text(
-                food?.price.toString() ?? "-",
+                foodModel?.price.toString() ?? "-",
                 style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -164,7 +164,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
           ),
           const SizedBox(height: 8),
           Text(
-            food?.description ?? "",
+            foodModel?.description ?? "",
             style: const TextStyle(
               fontSize: 16,
             ),

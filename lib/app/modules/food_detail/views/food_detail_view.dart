@@ -15,8 +15,8 @@ class FoodDetailView extends GetView<FoodDetailController> {
           initial: () {
             return const FoodDetailPage();
           },
-          loadSuccess: (food) {
-            return FoodDetailPage(food: food);
+          loadSuccess: (foodModel) {
+            return FoodDetailPage(foodModel: foodModel);
           },
           loadError: (error) {
             return Container();

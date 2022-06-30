@@ -19,21 +19,21 @@ mixin _$FoodDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Food food) loadSuccess,
+    required TResult Function(FoodModel foodModel) loadSuccess,
     required TResult Function(BaseError error) loadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
     required TResult orElse(),
   }) =>
@@ -124,7 +124,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Food food) loadSuccess,
+    required TResult Function(FoodModel foodModel) loadSuccess,
     required TResult Function(BaseError error) loadError,
   }) {
     return initial();
@@ -134,7 +134,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
   }) {
     return initial?.call();
@@ -144,7 +144,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
     required TResult orElse(),
   }) {
@@ -198,9 +198,8 @@ abstract class _$$LoadSuccessCopyWith<$Res> {
   factory _$$LoadSuccessCopyWith(
           _$LoadSuccess value, $Res Function(_$LoadSuccess) then) =
       __$$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({Food food});
 
-  $FoodCopyWith<$Res> get food;
+  $Res call({FoodModel foodModel});
 }
 
 /// @nodoc
@@ -216,35 +215,28 @@ class __$$LoadSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? food = freezed,
+    Object? foodModel = freezed,
   }) {
     return _then(_$LoadSuccess(
-      food: food == freezed
-          ? _value.food
-          : food // ignore: cast_nullable_to_non_nullable
-              as Food,
+      foodModel: foodModel == freezed
+          ? _value.foodModel
+          : foodModel // ignore: cast_nullable_to_non_nullable
+              as FoodModel,
     ));
-  }
-
-  @override
-  $FoodCopyWith<$Res> get food {
-    return $FoodCopyWith<$Res>(_value.food, (value) {
-      return _then(_value.copyWith(food: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$LoadSuccess with DiagnosticableTreeMixin implements LoadSuccess {
-  const _$LoadSuccess({required this.food});
+  const _$LoadSuccess({required this.foodModel});
 
   @override
-  final Food food;
+  final FoodModel foodModel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FoodDetailState.loadSuccess(food: $food)';
+    return 'FoodDetailState.loadSuccess(foodModel: $foodModel)';
   }
 
   @override
@@ -252,7 +244,7 @@ class _$LoadSuccess with DiagnosticableTreeMixin implements LoadSuccess {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FoodDetailState.loadSuccess'))
-      ..add(DiagnosticsProperty('food', food));
+      ..add(DiagnosticsProperty('foodModel', foodModel));
   }
 
   @override
@@ -260,12 +252,12 @@ class _$LoadSuccess with DiagnosticableTreeMixin implements LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadSuccess &&
-            const DeepCollectionEquality().equals(other.food, food));
+            const DeepCollectionEquality().equals(other.foodModel, foodModel));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(food));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(foodModel));
 
   @JsonKey(ignore: true)
   @override
@@ -276,32 +268,32 @@ class _$LoadSuccess with DiagnosticableTreeMixin implements LoadSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Food food) loadSuccess,
+    required TResult Function(FoodModel foodModel) loadSuccess,
     required TResult Function(BaseError error) loadError,
   }) {
-    return loadSuccess(food);
+    return loadSuccess(foodModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
   }) {
-    return loadSuccess?.call(food);
+    return loadSuccess?.call(foodModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(food);
+      return loadSuccess(foodModel);
     }
     return orElse();
   }
@@ -342,9 +334,11 @@ class _$LoadSuccess with DiagnosticableTreeMixin implements LoadSuccess {
 }
 
 abstract class LoadSuccess implements FoodDetailState {
-  const factory LoadSuccess({required final Food food}) = _$LoadSuccess;
+  const factory LoadSuccess({required final FoodModel foodModel}) =
+      _$LoadSuccess;
 
-  Food get food => throw _privateConstructorUsedError;
+  FoodModel get foodModel => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   _$$LoadSuccessCopyWith<_$LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -433,7 +427,7 @@ class _$LoadError with DiagnosticableTreeMixin implements LoadError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Food food) loadSuccess,
+    required TResult Function(FoodModel foodModel) loadSuccess,
     required TResult Function(BaseError error) loadError,
   }) {
     return loadError(error);
@@ -443,7 +437,7 @@ class _$LoadError with DiagnosticableTreeMixin implements LoadError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
   }) {
     return loadError?.call(error);
@@ -453,7 +447,7 @@ class _$LoadError with DiagnosticableTreeMixin implements LoadError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Food food)? loadSuccess,
+    TResult Function(FoodModel foodModel)? loadSuccess,
     TResult Function(BaseError error)? loadError,
     required TResult orElse(),
   }) {

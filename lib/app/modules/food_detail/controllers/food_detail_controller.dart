@@ -25,7 +25,7 @@ class FoodDetailController extends GetxController {
       result.when(
         success: (data) {
           if (data != null) {
-            state.value = FoodDetailState.loadSuccess(food: data);
+            state.value = FoodDetailState.loadSuccess(foodModel: data);
           }
         },
         error: (error) {
