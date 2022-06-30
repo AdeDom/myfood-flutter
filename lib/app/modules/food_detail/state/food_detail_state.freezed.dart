@@ -23,7 +23,6 @@ mixin _$FoodDetailState {
     required TResult Function(BaseError error) loadError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
@@ -31,7 +30,6 @@ mixin _$FoodDetailState {
     TResult Function(BaseError error)? loadError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -40,7 +38,6 @@ mixin _$FoodDetailState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
@@ -48,7 +45,6 @@ mixin _$FoodDetailState {
     required TResult Function(LoadError value) loadError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -56,7 +52,6 @@ mixin _$FoodDetailState {
     TResult Function(LoadError value)? loadError,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -80,7 +75,6 @@ class _$FoodDetailStateCopyWithImpl<$Res>
   _$FoodDetailStateCopyWithImpl(this._value, this._then);
 
   final FoodDetailState _value;
-
   // ignore: unused_field
   final $Res Function(FoodDetailState) _then;
 }
@@ -204,7 +198,6 @@ abstract class _$$LoadSuccessCopyWith<$Res> {
   factory _$$LoadSuccessCopyWith(
           _$LoadSuccess value, $Res Function(_$LoadSuccess) then) =
       __$$LoadSuccessCopyWithImpl<$Res>;
-
   $Res call({Food food});
 
   $FoodCopyWith<$Res> get food;
@@ -352,7 +345,6 @@ abstract class LoadSuccess implements FoodDetailState {
   const factory LoadSuccess({required final Food food}) = _$LoadSuccess;
 
   Food get food => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$LoadSuccessCopyWith<_$LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -363,7 +355,6 @@ abstract class _$$LoadErrorCopyWith<$Res> {
   factory _$$LoadErrorCopyWith(
           _$LoadError value, $Res Function(_$LoadError) then) =
       __$$LoadErrorCopyWithImpl<$Res>;
-
   $Res call({BaseError error});
 
   $BaseErrorCopyWith<$Res> get error;
@@ -511,7 +502,6 @@ abstract class LoadError implements FoodDetailState {
   const factory LoadError({required final BaseError error}) = _$LoadError;
 
   BaseError get error => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$LoadErrorCopyWith<_$LoadError> get copyWith =>
       throw _privateConstructorUsedError;

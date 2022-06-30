@@ -13,31 +13,16 @@ class CategoryEntity {
   @HiveField(2)
   String? image;
 
-  @HiveField(3)
-  String? categoryTypeName;
-
-  @HiveField(4)
-  String? created;
-
-  @HiveField(5)
-  String? updated;
-
   CategoryEntity({
     this.categoryId,
     this.categoryName,
     this.image,
-    this.categoryTypeName,
-    this.created,
-    this.updated,
   });
 
   CategoryEntity.fromJson(Map<String, dynamic> json) {
     categoryId = json["categoryId"];
     categoryName = json["categoryName"];
     image = json["image"];
-    categoryTypeName = json["categoryTypeName"];
-    created = json["created"];
-    updated = json["updated"];
   }
 
   Map<String, dynamic> toJson() {
@@ -45,9 +30,6 @@ class CategoryEntity {
     data["categoryId"] = categoryId;
     data["categoryName"] = categoryName;
     data["image"] = image;
-    data["categoryTypeName"] = categoryTypeName;
-    data["created"] = created;
-    data["updated"] = updated;
     return data;
   }
 }

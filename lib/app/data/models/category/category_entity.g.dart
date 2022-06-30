@@ -20,28 +20,19 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       categoryId: fields[0] as int?,
       categoryName: fields[1] as String?,
       image: fields[2] as String?,
-      categoryTypeName: fields[3] as String?,
-      created: fields[4] as String?,
-      updated: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CategoryEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.categoryId)
       ..writeByte(1)
       ..write(obj.categoryName)
       ..writeByte(2)
-      ..write(obj.image)
-      ..writeByte(3)
-      ..write(obj.categoryTypeName)
-      ..writeByte(4)
-      ..write(obj.created)
-      ..writeByte(5)
-      ..write(obj.updated);
+      ..write(obj.image);
   }
 
   @override

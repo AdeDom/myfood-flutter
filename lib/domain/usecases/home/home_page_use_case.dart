@@ -41,9 +41,6 @@ class HomePageUseCase {
           categoryId: category.categoryId,
           categoryName: category.categoryName,
           image: category.image,
-          categoryTypeName: category.categoryTypeName,
-          created: category.created,
-          updated: category.updated,
         );
       }).toList();
       await categoryRepository.saveCategoryAll(categoryEntity);

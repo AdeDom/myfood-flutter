@@ -22,9 +22,6 @@ class CategoryLocalDataSourceImpl with CategoryLocalDataSource {
         categoryId: element.categoryId,
         categoryName: element.categoryName,
         image: element.image,
-        categoryTypeName: element.categoryTypeName,
-        created: element.created,
-        updated: element.updated,
       );
     }).toList();
   }
@@ -36,9 +33,6 @@ class CategoryLocalDataSourceImpl with CategoryLocalDataSource {
         categoryId: element.categoryId,
         categoryName: element.categoryName,
         image: element.image,
-        categoryTypeName: element.categoryTypeName,
-        created: element.created,
-        updated: element.updated,
       );
     }).firstWhere((element) => element.categoryId == categoryId);
   }
