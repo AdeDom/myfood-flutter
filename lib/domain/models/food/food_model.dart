@@ -1,15 +1,19 @@
-class FoodModel {
-  String foodName;
-  String image;
-  double price;
-  String description;
-  String ratingScoreCount;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  FoodModel({
-    required this.foodName,
-    required this.image,
-    required this.price,
-    required this.description,
-    required this.ratingScoreCount,
-  });
+part 'food_model.freezed.dart';
+
+part 'food_model.g.dart';
+
+@freezed
+class FoodModel with _$FoodModel {
+  const factory FoodModel({
+    required String foodName,
+    required String image,
+    required double price,
+    required String description,
+    required String ratingScoreCount,
+  }) = _FoodModel;
+
+  factory FoodModel.fromJson(Map<String, Object?> json) =>
+      _$FoodModelFromJson(json);
 }

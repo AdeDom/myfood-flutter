@@ -198,8 +198,9 @@ abstract class _$$LoadSuccessCopyWith<$Res> {
   factory _$$LoadSuccessCopyWith(
           _$LoadSuccess value, $Res Function(_$LoadSuccess) then) =
       __$$LoadSuccessCopyWithImpl<$Res>;
-
   $Res call({FoodModel foodModel});
+
+  $FoodModelCopyWith<$Res> get foodModel;
 }
 
 /// @nodoc
@@ -223,6 +224,13 @@ class __$$LoadSuccessCopyWithImpl<$Res>
           : foodModel // ignore: cast_nullable_to_non_nullable
               as FoodModel,
     ));
+  }
+
+  @override
+  $FoodModelCopyWith<$Res> get foodModel {
+    return $FoodModelCopyWith<$Res>(_value.foodModel, (value) {
+      return _then(_value.copyWith(foodModel: value));
+    });
   }
 }
 
@@ -338,7 +346,6 @@ abstract class LoadSuccess implements FoodDetailState {
       _$LoadSuccess;
 
   FoodModel get foodModel => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   _$$LoadSuccessCopyWith<_$LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
