@@ -17,46 +17,18 @@ class FoodEntity {
   String? image;
 
   @HiveField(4)
-  double? price;
-
-  @HiveField(5)
-  String? description;
-
-  @HiveField(6)
-  int? favorite;
-
-  @HiveField(7)
-  double? ratingScore;
-
-  @HiveField(8)
   String? ratingScoreCount;
 
   @HiveField(9)
   int? categoryId;
-
-  @HiveField(10)
-  String? status;
-
-  @HiveField(11)
-  String? created;
-
-  @HiveField(12)
-  String? updated;
 
   FoodEntity({
     this.foodId,
     this.foodName,
     this.alias,
     this.image,
-    this.price,
-    this.description,
-    this.favorite,
-    this.ratingScore,
     this.ratingScoreCount,
     this.categoryId,
-    this.status,
-    this.created,
-    this.updated,
   });
 
   FoodEntity.fromJson(Map<String, dynamic> json) {
@@ -64,15 +36,8 @@ class FoodEntity {
     foodName = json["foodName"];
     alias = json["alias"];
     image = json["image"];
-    price = json["price"];
-    description = json["description"];
-    favorite = json["favorite"];
-    ratingScore = json["ratingScore"];
     ratingScoreCount = json["ratingScoreCount"];
     categoryId = json["categoryId"];
-    status = json["status"];
-    created = json["created"];
-    updated = json["updated"];
   }
 
   Map<String, dynamic> toJson() {
@@ -81,15 +46,8 @@ class FoodEntity {
     data["foodName"] = foodName;
     data["alias"] = alias;
     data["image"] = image;
-    data["price"] = price;
-    data["description"] = description;
-    data["favorite"] = favorite;
-    data["ratingScore"] = ratingScore;
     data["ratingScoreCount"] = ratingScoreCount;
     data["categoryId"] = categoryId;
-    data["status"] = status;
-    data["created"] = created;
-    data["updated"] = updated;
     return data;
   }
 }

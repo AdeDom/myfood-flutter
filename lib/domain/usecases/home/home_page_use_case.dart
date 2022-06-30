@@ -73,15 +73,8 @@ class HomePageUseCase {
             foodName: food.foodName,
             alias: food.alias,
             image: food.image,
-            price: food.price,
-            description: food.description,
-            favorite: food.favorite,
-            ratingScore: food.ratingScore,
             ratingScoreCount: food.ratingScoreCount,
             categoryId: food.categoryId,
-            status: food.status,
-            created: food.created,
-            updated: food.updated,
           );
         }).toList();
         await foodRepository.saveFoodList(foodEntity);

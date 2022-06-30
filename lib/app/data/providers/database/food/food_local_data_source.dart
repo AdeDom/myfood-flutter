@@ -23,15 +23,8 @@ class FoodLocalDataSourceImpl with FoodLocalDataSource {
         foodName: element.foodName,
         alias: element.alias,
         image: element.image,
-        price: element.price,
-        description: element.description,
-        favorite: element.favorite,
-        ratingScore: element.ratingScore,
         ratingScoreCount: element.ratingScoreCount,
         categoryId: element.categoryId,
-        status: element.status,
-        created: element.created,
-        updated: element.updated,
       );
     }).toList();
   }
@@ -46,15 +39,8 @@ class FoodLocalDataSourceImpl with FoodLocalDataSource {
         foodName: element.foodName,
         alias: element.alias,
         image: element.image,
-        price: element.price,
-        description: element.description,
-        favorite: element.favorite,
-        ratingScore: element.ratingScore,
         ratingScoreCount: element.ratingScoreCount,
         categoryId: element.categoryId,
-        status: element.status,
-        created: element.created,
-        updated: element.updated,
       );
     }).toList();
   }
