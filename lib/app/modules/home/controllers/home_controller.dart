@@ -41,13 +41,14 @@ class HomeController extends GetxController {
   }
 
   void getFoodListByCategoryId(int? categoryId) async {
-    final result = await getFoodListByCategoryIdUseCase(categoryId);
-    result.when(
-      success: (_) {},
-      error: (error) {
-        state.value = HomeState.homePageError(error: error);
-      },
-    );
+    try {
+      await getFoodListByCategoryIdUseCase(categoryId);
+    } catch (error) {
+      BaseError baseError = BaseError(
+        message: error.toString(),
+      );
+      state.value = HomeState.homePageError(error: baseError);
+    }
   }
 
   void setLogout() {
