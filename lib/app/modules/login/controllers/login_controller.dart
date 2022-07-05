@@ -39,27 +39,26 @@ class LoginController extends GetxController {
     return loginUseCase.validatePassword(password);
   }
 
-  void callLogin() {
+  void callLogin() async {
     state.value = LoginState.loading(
       isLoginButtonStatus: false,
       email: _email,
       password: _password,
     );
-    loginUseCase(email: _email, password: _password).then((result) {
-      result.when(
-        success: (_) {
-          Get.offAllNamed(Routes.HOME);
-        },
-        error: (error) {
-          state.value = LoginState.loginError(
-            error: error,
-            isLoginButtonStatus: true,
-            email: _email,
-            password: _password,
-          );
-        },
-      );
-    });
+    final result = await loginUseCase(email: _email, password: _password);
+    result.when(
+      success: (_) {
+        Get.offAllNamed(Routes.HOME);
+      },
+      error: (error) {
+        state.value = LoginState.loginError(
+          error: error,
+          isLoginButtonStatus: true,
+          email: _email,
+          password: _password,
+        );
+      },
+    );
   }
 
   void setCurrentPageState(bool isLoginButtonStatus) {

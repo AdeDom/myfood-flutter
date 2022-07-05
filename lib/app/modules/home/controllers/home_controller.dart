@@ -19,30 +19,26 @@ class HomeController extends GetxController {
   });
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
 
-    final result = homePageUseCase();
-    result.then((result) {
-      result.when(
-        success: (_) {},
-        error: (error) {
-          state.value = HomeState.homePageError(error: error);
-        },
-      );
-    });
+    final result = await homePageUseCase();
+    result.when(
+      success: (_) {},
+      error: (error) {
+        state.value = HomeState.homePageError(error: error);
+      },
+    );
   }
 
-  void getFoodListByCategoryId(int? categoryId) {
-    final result = getFoodListByCategoryIdUseCase(categoryId);
-    result.then((result) {
-      result.when(
-        success: (_) {},
-        error: (error) {
-          state.value = HomeState.homePageError(error: error);
-        },
-      );
-    });
+  void getFoodListByCategoryId(int? categoryId) async {
+    final result = await getFoodListByCategoryIdUseCase(categoryId);
+    result.when(
+      success: (_) {},
+      error: (error) {
+        state.value = HomeState.homePageError(error: error);
+      },
+    );
   }
 
   void setLogout() {

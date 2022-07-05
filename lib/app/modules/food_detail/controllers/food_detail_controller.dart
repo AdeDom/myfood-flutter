@@ -18,18 +18,16 @@ class FoodDetailController extends GetxController {
     callFoodDetail();
   }
 
-  Future<void> callFoodDetail() async {
+  void callFoodDetail() async {
     int? foodId = Get.arguments;
-    final result = getFoodDetailUseCase(foodId: foodId);
-    result.then((result) {
-      result.when(
-        success: (data) {
-          state.value = FoodDetailState.loadSuccess(foodModel: data);
-        },
-        error: (error) {
-          state.value = FoodDetailState.loadError(error: error);
-        },
-      );
-    });
+    final result = await getFoodDetailUseCase(foodId: foodId);
+    result.when(
+      success: (data) {
+        state.value = FoodDetailState.loadSuccess(foodModel: data);
+      },
+      error: (error) {
+        state.value = FoodDetailState.loadError(error: error);
+      },
+    );
   }
 }
