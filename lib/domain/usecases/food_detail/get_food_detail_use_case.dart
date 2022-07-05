@@ -15,25 +15,24 @@ class GetFoodDetailUseCase {
   });
 
   Future<Result<FoodModel>> call({int? foodId}) async {
-    if (foodId != null) {
-      try {
+    try {
+      if (foodId != null) {
         final food = await foodDetailRepository.callFoodDetail(foodId: foodId);
         final foodModel = mapFoodToFoodModel(food);
         return Result.success(data: foodModel);
-      } on ApiServiceManagerException catch (error) {
-        Map<String, dynamic> jsonError = json.decode(error.message);
-        BaseError baseError = BaseError.fromJson(jsonError);
-        return Result.error(baseError);
-      } catch (error) {
-        Map<String, dynamic> jsonError = json.decode(error.toString());
-        BaseError baseError = BaseError.fromJson(jsonError);
-        return Result.error(baseError);
+      } else {
+        String message = "Food id is null.";
+        throw Exception(message);
       }
-    } else {
-      String message = "Food id is null.";
-      BaseError error = BaseError(message: message);
-      Result<FoodModel> resultError = Result.error(error);
-      return Future.value(resultError);
+    } on ApiServiceManagerException catch (error) {
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
+      return Result.error(baseError);
+    } catch (error) {
+      BaseError baseError = BaseError(
+        message: error.toString(),
+      );
+      return Result.error(baseError);
     }
   }
 
