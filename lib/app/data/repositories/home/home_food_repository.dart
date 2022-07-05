@@ -62,7 +62,7 @@ class HomeFoodRepositoryImpl with HomeFoodRepository {
   }
 
   @override
-  Future<void> clearAndSaveCategory({required int categoryId}) async {
+  Future<void> clearAndSaveCategoryTemp({required int categoryId}) async {
     await tempCategoryLocalDataSource.deleteCategory();
     final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
       categoryId: categoryId,
@@ -71,7 +71,7 @@ class HomeFoodRepositoryImpl with HomeFoodRepository {
   }
 
   @override
-  Future<void> clearAndSaveFood({required int categoryId}) async {
+  Future<void> clearAndSaveFoodTemp({required int categoryId}) async {
     await tempFoodLocalDataSource.deleteFoodAll();
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
       categoryId,

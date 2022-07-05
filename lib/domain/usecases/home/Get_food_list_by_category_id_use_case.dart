@@ -12,8 +12,8 @@ class GetFoodListByCategoryIdUseCase {
   Future<Result> call(int? categoryId) async {
     if (categoryId != null) {
       foodRepository.setCurrentCategoryId(categoryId: categoryId);
-      await foodRepository.clearAndSaveCategory(categoryId: categoryId);
-      await foodRepository.clearAndSaveFood(categoryId: categoryId);
+      await foodRepository.clearAndSaveCategoryTemp(categoryId: categoryId);
+      await foodRepository.clearAndSaveFoodTemp(categoryId: categoryId);
       return const Result.success();
     } else {
       String message = "Category id is null.";

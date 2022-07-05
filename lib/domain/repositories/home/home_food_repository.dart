@@ -18,7 +18,7 @@ mixin HomeFoodRepository {
 
   void setCurrentCategoryId({required int categoryId});
 
-  Future<void> clearAndSaveCategory({required int categoryId});
+  Future<void> clearAndSaveCategoryTemp({required int categoryId});
 
-  Future<void> clearAndSaveFood({required int categoryId});
+  Future<void> clearAndSaveFoodTemp({required int categoryId});
 }

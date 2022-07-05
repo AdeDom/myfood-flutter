@@ -82,8 +82,8 @@ class HomePageUseCase {
     });
 
     int categoryId = foodRepository.getCurrentCategoryId();
-    await foodRepository.clearAndSaveCategory(categoryId: categoryId);
-    await foodRepository.clearAndSaveFood(categoryId: categoryId);
+    await foodRepository.clearAndSaveCategoryTemp(categoryId: categoryId);
+    await foodRepository.clearAndSaveFoodTemp(categoryId: categoryId);
 
     return const Result.success();
   }
