@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:myfood/app/data/models/base/base_error.dart';
+import 'package:myfood/app/data/providers/network/api_service_manager.dart';
 import 'package:myfood/app/modules/login/state/login_state.dart';
 import 'package:myfood/app/routes/app_pages.dart';
 import 'package:myfood/domain/usecases/login/login_use_case.dart';
@@ -45,20 +49,29 @@ class LoginController extends GetxController {
       email: _email,
       password: _password,
     );
-    final result = await loginUseCase(email: _email, password: _password);
-    result.when(
-      success: (_) {
-        Get.offAllNamed(Routes.HOME);
-      },
-      error: (error) {
-        state.value = LoginState.loginError(
-          error: error,
-          isLoginButtonStatus: true,
-          email: _email,
-          password: _password,
-        );
-      },
-    );
+    try {
+      await loginUseCase(email: _email, password: _password);
+      Get.offAllNamed(Routes.HOME);
+    } on ApiServiceManagerException catch (error) {
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
+      state.value = LoginState.loginError(
+        error: baseError,
+        isLoginButtonStatus: true,
+        email: _email,
+        password: _password,
+      );
+    } catch (error) {
+      BaseError baseError = BaseError(
+        message: error.toString(),
+      );
+      state.value = LoginState.loginError(
+        error: baseError,
+        isLoginButtonStatus: true,
+        email: _email,
+        password: _password,
+      );
+    }
   }
 
   void setCurrentPageState(bool isLoginButtonStatus) {
