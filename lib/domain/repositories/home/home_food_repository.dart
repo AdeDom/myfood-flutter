@@ -14,9 +14,9 @@ mixin HomeFoodRepository {
 
   Future<void> saveFoodList(List<FoodEntity> foodList);
 
-  Future<void> getFoodListByCategoryId({required int categoryId});
-
   int getCurrentCategoryId();
+
+  void setCurrentCategoryId({required int categoryId});
 
   Future<void> clearAndSaveCategory({required int categoryId});
 

@@ -52,25 +52,13 @@ class HomeFoodRepositoryImpl with HomeFoodRepository {
   }
 
   @override
-  Future<void> getFoodListByCategoryId({required int categoryId}) async {
-    dataStore.setCurrentCategoryId(categoryId: categoryId);
-
-    await tempCategoryLocalDataSource.deleteCategory();
-    final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
-      categoryId: categoryId,
-    );
-    await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
-
-    await tempFoodLocalDataSource.deleteFoodAll();
-    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
-      categoryId,
-    );
-    await tempFoodLocalDataSource.saveFoodList(foodHomePageList);
+  int getCurrentCategoryId() {
+    return dataStore.getCurrentCategoryId();
   }
 
   @override
-  int getCurrentCategoryId() {
-    return dataStore.getCurrentCategoryId();
+  void setCurrentCategoryId({required int categoryId}) {
+    dataStore.setCurrentCategoryId(categoryId: categoryId);
   }
 
   @override
