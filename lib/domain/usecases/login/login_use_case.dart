@@ -81,7 +81,7 @@ class LoginUseCase {
     );
     authUserProfileRepository.saveUser(userEntity);
 
-    return const Result.success();
+    return const Result.success(data: Object);
   }
 
   String? validateEmail(String? email) {

@@ -18,7 +18,7 @@ class GetFoodListByCategoryIdUseCase {
       await foodRepository.clearAndSaveFoodTempByCategoryId(
         categoryId: categoryId,
       );
-      return const Result.success();
+      return const Result.success(data: Object);
     } else {
       String message = "Category id is null.";
       BaseError error = BaseError(message: message);

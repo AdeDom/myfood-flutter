@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Result<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T? data) success,
+    required TResult Function(T data) success,
     required TResult Function(BaseError error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
     required TResult orElse(),
   }) =>
@@ -76,7 +76,8 @@ abstract class _$$SuccessCopyWith<T, $Res> {
   factory _$$SuccessCopyWith(
           _$Success<T> value, $Res Function(_$Success<T>) then) =
       __$$SuccessCopyWithImpl<T, $Res>;
-  $Res call({T? data});
+
+  $Res call({T data});
 }
 
 /// @nodoc
@@ -97,7 +98,7 @@ class __$$SuccessCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as T?,
+              as T,
     ));
   }
 }
@@ -105,10 +106,10 @@ class __$$SuccessCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$Success<T> with DiagnosticableTreeMixin implements Success<T> {
-  const _$Success({this.data});
+  const _$Success({required this.data});
 
   @override
-  final T? data;
+  final T data;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -143,7 +144,7 @@ class _$Success<T> with DiagnosticableTreeMixin implements Success<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T? data) success,
+    required TResult Function(T data) success,
     required TResult Function(BaseError error) error,
   }) {
     return success(data);
@@ -152,7 +153,7 @@ class _$Success<T> with DiagnosticableTreeMixin implements Success<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
   }) {
     return success?.call(data);
@@ -161,7 +162,7 @@ class _$Success<T> with DiagnosticableTreeMixin implements Success<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
     required TResult orElse(),
   }) {
@@ -204,9 +205,10 @@ class _$Success<T> with DiagnosticableTreeMixin implements Success<T> {
 }
 
 abstract class Success<T> implements Result<T> {
-  const factory Success({final T? data}) = _$Success<T>;
+  const factory Success({required final T data}) = _$Success<T>;
 
-  T? get data => throw _privateConstructorUsedError;
+  T get data => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -291,7 +293,7 @@ class _$Error<T> with DiagnosticableTreeMixin implements Error<T> {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T? data) success,
+    required TResult Function(T data) success,
     required TResult Function(BaseError error) error,
   }) {
     return error(this.error);
@@ -300,7 +302,7 @@ class _$Error<T> with DiagnosticableTreeMixin implements Error<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
   }) {
     return error?.call(this.error);
@@ -309,7 +311,7 @@ class _$Error<T> with DiagnosticableTreeMixin implements Error<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T? data)? success,
+    TResult Function(T data)? success,
     TResult Function(BaseError error)? error,
     required TResult orElse(),
   }) {

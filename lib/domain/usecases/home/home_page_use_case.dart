@@ -90,6 +90,6 @@ class HomePageUseCase {
       categoryId: categoryId,
     );
 
-    return const Result.success();
+    return const Result.success(data: Object);
   }
 }
