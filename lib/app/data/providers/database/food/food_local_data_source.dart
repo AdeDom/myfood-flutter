@@ -5,7 +5,7 @@ import 'package:myfood/app/data/models/food/food_entity.dart';
 mixin FoodLocalDataSource {
   List<FoodEntity> getFoodList();
 
-  List<FoodEntity> getFoodListByCategoryId(int categoryId);
+  List<FoodEntity> getFoodListByCategoryId({required int categoryId});
 
   Future<void> saveFoodList(List<FoodEntity> foodList);
 
@@ -30,7 +30,7 @@ class FoodLocalDataSourceImpl with FoodLocalDataSource {
   }
 
   @override
-  List<FoodEntity> getFoodListByCategoryId(int categoryId) {
+  List<FoodEntity> getFoodListByCategoryId({required int categoryId}) {
     return box.values
         .where((element) => element.categoryId == categoryId)
         .map((element) {
