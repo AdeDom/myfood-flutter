@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:myfood/app/data/models/base/base_error.dart';
 import 'package:myfood/app/data/models/base/base_response.dart';
 import 'package:myfood/app/data/models/food/food.dart';
-import 'package:myfood/app/data/repositories/result.dart';
 import 'package:myfood/domain/models/food/food_model.dart';
 import 'package:myfood/domain/repositories/food_detail/food_detail_repository.dart';
 import 'package:myfood/domain/usecases/food_detail/get_food_detail_use_case.dart';
@@ -61,18 +59,10 @@ main() {
           "Tom kha gai is related to tom yum and offers people with a lower tolerance to spice the opportunity to taste the same beautiful flavours. Besides the spice scale, Tom kha gai is also unique in that it typically comes with lots of creamy coconut milk creating a rich sweet soup. Like most Thai foods, vegetarian options are easily adaptable by substituting a few ingredients.",
       ratingScoreCount: "-",
     );
-    Result<FoodModel> resultSuccess = Result.success(
-      data: foodModel,
-    );
-    expect(result, resultSuccess);
+    expect(result, foodModel);
   });
 
   test("GetFoodDetailUseCase_foodIdIsNullOrBlank_returnError", () async {
-    final result = await useCase();
-
-    String message = "Food id is null.";
-    BaseError error = BaseError(message: message);
-    Result<FoodModel> resultError = Result.error(error);
-    expect(result, resultError);
+    expect(useCase(), throwsA(isA<Exception>()));
   });
 }
