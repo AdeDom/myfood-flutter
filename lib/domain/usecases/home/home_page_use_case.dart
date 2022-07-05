@@ -27,8 +27,9 @@ class HomePageUseCase {
       BaseError baseError = BaseError.fromJson(jsonError);
       return Result.error(baseError);
     } catch (error) {
-      Map<String, dynamic> jsonError = json.decode(error.toString());
-      BaseError baseError = BaseError.fromJson(jsonError);
+      BaseError baseError = BaseError(
+        message: error.toString(),
+      );
       return Result.error(baseError);
     }
   }
