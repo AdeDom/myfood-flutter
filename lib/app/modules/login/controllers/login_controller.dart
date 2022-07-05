@@ -44,12 +44,12 @@ class LoginController extends GetxController {
   }
 
   void callLogin() async {
-    state.value = LoginState.loading(
-      isLoginButtonStatus: false,
-      email: _email,
-      password: _password,
-    );
     try {
+      state.value = LoginState.loading(
+        isLoginButtonStatus: false,
+        email: _email,
+        password: _password,
+      );
       await loginUseCase(email: _email, password: _password);
       Get.offAllNamed(Routes.HOME);
     } on ApiServiceManagerException catch (error) {
