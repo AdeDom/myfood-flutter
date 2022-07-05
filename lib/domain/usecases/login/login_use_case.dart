@@ -21,23 +21,29 @@ class LoginUseCase {
     required String? email,
     required String? password,
   }) async {
-    String? validateEmailString = validateEmail(email);
-    String? validatePasswordString = validatePassword(password);
-    if (validateEmailString != null) {
-      BaseError error = BaseError(message: validateEmailString);
-      Result resultError = Result.error(error);
-      return Future.value(resultError);
-    } else if (validatePasswordString != null) {
-      BaseError error = BaseError(message: validatePasswordString);
-      Result resultError = Result.error(error);
-      return Future.value(resultError);
-    } else {
-      return await callLogin(email, password);
+    try {
+      String? validateEmailString = validateEmail(email);
+      String? validatePasswordString = validatePassword(password);
+      if (validateEmailString != null) {
+        throw Exception(validateEmailString);
+      } else if (validatePasswordString != null) {
+        throw Exception(validatePasswordString);
+      } else {
+        return await callLogin(email, password);
+      }
+    } on ApiServiceManagerException catch (error) {
+      Map<String, dynamic> jsonError = json.decode(error.message);
+      BaseError baseError = BaseError.fromJson(jsonError);
+      return Result.error(baseError);
+    } catch (error) {
+      BaseError baseError = BaseError(
+        message: error.toString(),
+      );
+      return Result.error(baseError);
     }
   }
 
   Future<Result> callLogin(String? email, String? password) async {
-    try {
       LoginRequest loginRequest = LoginRequest(
         email: email,
         password: password,
@@ -58,15 +64,6 @@ class LoginUseCase {
       } else {
         throw Exception("Token is null or empty.");
       }
-    } on ApiServiceManagerException catch (error) {
-      Map<String, dynamic> jsonError = json.decode(error.message);
-      BaseError baseError = BaseError.fromJson(jsonError);
-      return Result.error(baseError);
-    } catch (error) {
-      Map<String, dynamic> jsonError = json.decode(error.toString());
-      BaseError baseError = BaseError.fromJson(jsonError);
-      return Result.error(baseError);
-    }
   }
 
   Future<Result> callUserProfile() async {
