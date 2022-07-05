@@ -52,26 +52,6 @@ class HomeFoodRepositoryImpl with HomeFoodRepository {
   }
 
   @override
-  Future<void> saveTampCategory() async {
-    int categoryId = dataStore.getCurrentCategoryId();
-    await tempCategoryLocalDataSource.deleteCategory();
-    final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
-      categoryId: categoryId,
-    );
-    await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
-  }
-
-  @override
-  Future<void> saveTampFood() async {
-    int categoryId = dataStore.getCurrentCategoryId();
-    await tempFoodLocalDataSource.deleteFoodAll();
-    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
-      categoryId,
-    );
-    await tempFoodLocalDataSource.saveFoodList(foodHomePageList);
-  }
-
-  @override
   Future<void> getFoodListByCategoryId({required int categoryId}) async {
     dataStore.setCurrentCategoryId(categoryId: categoryId);
 
@@ -81,6 +61,29 @@ class HomeFoodRepositoryImpl with HomeFoodRepository {
     );
     await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
 
+    await tempFoodLocalDataSource.deleteFoodAll();
+    final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
+      categoryId,
+    );
+    await tempFoodLocalDataSource.saveFoodList(foodHomePageList);
+  }
+
+  @override
+  int getCurrentCategoryId() {
+    return dataStore.getCurrentCategoryId();
+  }
+
+  @override
+  Future<void> clearAndSaveCategory({required int categoryId}) async {
+    await tempCategoryLocalDataSource.deleteCategory();
+    final categoryHomePage = categoryLocalDataSource.getCategoryByCategoryId(
+      categoryId: categoryId,
+    );
+    await tempCategoryLocalDataSource.saveCategory(categoryHomePage);
+  }
+
+  @override
+  Future<void> clearAndSaveFood({required int categoryId}) async {
     await tempFoodLocalDataSource.deleteFoodAll();
     final foodHomePageList = foodLocalDataSource.getFoodListByCategoryId(
       categoryId,

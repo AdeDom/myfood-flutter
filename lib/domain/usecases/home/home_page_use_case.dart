@@ -81,9 +81,9 @@ class HomePageUseCase {
       }
     });
 
-    await foodRepository.saveTampCategory();
-
-    await foodRepository.saveTampFood();
+    int categoryId = foodRepository.getCurrentCategoryId();
+    await foodRepository.clearAndSaveCategory(categoryId: categoryId);
+    await foodRepository.clearAndSaveFood(categoryId: categoryId);
 
     return const Result.success();
   }
